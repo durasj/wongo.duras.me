@@ -3,7 +3,10 @@ import { mkdir, readFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { chromium } from 'playwright';
 
-const catalogue = JSON.parse(await readFile(new URL('../src/data/puzzles.json', import.meta.url),'utf8'));
+const catalogue = [
+ ...JSON.parse(await readFile(new URL('../src/data/puzzles.json', import.meta.url),'utf8')),
+ ...JSON.parse(await readFile(new URL('../src/data/dice-puzzles.json', import.meta.url),'utf8')),
+];
 const editions = JSON.parse(await readFile(new URL('../src/data/editions.json', import.meta.url),'utf8'));
 const pieces = JSON.parse(await readFile(new URL('../src/data/pieces.json', import.meta.url),'utf8'));
 const normalized = cubes => {
@@ -322,6 +325,12 @@ try {
     await page.emulateMedia({ media: 'screen' });
   }
   assert.deepEqual(failures, [], 'Browser reported runtime errors or failed requests');
+  const supplemental=JSON.parse(await readFile(new URL('../src/data/dice-puzzles.json',import.meta.url),'utf8'));
+  await page.goto(`${origin}/?edition=classic&p=${supplemental[0].code}`);
+  await page.locator('.viewer-heading').filter({hasText:supplemental[0].code}).waitFor();
+  const deckSummary=await page.getByTestId('physical-deck-counts').innerText();
+  assert.match(deckSummary,/288/);assert.match(deckSummary,/902/);
+  assert.equal(await page.locator('a[href="/downloads/puzzles/wongo-d6-expansion-13-36.pdf"]').count(),1);
   console.log(`Browser checks passed${remoteOrigin?' on '+origin:''}: manual solving, no-WebGL fallback, code errors, history, lookup, solution controls, downloads, eight-player rounds, mobile, rulebooks and physical print scale.`);
 } catch (error) {
   if (page && !page.isClosed()) {

@@ -1,4 +1,5 @@
 import catalogue from '../data/puzzles.json';
+import diceCatalogue from '../data/dice-puzzles.json';
 import { getPiece, pieces } from './pieces';
 import type { Footprint, Placement } from './solver';
 
@@ -22,9 +23,9 @@ export function isPlayablePuzzle(puzzle: Pick<Puzzle, 'difficulty' | 'pieceIds'>
     return false;
   }
 }
-const activeCode = /^W3-[EH]-\d{3}$/;
+const activeCode = /^(?:W3-[EH]-\d{3}|WD6-[EH]-\d{4})$/;
 /** Retired F3 data is intentionally not imported into the application bundle. */
-export const puzzles = (catalogue as Puzzle[]).filter(puzzle => activeCode.test(puzzle.code) && isPlayablePuzzle(puzzle));
+export const puzzles = ([...catalogue,...diceCatalogue] as Puzzle[]).filter(puzzle => activeCode.test(puzzle.code) && isPlayablePuzzle(puzzle));
 export function getPuzzle(code: string): Puzzle | undefined {
   const normalized = code.trim().toUpperCase();
   if (!activeCode.test(normalized)) return undefined;

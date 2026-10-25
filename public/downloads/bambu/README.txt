@@ -17,7 +17,7 @@ Cards: downloads/puzzles/wongo-d6-20mm.pdf or the companion HTML.
 A4 landscape, two A5 cards per side. Duplex: flip on SHORT edge.
 Easy puzzles on fronts, hard on backs; backs deliberately reverse the two slots.
 Cut along the centre line after checking one test sheet. No solutions on backs.
-D6 set: 96 pages = 48 A4 sheets = 96 double-sided A5 cards in 12 packs. Six choices share each footprint. Use one common die and one common difficulty; keep printed packs and four-player blocks together. The original single-puzzle catalogue remains available separately.
+D6 set: 288 pages = 144 A4 sheets = 288 double-sided A5 cards in 36 packs. Six choices share each footprint. Use one common die and one common difficulty; keep printed packs and four-player blocks together. The original single-puzzle catalogue remains available separately.
 
 Source/provenance: https://github.com/durasj/wongo.duras.me
 Geometry adapted from ps78/Ubongo, GPL-3.0. See LICENSE and Source/.

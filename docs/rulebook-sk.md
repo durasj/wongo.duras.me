@@ -8,7 +8,7 @@ Skladajte na vytlačenom plániku skôr, než vyprší čas. Všetci hrajú nara
 ## Čo potrebujete
 
 - Spoločnú zásobu 16 očíslovaných tvarov: **40 dielikov pre 2–4 hráčov alebo 80 pre 5–8**, v počtoch podľa zoznamu. Nejde o osobné kompletné súpravy. Raster kociek je 20 mm, skosenie hrán 0,5 mm.
-- **Obojstranné plániky D6 veľkosti A5**, bežnú šesťstennú kocku, časovač, nepriehľadné vrecúško a papier na skóre. Súbor má **12 očíslovaných sád po 8 kartách**. Ľahká strana je vpredu, ťažká vzadu. Na každej je jeden pôdorys a šesť zoznamov dielikov.
+- **Obojstranné plániky D6 veľkosti A5**, bežnú šesťstennú kocku, časovač, nepriehľadné vrecúško a papier na skóre. Súbor má **36 očíslovaných sád po 8 kartách**. Ľahká strana je vpredu, ťažká vzadu. Na každej je jeden pôdorys a šesť zoznamov dielikov.
 - **90 drahokamov:** 18 červených, 27 modrých, 18 zelených a 27 jantárových. Jedna súprava stačí pre všetky počty hráčov.
 
 | Drahokam | Body |
@@ -20,7 +20,7 @@ Skladajte na vytlačenom plániku skôr, než vyprší čas. Všetci hrajú nara
 
 ## Príprava
 
-1. Zamiešajte **celé očíslované sady**, ich karty držte spolu a vyberte deväť sád na deväť kôl. Nerozdávajte nesúvisiace karty: spotreba dielikov je overená pre konkrétnu sadu a hod.
+1. Najprv zoskupte karty podľa veľkého označenia **SADA 01–36** na oboch stranách. Jedna sada obsahuje osem kariet; blok A/B a číslo karty sú uvedené samostatne. Zamiešajte **celé sady**, ich karty držte spolu a vyberte deväť sád na deväť kôl. Použité sady odkladajte bokom: vystačia na štyri partie bez opakovania kariet. Jednotlivé hlavolamy sa môžu zopakovať. V jednom kole musia mať všetci rovnaké číslo sady, ale každý skladá vlastný pôdorys. Nerozdávajte nesúvisiace karty: spotreba dielikov je overená pre konkrétnu sadu a hod.
 2. Pre **2–4 hráčov** použite iba karty 1–4 (blok A) alebo iba 5–8 (blok B) z jednej sady. Každému dajte inú kartu z toho bloku. Pre **5–8** použite karty 1 až N z jednej sady a zásobu 80 dielikov. Menšie skupiny sa tiež zmestia do zásoby.
 3. Zvoľte **jednu spoločnú náročnosť**. Ľahká strana používa tri rôzne farby, ťažká štyri dieliky, po jednom z každej farby. Všetky karty otočte na túto stranu. Overenie zásoby neplatí pri miešaní úrovní, rôznych sád ani blokov so 40 dielikmi.
 4. Limit sú **dve minúty na kolo**, prípadne dlhší dohodnutý spoločný čas. Začiatočníkom doprajte skúšobné kolo.
@@ -63,7 +63,7 @@ Každá tlačená možnosť je nezávisle vyriešená a každý spoločný hod o
 
 ## Tlač a starostlivosť
 
-Stiahnite **fyzické plániky D6**. Tlačte A4 na šírku, **100 % / skutočná veľkosť**, bez prispôsobenia, okrajov, hlavičiek a pätičiek; obojstranne **otáčať po kratšej hrane**. Súbor má 96 strán na **48 listoch A4** a vznikne 96 obojstranných A5 kariet. Zadné pozície sú zámerne prehodené. Zmerajte **40 mm značku**, overte jeden list a strihajte v strede. Sady a bloky držte spolu. Na rub netlačte riešenia.
+Stiahnite **fyzické plániky D6**. Tlačte A4 na šírku, **100 % / skutočná veľkosť**, bez prispôsobenia, okrajov, hlavičiek a pätičiek; obojstranne **otáčať po kratšej hrane**. Súbor má 288 strán na **144 listoch A4** a vznikne 288 obojstranných A5 kariet. Zadné pozície sú zámerne prehodené. Zmerajte **40 mm značku**, overte jeden list a strihajte v strede. Sady a bloky držte spolu. Na rub netlačte riešenia.
 
 Modely majú raster 20 mm, skosenie 0,5 mm, vrstvy 0,1 mm, 3 steny a východiskovo 5 % gyroid. Najprv vytlačte skúšobné dieliky: nízka výplň aj tlačové nastavenia vyžadujú fyzický test.
 

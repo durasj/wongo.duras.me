@@ -98,7 +98,7 @@ Puzzle challenges are generated for Wongo rather than reproducing the commercial
 
 ## Physical game: A5 D6 cards and chamfered pieces
 
-`/downloads/puzzles/wongo-d6-20mm.pdf` and its bilingual `.html` companion contain **96 double-sided A5 cards in 12 numbered eight-card packs**: 96 printed pages on **48 A4 sheets**. Each side has one footprint and six distinct die-selected piece lists. There are 1,152 assignments drawn from **327 distinct verified puzzles**. The original 1,000-puzzle catalogue remains available in the app and `/downloads/puzzles/wongo-20mm-duplex.pdf`.
+`/downloads/puzzles/wongo-d6-20mm.pdf` and its bilingual `.html` companion contain **288 double-sided A5 cards in 36 numbered eight-card packs**: 288 printed pages on **144 A4 sheets**. Each side has one footprint and six distinct die-selected piece lists. There are 3,456 assignments drawn from **902 distinct verified puzzles**. The original 1,000-puzzle catalogue remains available in the app and `/downloads/puzzles/wongo-20mm-duplex.pdf`.
 
 Print A4 landscape, actual size, duplex **flip on the short edge**; measure the 40 mm mark before cutting. Use one common difficulty and one shared die roll. For 2–4 players take cards only from one four-card block; for 5–8 use one eight-card pack and 80 pieces. Do not independently mix packs, blocks or difficulty sides. Every common roll and player count is inventory-checked. Printed footprints may be properly rotated relative to the original puzzle code; no code meaning changes.
 
@@ -107,3 +107,7 @@ Print A4 landscape, actual size, duplex **flip on the short edge**; measure the 
 Bambu Studio estimates for the chamfered 40-piece set are **493.9 g / 28.80 hours**; print every colour twice for 80 pieces (**987.7 g / 57.59 hours**). These are slicer estimates, not physical measurements. Blue and red pieces have white outlines in icons, 3D previews and printed diagrams.
 
 Run `npm run generate:print-kit` to regenerate meshes, D6 data, plates, print-kit ZIP and both catalogues offline. `npm run generate:dice-cards` independently backtests all D6 assignments. Published D6 mappings are frozen. See `docs/PRINTING.md`, `docs/print-estimates.json` and `docs/infill-comparison.json`.
+
+The expanded deck adds 547 verified `WD6` puzzles; the online library now contains 1,547 puzzles including the unchanged original 1,000 `W3` entries. Sets 01–12 and every existing code retain their meanings. New sets 13–36 add different six-choice card faces, with usage balancing to reduce repeated individual puzzles. The 3,456 printed assignments use 902 unique puzzles: individual puzzles still recur. Keep used packs aside for four nine-round games without reusing a card.
+
+Already printed sets 01–12? Print only `/downloads/puzzles/wongo-d6-expansion-13-36.pdf`: 192 pages on 96 A4 duplex sheets. The full deck uses 144 sheets. Sort by the prominent SADA / SET number, then block and card slot.

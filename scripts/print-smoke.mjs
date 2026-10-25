@@ -32,7 +32,10 @@ try{
  assert.equal(manifest.sheets,250);
  await page.goto(origin+'/downloads/puzzles/wongo-d6-20mm.html');
  await page.emulateMedia({media:'print'});
- assert.equal(await page.locator('.sheet').count(),96);assert.equal(await page.locator('.dice-card').count(),192);assert.equal(await page.locator('.dice-choice').count(),1152);
+ assert.equal(await page.locator('.sheet').count(),288);assert.equal(await page.locator('.dice-card').count(),576);assert.equal(await page.locator('.dice-choice').count(),3456);
+ const badges=await page.locator('.dice-card').evaluateAll(cards=>cards.map(card=>({pack:card.dataset.pack,label:card.querySelector('.pack-badge').textContent,id:card.dataset.id})));
+ assert.equal(badges.length,576);for(const badge of badges){assert.equal(badge.label,'SADA / SET '+badge.pack);assert.equal(badge.pack,badge.id.split('-')[1]);}
+ for(let i=0;i<36;i++)assert.ok(badges.slice(i*16,(i+1)*16).every(b=>b.pack===String(i+1).padStart(2,'0')),'Keep every set together in print order');
  const d6issues=await page.locator('.dice-card').evaluateAll(cards=>cards.flatMap(card=>{const b=card.getBoundingClientRect(),board=card.querySelector('.board').getBoundingClientRect(),v=card.querySelector('.board').viewBox.baseVal,f=card.querySelector('footer').getBoundingClientRect();return [Math.abs(board.width/v.width-20*96/25.4)>.1?'cell':null,f.bottom>b.bottom-4?'overflow':null].filter(Boolean).map(x=>card.dataset.id+': '+x);}));assert.deepEqual(d6issues,[]);
  for(const id of [5,6,7,8,9,10,11,12])assert.ok(await page.locator('#piece-'+id+' polygon').evaluateAll(nodes=>nodes.length>0&&nodes.every(n=>n.getAttribute('stroke')==='#ffffff')));
  await page.locator('.sheet').first().screenshot({path:'test-results/d6-front.png'});await page.locator('.sheet').nth(1).screenshot({path:'test-results/d6-back.png'});
