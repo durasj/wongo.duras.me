@@ -2,6 +2,8 @@
 
 A family 3D puzzle workshop for **4–8 players**, inspired by Ubongo 3D Master. Solve original generated challenges virtually, inspect their solutions, search a printed card's code, prepare a round that fits your piece inventory, and print the physical game.
 
+The library contains **1,000 verified puzzles: 500 easy and 500 hard**, with searchable codes, pagination and direct page jumps.
+
 ## Run locally
 
 Requires Node.js 22.12+ or 24+.

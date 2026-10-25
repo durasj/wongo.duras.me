@@ -46,17 +46,17 @@ function combinations(count: number): number[][] {
 }
 
 const generated: Puzzle[] = [], seen = new Set<string>();
-let rejectedUnsolvable = 0, rejectedBudget = 0, rejectedAssembly = 0, attempts = 0;
-for (const difficulty of ['easy','hard'] as const) {
+let rejectedUnsolvable = 0, rejectedBudget = 0, rejectedAssembly = 0, rejectedDuplicate = 0, attempts = 0;
+function generateBatch(difficulty: 'easy' | 'hard', firstCode: number, lastCode: number): void {
   const sets = combinations(difficulty==='easy'?3:4);
-  let found = 0;
-  while (found < 48 && attempts < 100_000) {
+  let nextCode = firstCode;
+  while (nextCode <= lastCode && attempts < 1_000_000) {
     attempts++;
     const pieceIds = sets[Math.floor(random()*sets.length)];
     const volume = pieceIds.reduce((n,id)=>n+pieces.find(p=>p.id===id)!.cubes.length,0);
     const board = footprint(volume/2);
     const fingerprint = `${footprintKey(board)}|${pieceIds.join(',')}`;
-    if (seen.has(fingerprint)) continue;
+    if (seen.has(fingerprint)) { rejectedDuplicate++; continue; }
     const result = solve({ footprint: board, pieceIds }, 150_000);
     if (!result.solution) {
       if (result.exhausted) rejectedUnsolvable++; else rejectedBudget++;
@@ -66,12 +66,20 @@ for (const difficulty of ['easy','hard'] as const) {
     if (!checked.valid) throw new Error(`Invalid generator witness: ${checked.errors.join('; ')}`);
     const ordered = assemblyOrder(result.solution);
     if (!ordered) { rejectedAssembly++; continue; }
-    seen.add(fingerprint); found++;
-    generated.push({ code:`W3-${difficulty==='easy'?'E':'H'}-${String(found).padStart(3,'0')}`, difficulty, footprint:board, pieceIds, solution:ordered, metrics:{ solverNodes:result.nodes,volume } });
+    seen.add(fingerprint);
+    generated.push({ code:`W3-${difficulty==='easy'?'E':'H'}-${String(nextCode).padStart(3,'0')}`, difficulty, footprint:board, pieceIds, solution:ordered, metrics:{ solverNodes:result.nodes,volume } });
+    nextCode++;
   }
-  if (found!==48) throw new Error(`Only generated ${found} ${difficulty} puzzles`);
-  console.log(`${difficulty}: ${found} puzzles verified`);
+  if (nextCode<=lastCode) throw new Error(`Generation exhausted the candidate limit at ${difficulty} code ${nextCode}`);
+  console.log(`${difficulty}: codes ${firstCode}–${lastCode} verified`);
 }
+// Preserve the RNG sequence, geometry, IDs and witnesses of the original 96.
+// Extending the first easy loop directly would silently change published hard codes.
+generateBatch('easy',1,48);
+generateBatch('hard',1,48);
+generateBatch('easy',49,500);
+generateBatch('hard',49,500);
+generated.sort((a,b)=>a.code.localeCompare(b.code));
 
 // Backtest published data again, starting from an empty board, then verify each returned witness.
 let totalNodes = 0;
@@ -105,9 +113,21 @@ if (existsSync('src/data/puzzles.json')) {
 if (!archiveBytes) throw new Error('Missing immutable legacy archive; restore src/data/legacy-puzzles.json before generating.');
 if (!existsSync(legacyPath)) writeFileSync(legacyPath,archiveBytes);
 writeFileSync('src/data/puzzles.json',JSON.stringify(generated,null,2)+'\n');
+const diversity=Object.fromEntries((['easy','hard'] as const).map(difficulty=>{
+  const category=generated.filter(puzzle=>puzzle.difficulty===difficulty);
+  return [difficulty,{
+    puzzles:category.length,
+    uniqueFootprints:new Set(category.map(puzzle=>footprintKey(puzzle.footprint))).size,
+    uniquePieceSets:new Set(category.map(puzzle=>puzzle.pieceIds.join(','))).size,
+    areas:[...new Set(category.map(puzzle=>puzzle.footprint.length))].sort((a,b)=>a-b),
+    piecesUsed:[...new Set(category.flatMap(puzzle=>puzzle.pieceIds))].sort((a,b)=>a-b),
+  }];
+}));
 writeFileSync('src/data/validation.json',JSON.stringify({
-  schemaVersion:2, generatorVersion:'wongo-2-color-unique', namespace:'W3', seed, puzzles:generated.length,
-  easy:48, hard:48, attempts, rejectedUnsolvable, rejectedBudget, rejectedAssembly,
+  schemaVersion:3, generatorVersion:'wongo-3-expanded-1000', namespace:'W3', seed, puzzles:generated.length,
+  easy:500, hard:500, attempts, rejectedUnsolvable, rejectedBudget, rejectedAssembly, rejectedDuplicate,
+  candidateLimit:1_000_000, generationSolverNodeLimit:150_000, backtestSolverNodeLimit:1_000_000,
+  diversity,
   uniqueColourVerified:generated.length,
   colourRule:'Easy: exactly 3 pieces from 3 different logical colour groups. Hard: exactly 4 pieces, one from each of the 4 groups.',
   retiredLegacyPuzzles:96, legacySha256,

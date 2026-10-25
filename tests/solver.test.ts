@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { pieces, getPiece, type Voxel } from '../src/lib/pieces';
+import report from '../src/data/validation.json';
 import { puzzles, getPuzzle, isPlayablePuzzle, selectRound } from '../src/lib/puzzles';
 import { assemblyOrder, orientations, shapeKey, isConnected, footprintKey, solve, validateSolution } from '../src/lib/solver';
 
@@ -25,8 +26,10 @@ test('rotation group includes all 24 rigid rotations, never reflections', () => 
   for (const rotated of rotations) assert.equal(orientations(rotated).map(shapeKey).sort().join('|'),rotations.map(shapeKey).sort().join('|'));
 });
 
-test('96 generated challenges independently solve from an empty target', () => {
-  assert.equal(puzzles.length,96);
+test('1000 generated challenges independently solve from an empty target', () => {
+  assert.equal(puzzles.length,1000);
+  assert.equal(puzzles.filter(puzzle=>puzzle.difficulty==='easy').length,500);
+  assert.equal(puzzles.filter(puzzle=>puzzle.difficulty==='hard').length,500);
   const seen = new Set<string>();
   for (const puzzle of puzzles) {
     assert.equal(puzzle.pieceIds.length,puzzle.difficulty==='easy'?3:4);
@@ -117,4 +120,22 @@ test('global colour rule rejects repeated colour groups and incorrect difficulty
   } finally {
     puzzles.pop();
   }
+});
+
+test('validation report accounts for every candidate and reflects the full catalogue diversity', () => {
+  assert.equal(report.puzzles,1000);
+  assert.equal(report.independentlySolved,1000);
+  assert.equal(report.witnessesValidated,1000);
+  assert.equal(report.verticalAssemblyVerified,1000);
+  assert.equal(report.uniqueColourVerified,1000);
+  assert.equal(report.attempts,report.puzzles+report.rejectedUnsolvable+report.rejectedBudget+report.rejectedAssembly+report.rejectedDuplicate);
+  for (const difficulty of ['easy','hard'] as const) {
+    const category=puzzles.filter(p=>p.difficulty===difficulty);
+    assert.equal(report.diversity[difficulty].puzzles,500);
+    assert.equal(report.diversity[difficulty].uniqueFootprints,new Set(category.map(p=>footprintKey(p.footprint))).size);
+    assert.equal(report.diversity[difficulty].uniquePieceSets,new Set(category.map(p=>p.pieceIds.join(','))).size);
+    assert.deepEqual([...new Set(category.flatMap(p=>p.pieceIds))].sort((a,b)=>a-b),pieces.map(p=>p.id));
+  }
+  assert.ok(report.diversity.easy.uniqueFootprints>=80);
+  assert.ok(report.diversity.hard.uniqueFootprints>=200);
 });

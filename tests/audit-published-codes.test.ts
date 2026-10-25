@@ -42,7 +42,12 @@ test('retired F3 archive preserves every byte and original puzzle meaning withou
 });
 
 // Solutions/metrics are deliberately excluded: a better valid witness is fine.
-test('active W3 codes retain their unique-colour footprints and piece lists', () => {
+test('original 96 W3 codes retain their complete records and unique-colour meanings', () => {
+  const original=puzzles.filter(puzzle=>Number(puzzle.code.slice(-3))<=48);
+  assert.equal(original.length,96);
+  assert.equal(createHash('sha256').update(JSON.stringify(original,null,2)+'\n').digest('hex'),
+    'bc0c04d9aae44a55aaf118c5386451a22773f30eb0320feda73ee45123e03ce7',
+    'The 1,000-puzzle expansion changed original W3 records or saved witnesses.');
   const published=[];
   for(const category of ['E','H']) for(let n=1;n<=48;n++) {
     const code=`W3-${category}-${String(n).padStart(3,'0')}`;
@@ -57,4 +62,21 @@ test('active W3 codes retain their unique-colour footprints and piece lists', ()
   assert.equal(createHash('sha256').update(JSON.stringify(published)).digest('hex'),
     'cf678194508431384925e799d877e56ed298c0493a85d6d44f335a090a106b3c',
     'Active W3 puzzle meanings changed. Preserve this catalogue and use a new namespace.');
+});
+
+test('all 1000 active W3 codes retain their expanded catalogue meanings', () => {
+  const published=[];
+  for(const category of ['E','H']) for(let n=1;n<=500;n++) {
+    const code=`W3-${category}-${String(n).padStart(3,'0')}`;
+    const puzzle=getPuzzle(code);
+    assert.ok(puzzle,`Published code removed: ${code}`);
+    assert.equal(puzzles.filter(p=>p.code===code).length,1,`Ambiguous code: ${code}`);
+    published.push({code:puzzle.code,difficulty:puzzle.difficulty,
+      footprint:[...puzzle.footprint].sort((a,b)=>a[1]-b[1]||a[0]-b[0]),
+      pieceIds:[...puzzle.pieceIds].sort((a,b)=>a-b)});
+  }
+  published.sort((a,b)=>a.code.localeCompare(b.code));
+  assert.equal(createHash('sha256').update(JSON.stringify(published)).digest('hex'),
+    '6ee4ef6b16f727bbcb741aa05eedb3b792ca444a41069ae767a28b0bbe444952',
+    'Expanded W3 puzzle meanings changed. Preserve this catalogue and use a new namespace.');
 });

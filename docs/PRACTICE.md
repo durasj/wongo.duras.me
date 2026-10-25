@@ -12,4 +12,4 @@ Placement failure reasons are `outside` (outside the footprint or two layers, or
 
 All functions are pure. To move a piece, remove its previous placement before checking the new one; undo and removal can therefore be simple UI state operations. Partial layouts may include unsupported upper cells. This intentionally behaves as a discrete editor, not a gravity simulation, and permits people to fill the lower layer afterwards. Completion still requires a full legal two-layer assembly.
 
-Tests reconstruct all 96 published puzzles through the manual placement API, cover both anchor layers, all reachable rotations, rejected bounds/overlaps/duplicates/mirrors/deformation, immutable inputs and independent completion checks.
+Tests reconstruct all 1,000 published puzzles through the manual placement API, cover both anchor layers, all reachable rotations, rejected bounds/overlaps/duplicates/mirrors/deformation, immutable inputs and independent completion checks.

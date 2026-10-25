@@ -88,6 +88,17 @@ try {
   await page.goto(origin);
   await page.getByRole('heading', { name: 'Good things fit together.' }).waitFor();
   await page.locator('canvas').waitFor();
+  if(catalogue.length>24){
+    const firstCode=await page.locator('.puzzle-card .card-header').first().innerText();
+    await page.getByRole('button',{name:'Next',exact:true}).click();
+    assert.notEqual(await page.locator('.puzzle-card .card-header').first().innerText(),firstCode);
+    await page.getByRole('button',{name:'Previous',exact:true}).click();
+    assert.equal(await page.locator('.puzzle-card .card-header').first().innerText(),firstCode);
+    await page.getByRole('spinbutton',{name:'Library page',exact:true}).fill(String(Math.ceil(catalogue.length/24)));
+    assert.equal(await page.locator('.puzzle-card').count(),catalogue.length%24||24);
+    await page.getByRole('spinbutton',{name:'Library page',exact:true}).fill('1');
+  }
+
   // Printing through the browser menu works before the application's print button is used.
   await page.evaluate(()=>window.dispatchEvent(new Event('beforeprint')));
   assert.equal(await page.locator('.print-card').count(),1);

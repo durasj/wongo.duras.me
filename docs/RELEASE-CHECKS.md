@@ -1,5 +1,11 @@
 # Release checks
 
+## Version 0.4: expanded library
+
+The active library contains 1,000 verified challenges: 500 easy and 500 hard. Every original W3 record and saved solution remains unchanged. All 1,000 independently solve, pass the placement/coverage validator, obey the distinct-colour rule, and include a valid assembly order. All 24 automated tests pass, including manual reconstruction of every published solution.
+
+Generation is deterministic and considered 14,599 candidates: 1,000 accepted, 11,985 unsolvable, 21 rejected for cyclic assembly witnesses, and 1,593 duplicates. No candidates exhausted the solver budget. Library browsing now uses 24 puzzles per page, with previous/next controls and a direct page-number jump; search and difficulty changes return to page one.
+
 ## Version 0.3: distinct colours
 
 Every active easy puzzle has exactly three pieces in three different colour groups. Every active hard puzzle has exactly four pieces, one per colour group. No selectable puzzle repeats a colour. The new W3 catalogue contains 48 puzzles of each difficulty, independently solved and checked for exact coverage and vertical assembly order. All 22 tests pass.
