@@ -96,10 +96,14 @@ Wongo is an independent family adaptation, not an official Ubongo product. Ubong
 
 Puzzle challenges are generated for Wongo rather than reproducing the commercial card collection.
 
-## 20 mm physical print kit
+## Physical game: A5 D6 cards and chamfered pieces
 
-Download `/downloads/bambu/wongo-20mm-P1S-print-kit.zip` for four colour-separated P1S projects (0.4 mm nozzle, 0.1 mm layers, 3 walls, 20% gyroid). Print each once for 40 pieces or twice for 80. Starting filament settings derive from Generic PLA; use a calibrated Flashforge Matte profile when available.
+`/downloads/puzzles/wongo-d6-20mm.pdf` and its bilingual `.html` companion contain **96 double-sided A5 cards in 12 numbered eight-card packs**: 96 printed pages on **48 A4 sheets**. Each side has one footprint and six distinct die-selected piece lists. There are 1,152 assignments drawn from **327 distinct verified puzzles**. The original 1,000-puzzle catalogue remains available in the app and `/downloads/puzzles/wongo-20mm-duplex.pdf`.
 
-`/downloads/puzzles/wongo-20mm-duplex.pdf` and the companion `.html` contain all 1,000 published puzzles on 500 A4 landscape pages. Print at 100%, duplex, **flip on the short edge**: two easy fronts and two hard backs per sheet, then cut into two A5 cards. Back slots are reversed for physical alignment. Check one sheet first. Total: 250 A4 sheets. No solutions are printed on the cards.
+Print A4 landscape, actual size, duplex **flip on the short edge**; measure the 40 mm mark before cutting. Use one common difficulty and one shared die roll. For 2–4 players take cards only from one four-card block; for 5–8 use one eight-card pack and 80 pieces. Do not independently mix packs, blocks or difficulty sides. Every common roll and player count is inventory-checked. Printed footprints may be properly rotated relative to the original puzzle code; no code meaning changes.
 
-Run `npm run generate:print-kit` to rebuild the models, plates, kit ZIP and duplex catalogue. See `docs/PRINTING.md` and `docs/print-estimates.json`. Changing physical scale does not change any published code, piece shape or saved solution.
+`/downloads/bambu/wongo-20mm-P1S-print-kit.zip` contains four colour-separated P1S projects. Each voxel has a **0.5 mm 45-degree chamfer**, exposing shallow seam grooves while preserving the 20 mm pitch, occupied cells and chirality. The default is a 0.4 mm nozzle, 0.1 mm layers, 3 walls, 0.8 mm top/bottom and **5% gyroid**. The filament profile is Generic PLA-derived; use a calibrated Flashforge Matte profile if available and print a fit sample first.
+
+Bambu Studio estimates for the chamfered 40-piece set are **493.9 g / 28.80 hours**; print every colour twice for 80 pieces (**987.7 g / 57.59 hours**). These are slicer estimates, not physical measurements. Blue and red pieces have white outlines in icons, 3D previews and printed diagrams.
+
+Run `npm run generate:print-kit` to regenerate meshes, D6 data, plates, print-kit ZIP and both catalogues offline. `npm run generate:dice-cards` independently backtests all D6 assignments. Published D6 mappings are frozen. See `docs/PRINTING.md`, `docs/print-estimates.json` and `docs/infill-comparison.json`.

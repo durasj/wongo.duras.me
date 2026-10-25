@@ -3,5 +3,7 @@
   "layerHeightMm": 0.1,
   "nozzleMm": 0.4,
   "wallLoops": 3,
-  "infillPercent": 20
+  "infillPercent": 5,
+  "chamferMm": 0.5,
+  "infillPattern": "gyroid"
 }

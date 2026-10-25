@@ -1,18 +1,15 @@
 # Wongo 3D
-## Family rulebook · English · Version 1.0
+## Family rulebook · English · Version 2.0 · Physical D6 cards
 
 **2–8 players · 9 rounds · Ages 10+ suggested · About 25–40 minutes**
 
-Build a little solid world before time runs out. Everyone solves a different puzzle at the same time, earns gems, and tries to finish with the most points.
-
-Wongo is an original family adaptation inspired by Ubongo 3D Master. It is not an official Ubongo product. These are the rules for our custom two-to-eight-player game.
+Build on your printed card before time runs out. Everyone plays at once and earns gems. The website is optional for solutions and practice; you do not need it at the table. Wongo is an independent family adaptation inspired by Ubongo 3D Master, not an official product.
 
 ## What you need
 
-- Copies of the 16 numbered shapes: **40 pieces for 2–4 players, or 80 for 5–8 players**, using the print-manifest quantities. The 80-piece pool also works for 2–4. This is a shared pool, not 16 pieces per player.
-- One assigned puzzle per player per round, displayed in the app or printed at the matching piece scale.
-- A timer, an opaque gem bag, and paper for recording results.
-- **90 gems:** 18 red, 27 blue, 18 green and 27 amber. This one set works for two through eight players.
+- The shared pool of 16 numbered shapes: **40 pieces for 2–4 players or 80 for 5–8**, in the manifest quantities. These are not personal complete sets. Cube pitch is 20 mm, with 0.5 mm edge chamfers.
+- **Double-sided A5 D6 cards**, a normal six-sided die, timer, opaque gem bag and score paper. The download has **12 numbered packs of 8 cards**. Easy is on the front, hard on the back. Each side has one footprint and six piece lists.
+- **90 gems:** 18 red, 27 blue, 18 green and 27 amber. One set works for every player count.
 
 | Gem | Points |
 | --- | ---: |
@@ -23,65 +20,57 @@ Wongo is an original family adaptation inspired by Ubongo 3D Master. It is not a
 
 ## Set up
 
-1. Choose the number of players, from two to eight. Use the round generator so that all assigned puzzles together fit the available piece inventory. Do not independently pick arbitrary puzzles from the shared pool.
-2. Agree on difficulty before starting. **Easy uses three pieces in three different colours; hard uses four pieces, one of each colour.** No puzzle uses the same colour twice. These labels describe piece count, not a guarantee of how difficult a person will find a particular puzzle. The initial round planner uses one common level. As a family variant, players may use different levels only if the combined piece allocation has been checked against the shared inventory.
-3. Set the timer to **two minutes per round**. You may agree on a longer time for the whole game. Give beginners a practice round first.
-4. Put **nine blue and nine amber gems** in two visible rows. Each pair marks one round. Put all remaining gems in the bag: initially **18 of each colour**.
-5. Keep solutions hidden. Each player receives a different assigned puzzle and takes exactly the pieces named on it. Take time to identify the pieces before the timer starts.
+1. Shuffle **complete numbered packs**, keep their cards together and choose nine packs for nine rounds. Never deal unrelated cards: inventories are checked per pack and die face.
+2. For **2–4 players**, use only slots 1–4 (block A) or only 5–8 (block B) from one pack. Give each player a different card from that block. For **5–8**, use slots 1–N from one pack and the 80-piece pool. Smaller groups still fit.
+3. Choose **one common difficulty**. Easy uses three different colours; hard four pieces, one of each colour. Turn all cards to that side. The inventory guarantee does not cover mixed difficulties, mixed packs, or mixed blocks with 40 pieces.
+4. Use **two minutes per round**, or a longer agreed common limit. Give beginners a practice round.
+5. Display **nine blue and nine amber bonus gems**, one pair per round. Bag the rest: initially **18 of each colour**. Keep solutions hidden.
 
 ## The building challenge
 
-A puzzle shows a footprint on a square grid and the IDs of the pieces to use. Fill **every footprint square exactly two cubes high**.
+The single footprint on your card applies to **all six die rows**. The row changes the pieces, not the board. Fill **every square exactly two cubes high**.
 
-- Use every assigned piece exactly once. Use no extra pieces.
-- Rotate or turn pieces over in three dimensions. Do not alter or mirror their geometry.
-- Leave no gaps in either layer, overlap no cubes, and put nothing outside the footprint or above layer two.
-- Build an arrangement that can stand on the table; a hovering or physically impossible placement does not count. You may rearrange or lift pieces while working.
+- Use every listed piece once and add no extra pieces.
+- Rotate pieces freely in three dimensions; do not alter or mirror their shapes.
+- Leave no gaps or overlaps; nothing may project outside the footprint or above layer two.
+- The final build must stand on the table. You may lift and rearrange pieces while solving.
 
-A printed card is the base layer's footprint. The same footprint must be filled again in the second layer. Piece colours and numbers identify shapes; the board's squares are not colour-matching instructions.
+Shallow grooves show the individual cubes. Judge the 20 mm lattice, not tiny decorative chamfer gaps. Colours and IDs identify pieces; board cells do not specify colours.
 
 ## Play a round
 
-1. When everybody has the correct pieces, start the timer together.
-2. Work on your own puzzle. When finished, say **“Wongo!”** and leave your arrangement in place. Record the finish order; everyone else keeps solving until time runs out.
-3. Check completed builds before awarding gems. An incorrect build earns nothing unless the player fixes it and finishes before the timer ends. A displayed solution is not proof of a player's own build.
-4. Every player who finished correctly in time draws **one random gem** from the bag. In addition, the fastest receives that round's **blue** gem and the second-fastest receives that round's **amber** gem.
-5. Return any unawarded bonus gem from that round to the bag. Return all pieces to the shared pool, then deal the next inventory-checked round.
+1. Deal cards from the next complete pack as described above. **Roll once for everybody.** Each player finds that die face on their card and takes exactly its listed pieces. Do not roll separately per player.
+2. Check the pieces, then start the shared timer. Solve your own footprint. On finishing, say **“Wongo!”**, leave the build in place and record the order. Others continue until time expires.
+3. Check finished builds before awarding gems. A mistake earns nothing unless fixed before the time limit. A displayed reference solution does not prove the player's build is correct.
+4. Every correct finisher draws **one random gem**. The fastest also takes the round's **blue** bonus; the second-fastest takes **amber**.
+5. Return unawarded bonuses to the bag and all pieces to the pool. Put the complete pack aside and use the next one. Do not retain pieces or mix packs.
 
-If two finish announcements cannot be distinguished, draw lots between those players for their order before giving bonus gems. Everyone who solved still gets their random gem.
-
-If **nobody** solves a round, the group may use **one second chance**: restart the same timer once and continue the same puzzles. Agree before the game whether to use this option. If nobody solves after that, award no gems and return both bonus gems to the bag. The round still counts. Never add extra rounds because a round was unsuccessful.
+For an indistinguishable finish tie, draw lots for bonus order; all correct finishers still draw a gem. If **nobody** finishes, you may allow **one second chance**: restart the same timer once on the same cards and die result. Agree beforehand. If nobody then solves, return both bonuses to the bag. The round still counts; do not add rounds.
 
 ## Win
 
-After round nine, add the points on your collected gems. The highest total wins. **A tied highest score is a shared victory.** Gem count alone does not decide the winner.
-
-For mixed abilities, keep each person's chosen level consistent throughout a game. After a game, adjust levels or the common time limit together. The random gem draw deliberately gives slower solvers a chance to win too.
+After round nine, total the gem points. Highest wins; **a tied highest score is a shared victory**. Gem count alone does not decide. Change the common level or timer between games to suit the group.
 
 ## Use the virtual puzzle library
 
-Every puzzle has a permanent **problem code**. Enter or search that code to return to the same footprint, piece list and saved solution. Codes identify Wongo-generated puzzles, not the publisher's original cards.
+Search the **W3 code beside the chosen die row**, not the D6 pack ID. It opens that piece list and a reference solution. The printed footprint may be rotated to share a common orientation; turn the card when comparing it with the screen.
 
-Choose **Try this puzzle** to build your own solution. Select a piece, rotate it about X, Y or Z, and choose its anchor on the lower or upper grid. The anchor is the lower corner of the piece’s bounding box, which may itself be empty; **+X points right and +Y up the grid**. Place the piece, then repeat. Overlaps and placements outside the two-layer board are rejected. You can undo, remove a placed piece, or reset the board.
+Choose **Try this puzzle** for practice with X/Y/Z rotations and two layer grids. The anchor is the lower corner of the piece's bounding box and may be empty. **+X points right; +Y points up.** Illegal overlaps and bounds are blocked. Any complete legal solution is accepted, even if different from the saved example. Partial practice builds may temporarily have unsupported cubes.
 
-During practice, a partly built arrangement may temporarily have unsupported cubes. Completion is checked independently: all assigned pieces must form their correct shapes and exactly fill both layers without gaps or overlaps. Any valid arrangement counts, even if it differs from the saved solution.
+Reveal the solution after the competitive round. Revealing it during a round makes that player's puzzle ineligible for rewards. Without WebGL, use numbered 2D layers. The website does not synchronize timers, rolls, finish order or scores.
 
-To check the reference solution, reveal it, rotate the 3D view, step through the pieces, or inspect either layer. If WebGL is unavailable, use the numbered 2D layer views. Revealing a solution during a competitive round makes that player's puzzle ineligible for rewards that round.
+Every printed alternative is independently solved, and every common die result checked against the block's shared pool. This proves geometry and inventory availability, not printer tolerances or drop resistance.
 
-Each published puzzle passes an exact solver check and a separate saved-solution check. The round planner also checks total piece demand. These establish geometric solvability; printed fit still needs a physical sample test.
+## Printing and care
 
-Practice runs locally in your browser. There is no synchronized online multiplayer: for family games, start a shared timer, record finish order and count gem scores yourselves.
+Download the **D6 physical cards**. Use A4 landscape, **100% / actual size**, no fitting, margins, headers or footers, and duplex **flip on the short edge**. The 96-page file uses **48 A4 sheets** and yields 96 double-sided A5 cards. Back slots are intentionally reversed. Measure the **40 mm guide**, check one sheet, then cut at the centre. Keep packs and blocks together. Do not print solutions on the backs.
 
-## Print later
-
-Print puzzle cards at **100% / actual size**, with page fitting disabled, after choosing your piece size (the initial models use 20 mm cubes). Measure the card's calibration guide before using it with printed pieces. Print solutions separately or on a separate page so they are not visible during play. Start with a small fit test before printing the whole collection.
+Models use 20 mm cubes, 0.5 mm chamfers, 0.1 mm layers, 3 walls and a 5% gyroid starting profile. Print a small fit sample first: low infill and printer settings need a physical test.
 
 ## Solo practice
 
-Choose any puzzle, hide the solution, and time yourself. Try to beat your previous time or solve as many puzzles as possible in ten minutes. Gems and multiplayer inventory checks are unnecessary when solving one puzzle at a time.
-
-Keep small pieces and gems away from children who might put them in their mouths.
+Take any card, choose a side, roll and time yourself. No gems or multiplayer inventory checks are needed. Keep small pieces and gems away from children who might put them in their mouths.
 
 ---
 
-**Reference:** [Albi's Ubongo 3D Master rulebook](https://albi.cz/data/files/products/50224/1662463648-ubongo_3d-master_manual_cz.pdf). Wongo's player count, generated puzzles, inventory scheduling and 90-gem setup are custom adaptations.
+**Reference:** [Albi's Ubongo 3D Master rulebook](https://albi.cz/data/files/products/50224/1662463648-ubongo_3d-master_manual_cz.pdf). Wongo's D6 packs, player counts, puzzles, inventory scheduling and 90-gem setup are custom adaptations.
