@@ -10,6 +10,7 @@ Wongo is a family 3D puzzle workshop for 4–8 simultaneous players, inspired by
 - Puzzle codes are stable identifiers. Never silently assign an existing published code to a different puzzle. Version new catalogues if geometry or codes change.
 - Preserve both published-code and physical-shape regression fingerprints. Unknown codes must show an explicit error, never silently substitute a different puzzle.
 - Practice must validate actual user placements independently and accept any legal complete fill. Do not reveal or insert witness placements as part of manual solving. Keep controls usable without WebGL.
+- Every selectable easy puzzle must use exactly three pieces of three different colour groups. Every selectable hard puzzle must use exactly four pieces, one of each colour. Never repeat a colour within a puzzle. The retired F3 catalogue is archival only; expose only the current W3 catalogue for play and lookup.
 - A round is valid only if all player assignments fit the actual inventory. Do not assume each player owns a complete set.
 - Difficulty labels initially describe piece count, not a scientifically calibrated human rating. Keep that limitation visible in documentation.
 - Do not claim manual drag-and-drop play, networking, physical assembly validation, print testing, or deployment unless implemented and verified.

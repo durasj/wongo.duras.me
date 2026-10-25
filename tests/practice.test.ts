@@ -88,7 +88,7 @@ test('practice is pure, normalizes anchor semantics, and permits unsupported par
 });
 
 test('completion accepts a solver-generated fill rather than requiring the saved witness', () => {
-  const puzzle=puzzles.find(p=>p.code==='F3-H-001')!;
+  const puzzle=puzzles.find(p=>p.code==='W3-H-001')!;
   const result=solve(puzzle);
   assert.ok(result.solution);
   assert.equal(completion(puzzle,result.solution!),true);

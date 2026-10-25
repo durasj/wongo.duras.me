@@ -43,7 +43,7 @@ npm run generate:puzzles
 npm run export:rulebooks
 ```
 
-The piece exporter requires only Node.js; the rulebook exporter uses Python 3's standard library. Regeneration refuses to overwrite published codes with different problems. Regression tests also freeze the current code mappings and physical piece geometries. See `docs/VALIDATION.md` and `docs/PIECES.md` for the checks and source provenance.
+The piece exporter requires only Node.js; the rulebook exporter uses Python 3's standard library. Regeneration refuses to overwrite published codes with different problems. The active W3 catalogue enforces the distinct-colour rule; retired F3 challenges remain in a verification archive and are never assigned or exposed as playable puzzles. Regression tests also freeze the current code mappings and physical piece geometries. See `docs/VALIDATION.md` and `docs/PIECES.md` for the checks and source provenance.
 
 ## Project layout
 
@@ -66,7 +66,7 @@ Reveal the saved solution only when ready. Inspect it from different angles and 
 
 Use the browser's print action for puzzle cards and the download pages for the English and Slovak rulebooks. Print at **100% / actual size**, with browser headers and footers disabled. Check the calibration reference before printing a batch; board cells and printable models must use the same physical unit size.
 
-The first catalogue uses 3-piece and 4-piece challenges. These labels are structural difficulty categories; human difficulty is not yet playtested. Computer validation proves grid coverage, proper orientations, piece usage and inventory availability; each saved witness also has a valid vertical assembly order. It does not certify printer tolerances or ergonomics. Test a small batch before producing the full set.
+Every selectable easy puzzle uses exactly three pieces of three different colours. Every selectable hard puzzle uses exactly four pieces, one per colour. The same colour never appears twice in a puzzle. These labels are structural difficulty categories; human difficulty is not yet playtested. Computer validation proves grid coverage, proper orientations, piece usage and inventory availability; each saved witness also has a valid vertical assembly order. It does not certify printer tolerances or ergonomics. Test a small batch before producing the full set.
 
 ## Vercel
 

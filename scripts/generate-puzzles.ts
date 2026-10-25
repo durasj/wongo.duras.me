@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { pieces } from '../src/lib/pieces';
 import { assemblyOrder, footprintKey, solve, validateSolution, type Footprint } from '../src/lib/solver';
 import type { Puzzle } from '../src/lib/puzzles';
@@ -33,7 +34,9 @@ function combinations(count: number): number[][] {
   const result: number[][] = [];
   function visit(start: number, picked: number[]) {
     if (picked.length === count) {
-      if (picked.reduce((n,id)=>n+pieces.find(p=>p.id===id)!.cubes.length,0)%2===0) result.push(picked);
+      const chosen = picked.map(id=>pieces.find(p=>p.id===id)!);
+      if (new Set(chosen.map(piece=>piece.color)).size !== count) return;
+      if (chosen.reduce((n,piece)=>n+piece.cubes.length,0)%2===0) result.push(picked);
       return;
     }
     for (let index=start; index<pieces.length; index++) visit(index+1,[...picked,pieces[index].id]);
@@ -64,7 +67,7 @@ for (const difficulty of ['easy','hard'] as const) {
     const ordered = assemblyOrder(result.solution);
     if (!ordered) { rejectedAssembly++; continue; }
     seen.add(fingerprint); found++;
-    generated.push({ code:`F3-${difficulty==='easy'?'E':'H'}-${String(found).padStart(3,'0')}`, difficulty, footprint:board, pieceIds, solution:ordered, metrics:{ solverNodes:result.nodes,volume } });
+    generated.push({ code:`W3-${difficulty==='easy'?'E':'H'}-${String(found).padStart(3,'0')}`, difficulty, footprint:board, pieceIds, solution:ordered, metrics:{ solverNodes:result.nodes,volume } });
   }
   if (found!==48) throw new Error(`Only generated ${found} ${difficulty} puzzles`);
   console.log(`${difficulty}: ${found} puzzles verified`);
@@ -73,18 +76,41 @@ for (const difficulty of ['easy','hard'] as const) {
 // Backtest published data again, starting from an empty board, then verify each returned witness.
 let totalNodes = 0;
 for (const puzzle of generated) {
+  const count=puzzle.difficulty==='easy'?3:4;
+  if (puzzle.pieceIds.length!==count || new Set(puzzle.pieceIds.map(id=>pieces.find(piece=>piece.id===id)!.color)).size!==count)
+    throw new Error(`Colour rule failed: ${puzzle.code}`);
   const result = solve({footprint:puzzle.footprint,pieceIds:puzzle.pieceIds});
   if (!result.solution || !validateSolution(puzzle,result.solution).valid) throw new Error(`Backtest failed: ${puzzle.code}`);
   totalNodes += result.nodes;
 }
 mkdirSync('src/data',{recursive:true});
+// A one-time, explicitly authorized namespace migration. Preserve every legacy byte;
+// retired F3 meanings must never be reassigned or leak into public play/search.
+const legacyPath='src/data/legacy-puzzles.json';
+const legacySha256='ff7b5467ab7059587ef75f1faf1a6b1425826a701c0a2ce2aad41cde49292335';
+const digest=(data:Buffer)=>createHash('sha256').update(data).digest('hex');
+let archiveBytes=existsSync(legacyPath)?readFileSync(legacyPath):undefined;
+if (archiveBytes && digest(archiveBytes)!==legacySha256) throw new Error('Legacy F3 archive changed; refusing generation.');
 if (existsSync('src/data/puzzles.json')) {
-  assertPublishedCatalogueUnchanged(JSON.parse(readFileSync('src/data/puzzles.json','utf8')) as Puzzle[],generated);
+  const previousBytes=readFileSync('src/data/puzzles.json');
+  const previous=JSON.parse(previousBytes.toString('utf8')) as Puzzle[];
+  if (previous.length===96 && previous.every(puzzle=>/^F3-[EH]-\d{3}$/.test(puzzle.code))) {
+    if (digest(previousBytes)!==legacySha256) throw new Error('Legacy F3 catalogue changed; refusing migration.');
+    if (!archiveBytes) archiveBytes=previousBytes;
+  } else {
+    if (previous.some(puzzle=>!/^W3-[EH]-\d{3}$/.test(puzzle.code))) throw new Error('Unexpected active catalogue namespace; refusing overwrite.');
+    assertPublishedCatalogueUnchanged(previous,generated);
+  }
 }
+if (!archiveBytes) throw new Error('Missing immutable legacy archive; restore src/data/legacy-puzzles.json before generating.');
+if (!existsSync(legacyPath)) writeFileSync(legacyPath,archiveBytes);
 writeFileSync('src/data/puzzles.json',JSON.stringify(generated,null,2)+'\n');
 writeFileSync('src/data/validation.json',JSON.stringify({
-  schemaVersion:1, generatorVersion:'wongo-1', seed, puzzles:generated.length,
+  schemaVersion:2, generatorVersion:'wongo-2-color-unique', namespace:'W3', seed, puzzles:generated.length,
   easy:48, hard:48, attempts, rejectedUnsolvable, rejectedBudget, rejectedAssembly,
+  uniqueColourVerified:generated.length,
+  colourRule:'Easy: exactly 3 pieces from 3 different logical colour groups. Hard: exactly 4 pieces, one from each of the 4 groups.',
+  retiredLegacyPuzzles:96, legacySha256,
   independentlySolved:generated.length, witnessesValidated:generated.length,
   verticalAssemblyVerified:generated.length,
   deduplication:'Footprint D4 symmetry plus sorted piece IDs',

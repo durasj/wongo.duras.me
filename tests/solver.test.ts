@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { pieces, getPiece, type Voxel } from '../src/lib/pieces';
-import { puzzles, getPuzzle, selectRound } from '../src/lib/puzzles';
+import { puzzles, getPuzzle, isPlayablePuzzle, selectRound } from '../src/lib/puzzles';
 import { assemblyOrder, orientations, shapeKey, isConnected, footprintKey, solve, validateSolution } from '../src/lib/solver';
 
 test('all 16 rigid, connected pieces have unique identities and expected volumes', () => {
@@ -30,7 +30,9 @@ test('96 generated challenges independently solve from an empty target', () => {
   const seen = new Set<string>();
   for (const puzzle of puzzles) {
     assert.equal(puzzle.pieceIds.length,puzzle.difficulty==='easy'?3:4);
-    assert.match(puzzle.code,/^F3-[EH]-\d{3}$/);
+    assert.match(puzzle.code,/^W3-[EH]-\d{3}$/);
+    assert.equal(isPlayablePuzzle(puzzle),true,puzzle.code);
+    assert.equal(new Set(puzzle.pieceIds.map(id=>getPiece(id).color)).size,puzzle.pieceIds.length,puzzle.code);
     const signature = `${footprintKey(puzzle.footprint)}|${[...puzzle.pieceIds].sort((a,b)=>a-b)}`;
     assert.ok(!seen.has(signature),`Duplicate ${puzzle.code}`); seen.add(signature);
     assert.deepEqual(validateSolution(puzzle,puzzle.solution),{valid:true,errors:[]},puzzle.code);
@@ -77,7 +79,9 @@ test('unsolvable boards fail; search budget exhaustion is not a solvability verd
 });
 
 test('code lookup is case-insensitive and round selection is repeatable', () => {
-  assert.equal(getPuzzle(' f3-e-001 ')?.code,'F3-E-001');
+  assert.equal(getPuzzle(' w3-e-001 ')?.code,'W3-E-001');
+  assert.equal(getPuzzle('F3-E-001'),undefined);
+  assert.equal(getPuzzle('F3-H-048'),undefined);
   assert.equal(getPuzzle('nonsense'),undefined);
   assert.deepEqual(selectRound(8,'hard',42).map(p=>p.code),selectRound(8,'hard',42).map(p=>p.code));
 });
@@ -89,9 +93,28 @@ test('every player count and difficulty fits the real inventory across many roun
     assert.equal(new Set(round.map(p=>p.code)).size,count);
     const used = new Map<number,number>();
     for (const puzzle of round) for (const id of puzzle.pieceIds) used.set(id,(used.get(id)??0)+1);
+    assert.ok(round.every(p=>p.code.startsWith('W3-') && isPlayablePuzzle(p)));
     for (const piece of pieces) assert.ok((used.get(piece.id)??0) <= (count<=4?piece.quantity4:piece.quantity8));
   }
   assert.throws(()=>selectRound(8,'hard',1,{}),/Not enough pieces/);
   assert.throws(()=>selectRound(3,'easy'),/4 and 8/);
   assert.throws(()=>selectRound(9,'easy'),/4 and 8/);
+});
+
+test('global colour rule rejects repeated colour groups and incorrect difficulty counts', () => {
+  assert.equal(isPlayablePuzzle({difficulty:'easy',pieceIds:[1,8,15]}),true);
+  assert.equal(isPlayablePuzzle({difficulty:'hard',pieceIds:[1,8,10,15]}),true);
+  assert.equal(isPlayablePuzzle({difficulty:'easy',pieceIds:[1,2,15]}),false);
+  assert.equal(isPlayablePuzzle({difficulty:'hard',pieceIds:[1,2,8,15]}),false);
+  assert.equal(isPlayablePuzzle({difficulty:'easy',pieceIds:[1,8,10,15]}),false);
+  assert.equal(isPlayablePuzzle({difficulty:'hard',pieceIds:[1,8,15]}),false);
+  assert.equal(isPlayablePuzzle({difficulty:'easy',pieceIds:[1,8,99]}),false);
+  const invalid={...puzzles[0],code:'W3-E-999',pieceIds:[1,2,15]};
+  puzzles.push(invalid);
+  try {
+    assert.equal(getPuzzle(invalid.code),undefined);
+    for(let seed=0;seed<20;seed++) assert.ok(selectRound(8,'easy',seed).every(p=>p.code!==invalid.code));
+  } finally {
+    puzzles.pop();
+  }
 });

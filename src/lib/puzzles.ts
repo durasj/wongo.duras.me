@@ -1,5 +1,5 @@
 import catalogue from '../data/puzzles.json';
-import { pieces } from './pieces';
+import { getPiece, pieces } from './pieces';
 import type { Footprint, Placement } from './solver';
 
 export type Difficulty = 'easy' | 'hard';
@@ -11,9 +11,24 @@ export interface Puzzle {
   solution: Placement[];
   metrics?: { solverNodes: number; volume: number };
 }
-export const puzzles = catalogue as Puzzle[];
+/** Global play rule: three distinct colour groups on easy, all four on hard. */
+export function isPlayablePuzzle(puzzle: Pick<Puzzle, 'difficulty' | 'pieceIds'>): boolean {
+  if (puzzle.difficulty !== 'easy' && puzzle.difficulty !== 'hard') return false;
+  const requiredCount = puzzle.difficulty === 'easy' ? 3 : 4;
+  if (puzzle.pieceIds.length !== requiredCount) return false;
+  try {
+    return new Set(puzzle.pieceIds.map(id => getPiece(id).color)).size === requiredCount;
+  } catch {
+    return false;
+  }
+}
+const activeCode = /^W3-[EH]-\d{3}$/;
+/** Retired F3 data is intentionally not imported into the application bundle. */
+export const puzzles = (catalogue as Puzzle[]).filter(puzzle => activeCode.test(puzzle.code) && isPlayablePuzzle(puzzle));
 export function getPuzzle(code: string): Puzzle | undefined {
-  return puzzles.find(puzzle => puzzle.code === code.trim().toUpperCase());
+  const normalized = code.trim().toUpperCase();
+  if (!activeCode.test(normalized)) return undefined;
+  return puzzles.find(puzzle => puzzle.code === normalized && isPlayablePuzzle(puzzle));
 }
 
 export function seededRandom(seed: number): () => number {
@@ -34,7 +49,7 @@ export function selectRound(playerCount: number, difficulty: Difficulty, seed = 
   const remaining = new Map(pieces.map(piece => [piece.id, inventory ? (inventory[piece.id] ?? 0) : (playerCount <= 4 ? piece.quantity4 : piece.quantity8)]));
   if ([...remaining.values()].some(n => !Number.isInteger(n) || n < 0)) throw new Error('Inventory quantities must be nonnegative integers.');
   const random = seededRandom(seed);
-  const pool = puzzles.filter(p => p.difficulty === difficulty);
+  const pool = puzzles.filter(p => p.difficulty === difficulty && activeCode.test(p.code) && isPlayablePuzzle(p));
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(random() * (i + 1));
     [pool[i],pool[j]] = [pool[j],pool[i]];

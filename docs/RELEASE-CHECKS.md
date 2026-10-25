@@ -1,5 +1,11 @@
 # Release checks
 
+## Version 0.3: distinct colours
+
+Every active easy puzzle has exactly three pieces in three different colour groups. Every active hard puzzle has exactly four pieces, one per colour group. No selectable puzzle repeats a colour. The new W3 catalogue contains 48 puzzles of each difficulty, independently solved and checked for exact coverage and vertical assembly order. All 22 tests pass.
+
+The previous F3 collection is preserved byte-for-byte in a verification archive and retired from lookup and round assignment. Its codes are not reused for different puzzles. Runtime guards and generation tests enforce the new rule, including inventory-checked rounds for four through eight players. Piece shapes and print scale are unchanged.
+
 ## Version 0.2: production follow-up
 
 On 25 October 2026 the original live deployment passed the browser suite for lookup, solution controls, downloads, eight-player rounds, mobile layout and print scale. The follow-up release adds manual practice and fixes discovered during the production review.

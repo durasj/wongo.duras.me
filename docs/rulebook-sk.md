@@ -21,12 +21,10 @@ Wongo je vlastná rodinná úprava inšpirovaná hrou Ubongo 3D Master. Nie je t
 | Zelený | 2 |
 | Jantárový | 1 |
 
-Malé dieliky a drahokamy držte mimo dosahu detí, ktoré by si ich mohli vložiť do úst.
-
 ## Príprava
 
 1. Zvoľte počet hráčov od štyroch do ôsmich. Použite generátor kola, ktorý vyberie zadania tak, aby vystačila spoločná zásoba dielikov. Nevyberajte každému ľubovoľné zadanie nezávisle od ostatných.
-2. Vopred sa dohodnite na náročnosti. **Ľahké zadania používajú tri dieliky, ťažké štyri.** Označenie vyjadruje počet dielikov, nie zaručenú náročnosť pre konkrétneho človeka. Úvodný plánovač kola používa jednu spoločnú úroveň. Ako rodinnú obmenu môžete hráčom prideliť rôzne úrovne, iba ak vopred overíte spoločnú spotrebu dielikov voči dostupnej zásobe.
+2. Vopred sa dohodnite na náročnosti. **Ľahké zadania používajú tri dieliky troch rôznych farieb; ťažké štyri dieliky, po jednom z každej farby.** Žiadna farba sa v jednom zadaní neopakuje. Označenie vyjadruje počet dielikov, nie zaručenú náročnosť pre konkrétneho človeka. Úvodný plánovač kola používa jednu spoločnú úroveň. Ako rodinnú obmenu môžete hráčom prideliť rôzne úrovne, iba ak vopred overíte spoločnú spotrebu dielikov voči dostupnej zásobe.
 3. Nastavte časovač na **dve minúty na kolo**. Môžete sa dohodnúť aj na dlhšom limite pre celú hru. Začiatočníkom doprajte skúšobné kolo.
 4. Vyložte **deväť modrých a deväť jantárových drahokamov** do dvoch radov. Každá dvojica predstavuje jedno kolo. Všetky zvyšné drahokamy vložte do vrecúška: na začiatku je v ňom **18 z každej farby**.
 5. Riešenia nechajte skryté. Každému prideľte iné zadanie a presne tie dieliky, ktoré sú na ňom uvedené. Pred spustením časovača si všetci pokojne skontrolujú svoje dieliky.
@@ -81,6 +79,8 @@ Po zvolení veľkosti dielikov (úvodné modely používajú 15 mm kocky) tlačt
 ## Tréning pre jedného
 
 Vyberte si ľubovoľné zadanie, skryte riešenie a merajte si čas. Skúste prekonať vlastný rekord alebo vyriešiť čo najviac úloh za desať minút. Pri riešení jednej úlohy naraz nepotrebujete drahokamy ani kontrolu spoločnej zásoby pre viac hráčov.
+
+Malé dieliky a drahokamy držte mimo dosahu detí, ktoré by si ich mohli vložiť do úst.
 
 ---
 
