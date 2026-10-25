@@ -55,12 +55,24 @@ let browser;
 let page;
 const failures = [];
 try {
-  if (server) await new Promise((resolve, reject) => {
-    server.stdout.on('data', data => { if (data.toString().includes('Local:')) resolve(); });
-    server.once('exit', code => reject(new Error(`Preview server exited: ${code}`)));
-    server.stderr.on('data', data => process.stderr.write(data));
-    setTimeout(() => reject(new Error('Preview server did not start')), 15_000).unref();
-  });
+  if (server) {
+    // CI may suppress or colour the terminal banner. Readiness is an HTTP response,
+    // not a particular log line from Vite.
+    let output='';
+    server.stdout.on('data',data=>{output+=data;});
+    server.stderr.on('data',data=>{output+=data;});
+    const deadline=Date.now()+30_000;
+    let ready=false;
+    while(Date.now()<deadline){
+      if(server.exitCode!==null)throw new Error(`Preview server exited (${server.exitCode}): ${output}`);
+      try {
+        const response=await fetch('http://127.0.0.1:5182/',{signal:AbortSignal.timeout(1000)});
+        if(response.ok){ready=true;break;}
+      } catch { /* The child may not have bound its port yet. */ }
+      await new Promise(resolve=>setTimeout(resolve,100));
+    }
+    if(!ready)throw new Error(`Preview server did not become reachable: ${output}`);
+  }
   await mkdir('test-results', { recursive: true });
   browser = await chromium.launch({
     headless: true,
