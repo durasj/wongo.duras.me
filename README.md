@@ -1,4 +1,4 @@
-# Fongo
+# Wongo
 
 A family 3D puzzle workshop for **4–8 players**, inspired by Ubongo 3D Master. Solve original generated challenges virtually, inspect their solutions, search a printed card's code, prepare a round that fits your piece inventory, and print the physical game.
 
@@ -25,15 +25,15 @@ npm run build
 npm run test:browser
 ```
 
-An existing Chromium executable can be supplied with `FONGO_CHROMIUM_PATH`. Browser checks cover manual solving, undo/reset, no-WebGL fallback, invalid codes, Back/Forward navigation, printing from the browser menu, solution controls, downloads, eight-player assignments, Slovak UI, mobile layout, rulebook pagination, and the physical 15 mm card grid. Fonts are served locally; the app does not require third-party font requests.
+An existing Chromium executable can be supplied with `WONGO_CHROMIUM_PATH`. Browser checks cover manual solving, undo/reset, no-WebGL fallback, invalid codes, Back/Forward navigation, printing from the browser menu, solution controls, downloads, eight-player assignments, Slovak UI, mobile layout, rulebook pagination, and the physical 15 mm card grid. Fonts are served locally; the app does not require third-party font requests.
 
 To run the same checks against the deployed site:
 
 ```sh
-FONGO_BASE_URL=https://fongo.duras.me npm run test:browser
+WONGO_BASE_URL=https://wongo.duras.me npm run test:browser
 ```
 
-In a test environment with a TLS-inspecting proxy, the optional `FONGO_IGNORE_HTTPS_ERRORS=1` affects only the test browser. Verify the public certificate separately with a client that trusts that environment's CA; this flag is never used by the deployed application.
+In a test environment with a TLS-inspecting proxy, the optional `WONGO_IGNORE_HTTPS_ERRORS=1` affects only the test browser. Verify the public certificate separately with a client that trusts that environment's CA; this flag is never used by the deployed application.
 
 ## Regenerate assets
 
@@ -70,19 +70,19 @@ The first catalogue uses 3-piece and 4-piece challenges. These labels are struct
 
 ## Vercel
 
-The production application is hosted at [fongo.duras.me](https://fongo.duras.me). Vercel uses this repository with:
+The production application is hosted at [wongo.duras.me](https://wongo.duras.me). Vercel uses this repository with:
 
 - Framework preset: **Vite**.
 - Root directory: repository root.
 - Build command: `npm run build`.
 - Output directory: `dist`.
 - No environment variables or database are needed.
-- Production domain: `fongo.duras.me`.
+- Production domain: `wongo.duras.me`.
 
 `vercel.json` records the build configuration. Query-string puzzle and tab links work directly on a static deployment.
 
 ## Sources and license
 
-Fongo is an independent family adaptation, not an official Ubongo product. Ubongo is the original game by Grzegorz Rejchtman, published by KOSMOS/Albi. The official Master rules provide the reference piece numbering and game mechanics. Piece coordinate data is adapted from [ps78/Ubongo](https://github.com/ps78/Ubongo), under GPL-3.0; attribution and detailed sources are documented in this repository. This project is distributed under **GPL-3.0-or-later**, with the full license in `LICENSE`.
+Wongo is an independent family adaptation, not an official Ubongo product. Ubongo is the original game by Grzegorz Rejchtman, published by KOSMOS/Albi. The official Master rules provide the reference piece numbering and game mechanics. Piece coordinate data is adapted from [ps78/Ubongo](https://github.com/ps78/Ubongo), under GPL-3.0; attribution and detailed sources are documented in this repository. This project is distributed under **GPL-3.0-or-later**, with the full license in `LICENSE`.
 
-Puzzle challenges are generated for Fongo rather than reproducing the commercial card collection.
+Puzzle challenges are generated for Wongo rather than reproducing the commercial card collection.

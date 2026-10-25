@@ -1,15 +1,15 @@
-# Fongo 3D
+# Wongo 3D
 ## Family rulebook · English · Version 1.0
 
 **4–8 players · 9 rounds · Ages 10+ suggested · About 25–40 minutes**
 
 Build a little solid world before time runs out. Everyone solves a different puzzle at the same time, earns gems, and tries to finish with the most points.
 
-Fongo is an original family adaptation inspired by Ubongo 3D Master. It is not an official Ubongo product. These are the rules for our custom four-to-eight-player game.
+Wongo is an original family adaptation inspired by Ubongo 3D Master. It is not an official Ubongo product. These are the rules for our custom four-to-eight-player game.
 
 ## What you need
 
-- The 16 numbered piece shapes, with copies in the quantities shown in the Fongo print manifest: **80 pieces for the full eight-player pool**. The same pool works for four to seven players. This is a shared pool, not 16 pieces per player.
+- The 16 numbered piece shapes, with copies in the quantities shown in the Wongo print manifest: **80 pieces for the full eight-player pool**. The same pool works for four to seven players. This is a shared pool, not 16 pieces per player.
 - One assigned puzzle per player per round, displayed in the app or printed at the matching piece scale.
 - A timer, an opaque gem bag, and paper for recording results.
 - **90 gems:** 18 red, 27 blue, 18 green and 27 amber. This one set works for four through eight players.
@@ -45,7 +45,7 @@ A printed card is the base layer's footprint. The same footprint must be filled 
 ## Play a round
 
 1. When everybody has the correct pieces, start the timer together.
-2. Work on your own puzzle. When finished, say **“Fongo!”** and leave your arrangement in place. Record the finish order; everyone else keeps solving until time runs out.
+2. Work on your own puzzle. When finished, say **“Wongo!”** and leave your arrangement in place. Record the finish order; everyone else keeps solving until time runs out.
 3. Check completed builds before awarding gems. An incorrect build earns nothing unless the player fixes it and finishes before the timer ends. A displayed solution is not proof of a player's own build.
 4. Every player who finished correctly in time draws **one random gem** from the bag. In addition, the fastest receives that round's **blue** gem and the second-fastest receives that round's **amber** gem.
 5. Return any unawarded bonus gem from that round to the bag. Return all pieces to the shared pool, then deal the next inventory-checked round.
@@ -62,7 +62,7 @@ For mixed abilities, keep each person's chosen level consistent throughout a gam
 
 ## Use the virtual puzzle library
 
-Every puzzle has a permanent **problem code**. Enter or search that code to return to the same footprint, piece list and saved solution. Codes identify Fongo-generated puzzles, not the publisher's original cards.
+Every puzzle has a permanent **problem code**. Enter or search that code to return to the same footprint, piece list and saved solution. Codes identify Wongo-generated puzzles, not the publisher's original cards.
 
 Choose **Try this puzzle** to build your own solution. Select a piece, rotate it about X, Y or Z, and choose its anchor on the lower or upper grid. The anchor is the lower corner of the piece’s bounding box, which may itself be empty; **+X points right and +Y up the grid**. Place the piece, then repeat. Overlaps and placements outside the two-layer board are rejected. You can undo, remove a placed piece, or reset the board.
 
@@ -84,4 +84,4 @@ Choose any puzzle, hide the solution, and time yourself. Try to beat your previo
 
 ---
 
-**Reference:** [Albi's Ubongo 3D Master rulebook](https://albi.cz/data/files/products/50224/1662463648-ubongo_3d-master_manual_cz.pdf). Fongo's player count, generated puzzles, inventory scheduling and 90-gem setup are custom adaptations.
+**Reference:** [Albi's Ubongo 3D Master rulebook](https://albi.cz/data/files/products/50224/1662463648-ubongo_3d-master_manual_cz.pdf). Wongo's player count, generated puzzles, inventory scheduling and 90-gem setup are custom adaptations.

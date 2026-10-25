@@ -1,6 +1,6 @@
-# Fongo development
+# Wongo development
 
-Fongo is a family 3D puzzle workshop for 4–8 simultaneous players, inspired by Ubongo 3D Master. It is a static Vite/React/TypeScript application hosted at https://fongo.duras.me on Vercel; it has no accounts, backend, paid services, or networked multiplayer. Manual single-player practice uses legal rotations and two grid layers with a 3D preview.
+Wongo is a family 3D puzzle workshop for 4–8 simultaneous players, inspired by Ubongo 3D Master. It is a static Vite/React/TypeScript application hosted at https://wongo.duras.me on Vercel; it has no accounts, backend, paid services, or networked multiplayer. Manual single-player practice uses legal rotations and two grid layers with a 3D preview.
 
 ## Invariants
 
@@ -20,5 +20,5 @@ Fongo is a family 3D puzzle workshop for 4–8 simultaneous players, inspired by
 - Printable boards use a 15 mm grid at 100% scale by default. Include a calibration reference and make scaling explicit.
 - Keep printable assets and regeneration scripts in this repository. Exclude dependencies and build output.
 - Preserve source attribution and GPL compatibility. The piece catalogue is adapted from ps78/Ubongo; see provenance documentation and LICENSE.
-- Run `npm test` and `npm run build` before submitting code. Run `npm run test:browser` for UI changes; `FONGO_BASE_URL` runs the same flow against a deployment. Regenerate puzzles and meshes when their inputs change, and inspect browser and printable output for relevant UI changes.
+- Run `npm test` and `npm run build` before submitting code. Run `npm run test:browser` for UI changes; `WONGO_BASE_URL` runs the same flow against a deployment. Regenerate puzzles and meshes when their inputs change, and inspect browser and printable output for relevant UI changes.
 - Configure Vercel with the Vite preset and `dist` output; no environment variables are required for the static application.

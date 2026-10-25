@@ -16,7 +16,7 @@ The version 0.2 production build passes 20 automated tests and the expanded brow
 - Preserve the meaning of all 96 published codes and every numbered physical shape, and reject incompatible catalogue regeneration before writing files.
 - Keep both bilingual rulebooks at three A4 pages, and eight-player round output at eight A4 pages.
 
-The browser suite supports a live deployment with `FONGO_BASE_URL=https://fongo.duras.me npm run test:browser`. GitHub CI now runs browser checks and regeneration checks in addition to unit tests and the production build.
+The browser suite supports a live deployment with `WONGO_BASE_URL=https://wongo.duras.me npm run test:browser`. GitHub CI now runs browser checks and regeneration checks in addition to unit tests and the production build.
 
 The Vercel runtime-log API returned HTTP 403 during the review; no claim about server-log absence is made. This application is static. Browser exceptions, failed asset requests, deployment state and public asset responses are checked separately. Physical print fit and human difficulty still need playtesting.
 

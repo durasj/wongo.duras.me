@@ -1,4 +1,4 @@
-FONGO PRINTABLE PIECES
+WONGO PRINTABLE PIECES
 
 16 distinct shapes. All STL files use millimetres; unit cube side 15 mm.
 Each STL is an outer union surface: no internal coincident faces.
@@ -14,6 +14,6 @@ SCAD files expose the unit size. Scale all pieces AND future puzzle cards togeth
 Geometry data adapted from ps78/Ubongo blockfactory/blockfactory.go,
 blob 63c1a892046543f1973b375d3dfba89f90c8114e, GPL-3.0.
 Source: https://github.com/ps78/Ubongo
-Fongo source and provenance: https://github.com/durasj/fongo.duras.me
+Wongo source and provenance: https://github.com/durasj/wongo.duras.me
 Game concept: Grzegorz Rejchtman / KOSMOS. Independent family project.
 See repository LICENSE and docs/PIECES.md.

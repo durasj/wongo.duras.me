@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatorVersion": "fongo-1",
+  "generatorVersion": "wongo-1",
   "seed": 20261025,
   "puzzles": 96,
   "easy": 48,

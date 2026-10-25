@@ -1,6 +1,6 @@
 # Puzzle generation and verification
 
-Fongo's challenge library is generated from the numbered Master piece geometry. It contains original puzzles, not transcriptions of the commercial cards.
+Wongo's challenge library is generated from the numbered Master piece geometry. It contains original puzzles, not transcriptions of the commercial cards.
 
 ## Reproduce the library
 

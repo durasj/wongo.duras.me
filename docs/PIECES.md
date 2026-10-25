@@ -1,6 +1,6 @@
-# Fongo pieces: geometry, printing, and provenance
+# Wongo pieces: geometry, printing, and provenance
 
-Fongo uses the 16 numbered shapes from the Master-style 3D piece catalogue. The canonical geometry lives in `src/data/pieces.json`; every virtual rendering, puzzle solution, and printable STL must derive from this file.
+Wongo uses the 16 numbered shapes from the Master-style 3D piece catalogue. The canonical geometry lives in `src/data/pieces.json`; every virtual rendering, puzzle solution, and printable STL must derive from this file.
 
 ## Coordinates and handedness
 
@@ -18,7 +18,7 @@ Nine shapes are chiral: IDs **1, 2, 3, 5, 6, 10, 11, 13, 14**. Their mirror imag
 
 This establishes lattice geometry, not a measurement of commercial manufacturing dimensions. The **15 mm cube side is our chosen size**, not a claim about the retail product. The generated puzzle cards must use the same unit size.
 
-No official puzzle cards or artwork are copied into the generated Fongo puzzle collection.
+No official puzzle cards or artwork are copied into the generated Wongo puzzle collection.
 
 ## Shared inventory for four to eight players
 
@@ -44,7 +44,7 @@ These counts describe a shared pool, not a personal full set. Generated rounds m
 | 16 | green | 4 | 4 | 8 |
 | **Total** | | | **40** | **80** |
 
-The official manual's itemized labels sum to **40**: yellow 9, blue 11, red 10, green 10. Its prose also says “10 in each colour”; those statements conflict. Fongo follows the **numbered labels**, and doubles them for the custom eight-player pool. Eight-player play is our adaptation, not an official Master mode.
+The official manual's itemized labels sum to **40**: yellow 9, blue 11, red 10, green 10. Its prose also says “10 in each colour”; those statements conflict. Wongo follows the **numbered labels**, and doubles them for the custom eight-player pool. Eight-player play is our adaptation, not an official Master mode.
 
 ## Printable downloads
 
@@ -70,7 +70,7 @@ Never scale individual piece files independently. If choosing another size, rege
 
 ```sh
 node scripts/export-pieces.mjs
-node scripts/export-pieces.mjs --unit=18 --out=/tmp/fongo-18mm
+node scripts/export-pieces.mjs --unit=18 --out=/tmp/wongo-18mm
 ```
 
 The second command writes an alternate set without replacing the canonical 15 mm downloads. Keep generated metadata alongside any alternate set.

@@ -1,4 +1,4 @@
-name: Validate Fongo
+name: Validate Wongo
 
 on:
   push:

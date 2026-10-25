@@ -1,15 +1,15 @@
-# Fongo 3D
+# Wongo 3D
 ## Rodinné pravidlá · Slovenčina · Verzia 1.0
 
 **4–8 hráčov · 9 kôl · Odporúčaný vek 10+ · Približne 25–40 minút**
 
 Poskladajte malý priestorový hlavolam skôr, než vyprší čas. Všetci naraz riešia vlastné zadanie, získavajú drahokamy a snažia sa nazbierať čo najviac bodov.
 
-Fongo je vlastná rodinná úprava inšpirovaná hrou Ubongo 3D Master. Nie je to oficiálny produkt Ubongo. Tieto pravidlá platia pre našu verziu pre štyroch až ôsmich hráčov.
+Wongo je vlastná rodinná úprava inšpirovaná hrou Ubongo 3D Master. Nie je to oficiálny produkt Ubongo. Tieto pravidlá platia pre našu verziu pre štyroch až ôsmich hráčov.
 
 ## Čo potrebujete
 
-- 16 očíslovaných tvarov dielikov v počtoch uvedených v tlačovom zozname Fongo: **80 dielikov v celej zásobe pre ôsmich hráčov**. Rovnaká zásoba funguje aj pre štyroch až siedmich. Ide o spoločnú zásobu, nie o 16 dielikov pre každého hráča.
+- 16 očíslovaných tvarov dielikov v počtoch uvedených v tlačovom zozname Wongo: **80 dielikov v celej zásobe pre ôsmich hráčov**. Rovnaká zásoba funguje aj pre štyroch až siedmich. Ide o spoločnú zásobu, nie o 16 dielikov pre každého hráča.
 - Jedno pridelené zadanie pre každého hráča v každom kole, zobrazené v aplikácii alebo vytlačené v mierke zodpovedajúcej dielikom.
 - Časovač, nepriehľadné vrecúško na drahokamy a papier na zapisovanie výsledkov.
 - **90 drahokamov:** 18 červených, 27 modrých, 18 zelených a 27 jantárových. Táto súprava stačí pre štyroch až ôsmich hráčov.
@@ -45,7 +45,7 @@ Vytlačená karta určuje pôdorys spodného poschodia. Rovnaký pôdorys musí 
 ## Priebeh kola
 
 1. Keď majú všetci správne dieliky, spoločne spustite časovač.
-2. Riešte svoje zadanie. Po dokončení zvolajte **„Fongo!“** a nechajte svoj výtvor na mieste. Zapíšte poradie dokončenia. Ostatní pokračujú až do vypršania času.
+2. Riešte svoje zadanie. Po dokončení zvolajte **„Wongo!“** a nechajte svoj výtvor na mieste. Zapíšte poradie dokončenia. Ostatní pokračujú až do vypršania času.
 3. Pred rozdaním odmien skontrolujte hotové riešenia. Nesprávne riešenie nezískava odmenu, ak ho hráč neopraví a nedokončí ešte v časovom limite. Zobrazené vzorové riešenie nenahrádza kontrolu hráčovho výtvoru.
 4. Každý, kto správne dokončil zadanie včas, si náhodne vytiahne **jeden drahokam** z vrecúška. Najrýchlejší navyše získa **modrý** drahokam daného kola a druhý najrýchlejší **jantárový**.
 5. Nepridelené bonusové drahokamy daného kola vráťte do vrecúška. Dieliky vráťte do spoločnej zásoby a prideľte ďalšie kolo s overenými počtami dielikov.
@@ -62,7 +62,7 @@ Pri rôznych schopnostiach zachovajte každému jeho zvolenú úroveň počas ce
 
 ## Virtuálna knižnica zadaní
 
-Každé zadanie má stály **kód úlohy**. Zadaním alebo vyhľadaním kódu sa vrátite k rovnakému pôdorysu, zoznamu dielikov a uloženému riešeniu. Kódy označujú zadania vytvorené pre Fongo, nie pôvodné karty vydavateľa.
+Každé zadanie má stály **kód úlohy**. Zadaním alebo vyhľadaním kódu sa vrátite k rovnakému pôdorysu, zoznamu dielikov a uloženému riešeniu. Kódy označujú zadania vytvorené pre Wongo, nie pôvodné karty vydavateľa.
 
 V režime tréningu poskladajte vlastné riešenie. Vyberte dielik, otočte ho okolo osi X, Y alebo Z a zvoľte jeho kotviaci bod na spodnej alebo hornej mriežke. Je to dolný roh ohraničujúceho kvádra dielika a môže byť aj prázdny; **+X smeruje doprava a +Y nahor po mriežke**. Umiestnite dielik a pokračujte ďalším. Prekrytie aj umiestnenie mimo dvojposchodovej plochy aplikácia odmietne. Môžete vrátiť posledný krok, odstrániť dielik alebo vymazať celé rozostavenie.
 
@@ -84,4 +84,4 @@ Vyberte si ľubovoľné zadanie, skryte riešenie a merajte si čas. Skúste pre
 
 ---
 
-**Podklad:** [Pravidlá Ubongo 3D Master od Albi](https://albi.cz/data/files/products/50224/1662463648-ubongo_3d-master_manual_cz.pdf). Počet hráčov, generované zadania, prideľovanie podľa zásoby dielikov a súprava 90 drahokamov sú vlastné úpravy Fongo.
+**Podklad:** [Pravidlá Ubongo 3D Master od Albi](https://albi.cz/data/files/products/50224/1662463648-ubongo_3d-master_manual_cz.pdf). Počet hráčov, generované zadania, prideľovanie podľa zásoby dielikov a súprava 90 drahokamov sú vlastné úpravy Wongo.

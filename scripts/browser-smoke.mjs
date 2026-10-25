@@ -49,7 +49,7 @@ async function solveInBrowser(page, puzzle) {
 }
 
 // Run against a production build, so asset paths and static downloads are tested too.
-const remoteOrigin = process.env.FONGO_BASE_URL;
+const remoteOrigin = process.env.WONGO_BASE_URL;
 const server = remoteOrigin ? null : spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', '5182', '--strictPort'], { stdio: ['ignore', 'pipe', 'pipe'] });
 let browser;
 let page;
@@ -77,10 +77,10 @@ try {
   browser = await chromium.launch({
     headless: true,
     ...(remoteOrigin && process.env.HTTPS_PROXY ? { proxy: { server: process.env.HTTPS_PROXY } } : {}),
-    ...(process.env.FONGO_CHROMIUM_PATH ? { executablePath: process.env.FONGO_CHROMIUM_PATH,
+    ...(process.env.WONGO_CHROMIUM_PATH ? { executablePath: process.env.WONGO_CHROMIUM_PATH,
       args: ['--no-sandbox', '--no-zygote', '--single-process', '--use-gl=angle', '--use-angle=swiftshader'] } : {}),
   });
-  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, ignoreHTTPSErrors: process.env.FONGO_IGNORE_HTTPS_ERRORS === '1' });
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, ignoreHTTPSErrors: process.env.WONGO_IGNORE_HTTPS_ERRORS === '1' });
   page = await context.newPage();
   page.on('pageerror', error => failures.push(error.message));
   page.on('requestfailed', request => failures.push(`${request.url()}: ${request.failure()?.errorText}`));
@@ -143,7 +143,7 @@ try {
   const stlLink = page.getByRole('link', { name: 'Download STL', exact: true });
   const stl = await page.request.get(origin + await stlLink.getAttribute('href'));
   assert.equal(stl.status(), 200);
-  assert.match(await stl.text(), /^solid fongo-piece-/);
+  assert.match(await stl.text(), /^solid wongo-piece-/);
   const zip = await page.request.get(origin + '/downloads/pieces/all-pieces.zip');
   assert.equal(zip.status(), 200);
   assert.equal((await zip.body()).readUInt32LE(0), 0x04034b50);
@@ -172,7 +172,7 @@ try {
   await page.screenshot({ path: 'test-results/puzzle-mobile.png', fullPage: true });
 
   await page.getByRole('button',{name:'EN',exact:true}).click();
-  await page.waitForFunction(()=>localStorage.getItem('fongo-language')==='en');
+  await page.waitForFunction(()=>localStorage.getItem('wongo-language')==='en');
   await page.goto(`${origin}/?p=NOT-A-REAL-CODE`);
   await page.getByRole('heading',{name:'Unknown puzzle code',exact:true}).waitFor();
   assert.equal(await page.locator('.workbench').count(),0);

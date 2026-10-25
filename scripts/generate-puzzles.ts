@@ -83,7 +83,7 @@ if (existsSync('src/data/puzzles.json')) {
 }
 writeFileSync('src/data/puzzles.json',JSON.stringify(generated,null,2)+'\n');
 writeFileSync('src/data/validation.json',JSON.stringify({
-  schemaVersion:1, generatorVersion:'fongo-1', seed, puzzles:generated.length,
+  schemaVersion:1, generatorVersion:'wongo-1', seed, puzzles:generated.length,
   easy:48, hard:48, attempts, rejectedUnsolvable, rejectedBudget, rejectedAssembly,
   independentlySolved:generated.length, witnessesValidated:generated.length,
   verticalAssemblyVerified:generated.length,

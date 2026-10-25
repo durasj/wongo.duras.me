@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Fongo geometry export. Shape catalogue adapted from ps78/Ubongo (GPL-3.0).
+// Wongo geometry export. Shape catalogue adapted from ps78/Ubongo (GPL-3.0).
 // This exporter is original implementation; see docs/PIECES.md for provenance.
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -127,16 +127,16 @@ for (const piece of pieces) {
   if (signatures.has(signature)) throw new Error(`Duplicate shape under rotations: ${piece.id}`);
   signatures.add(signature);
   const cubes=printOrientation(piece.cubes), triangles=mesh(cubes), validation=validateMesh(triangles,cubes.length);
-  const basename=`fongo-piece-${String(piece.id).padStart(2,'0')}-${piece.color}`;
+  const basename=`wongo-piece-${String(piece.id).padStart(2,'0')}-${piece.color}`;
   const data=stl(basename,triangles);
-  const scad=`// Fongo piece ${piece.id}: ${piece.name}. GPL-3.0; see README.txt.\n// All cube positions derive from the canonical catalogue. z points up.\nunit = ${unit}; // mm, scale all pieces AND cards together\npositions = ${JSON.stringify(cubes)};\nunion() { for (p = positions) translate(p * unit) cube([unit, unit, unit]); }\n`;
+  const scad=`// Wongo piece ${piece.id}: ${piece.name}. GPL-3.0; see README.txt.\n// All cube positions derive from the canonical catalogue. z points up.\nunit = ${unit}; // mm, scale all pieces AND cards together\npositions = ${JSON.stringify(cubes)};\nunion() { for (p = positions) translate(p * unit) cube([unit, unit, unit]); }\n`;
   await writeFile(path.join(output,`${basename}.stl`),data); await writeFile(path.join(output,`${basename}.scad`),scad);
   entries.push([`${basename}.stl`,data],[`${basename}.scad`,scad]);
   exports.push({...piece,filename:`${basename}.stl`,scadFilename:`${basename}.scad`,unitMm:unit,printCubes:cubes,supportsRequired:false,dimensionsMm:[0,1,2].map((axis) => (Math.max(...cubes.map((v) => v[axis]))+1)*unit),validation});
 }
 const manifest={schemaVersion:1,unitMm:unit,shapeCount:pieces.length,inventory4:pieces.reduce((n,p) => n+p.quantity4,0),inventory8:pieces.reduce((n,p) => n+p.quantity8,0),pieces:exports};
 const manifestText=JSON.stringify(manifest,null,2)+'\n';
-const readme=`FONGO PRINTABLE PIECES\n\n16 distinct shapes. All STL files use millimetres; unit cube side ${unit} mm.\nEach STL is an outer union surface: no internal coincident faces.\nAll are oriented with flat supported layers; supports are not required for ideal geometry.\nPrint quantities are in manifest.json: quantity4 (40 total) or quantity8 (80 total).\nThese are a shared inventory, not 16 pieces per player.\n\nStart with PLA, 0.2 mm layers, 3 walls, 15-20% infill; use your filament profile.\nPrint a small fit sample before committing to the full set. Inspect first-layer flare.\nNo scale clearance or rounding is applied: STL retains the solver's exact geometry.\nSCAD files expose the unit size. Scale all pieces AND future puzzle cards together.\n\nGeometry data adapted from ps78/Ubongo blockfactory/blockfactory.go,\nblob 63c1a892046543f1973b375d3dfba89f90c8114e, GPL-3.0.\nSource: https://github.com/ps78/Ubongo\nFongo source and provenance: https://github.com/durasj/fongo.duras.me\nGame concept: Grzegorz Rejchtman / KOSMOS. Independent family project.\nSee repository LICENSE and docs/PIECES.md.\n`;
+const readme=`WONGO PRINTABLE PIECES\n\n16 distinct shapes. All STL files use millimetres; unit cube side ${unit} mm.\nEach STL is an outer union surface: no internal coincident faces.\nAll are oriented with flat supported layers; supports are not required for ideal geometry.\nPrint quantities are in manifest.json: quantity4 (40 total) or quantity8 (80 total).\nThese are a shared inventory, not 16 pieces per player.\n\nStart with PLA, 0.2 mm layers, 3 walls, 15-20% infill; use your filament profile.\nPrint a small fit sample before committing to the full set. Inspect first-layer flare.\nNo scale clearance or rounding is applied: STL retains the solver's exact geometry.\nSCAD files expose the unit size. Scale all pieces AND future puzzle cards together.\n\nGeometry data adapted from ps78/Ubongo blockfactory/blockfactory.go,\nblob 63c1a892046543f1973b375d3dfba89f90c8114e, GPL-3.0.\nSource: https://github.com/ps78/Ubongo\nWongo source and provenance: https://github.com/durasj/wongo.duras.me\nGame concept: Grzegorz Rejchtman / KOSMOS. Independent family project.\nSee repository LICENSE and docs/PIECES.md.\n`;
 await writeFile(path.join(output,'manifest.json'),manifestText); await writeFile(path.join(output,'README.txt'),readme);
 entries.push(['manifest.json',manifestText],['README.txt',readme]);
 const license=await readFile(path.join(root,'LICENSE'),'utf8');
