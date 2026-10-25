@@ -1,0 +1,111 @@
+{
+  "sources": {
+    "crew": {
+      "src": "/art/tacustav/crew-poster.jpg",
+      "width": 1024,
+      "height": 1536
+    },
+    "finisher": {
+      "src": "/art/tacustav/finisher-poster.jpg",
+      "width": 1229,
+      "height": 1536
+    },
+    "dog": {
+      "src": "/art/tacustav/dog-poster.jpg",
+      "width": 1085,
+      "height": 1536
+    }
+  },
+  "crew": [
+    {
+      "id": "foreman",
+      "source": "crew",
+      "crop": [
+        620,
+        684,
+        180,
+        315
+      ],
+      "alt": {
+        "sk": "Muž v modrom tričku so založenými rukami.",
+        "en": "The man in the blue shirt with folded arms."
+      },
+      "caption": {
+        "sk": "SEBECHVÁLENIE NA MAX!",
+        "en": "SELF-PRAISE: MAXIMUM!"
+      }
+    },
+    {
+      "id": "finisher",
+      "source": "finisher",
+      "crop": [
+        770,
+        115,
+        390,
+        530
+      ],
+      "alt": {
+        "sk": "Žena v tyrkysovom svetri pri práci.",
+        "en": "The woman in the teal sweater at work."
+      },
+      "caption": {
+        "sk": "NEBOJÍ SA ROBOTY.",
+        "en": "NOT AFRAID OF WORK."
+      }
+    },
+    {
+      "id": "plasterer",
+      "source": "crew",
+      "crop": [
+        0,
+        720,
+        285,
+        285
+      ],
+      "alt": {
+        "sk": "Muž v sivej šiltovke pri omietaní.",
+        "en": "The man in the grey cap plastering."
+      },
+      "caption": {
+        "sk": "ŽIADNA STENA NEODOLÁ!",
+        "en": "NO WALL STANDS A CHANCE!"
+      }
+    },
+    {
+      "id": "demolition",
+      "source": "crew",
+      "crop": [
+        0,
+        85,
+        280,
+        250
+      ],
+      "alt": {
+        "sk": "Žena v ružovom tričku pri búraní.",
+        "en": "The woman in the pink shirt doing demolition."
+      },
+      "caption": {
+        "sk": "BÚRAME. AJ REKORDY.",
+        "en": "WE BREAK THINGS. RECORDS TOO."
+      }
+    },
+    {
+      "id": "dog",
+      "source": "dog",
+      "crop": [
+        625,
+        960,
+        455,
+        500
+      ],
+      "alt": {
+        "sk": "Axel, stavby majster, v prilbe.",
+        "en": "Axel, the site foreman, in the hard hat."
+      },
+      "caption": {
+        "sk": "AXEL · STAVBY MAJSTER",
+        "en": "AXEL · SITE FOREMAN"
+      }
+    }
+  ]
+}
