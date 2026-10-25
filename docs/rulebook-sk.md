@@ -64,11 +64,15 @@ Pri rôznych schopnostiach zachovajte každému jeho zvolenú úroveň počas ce
 
 Každé zadanie má stály **kód úlohy**. Zadaním alebo vyhľadaním kódu sa vrátite k rovnakému pôdorysu, zoznamu dielikov a uloženému riešeniu. Kódy označujú zadania vytvorené pre Fongo, nie pôvodné karty vydavateľa.
 
-Najprv si pozrite zadanie so skrytým riešením. Pri kontrole odhaľte uložené riešenie a prezrite obe poschodia; otáčajte 3D pohľad, prechádzajte dieliky po krokoch alebo si zvlášť prezrite spodné a horné poschodie. Platné môže byť aj iné usporiadanie, ak spĺňa všetky pravidlá skladania. Odhalením riešenia počas súťažného kola hráč stráca nárok na odmenu za svoje zadanie v danom kole.
+V režime tréningu poskladajte vlastné riešenie. Vyberte dielik, otočte ho okolo osi X, Y alebo Z a zvoľte jeho kotviaci bod na spodnej alebo hornej mriežke. Je to dolný roh ohraničujúceho kvádra dielika a môže byť aj prázdny; **+X smeruje doprava a +Y nahor po mriežke**. Umiestnite dielik a pokračujte ďalším. Prekrytie aj umiestnenie mimo dvojposchodovej plochy aplikácia odmietne. Môžete vrátiť posledný krok, odstrániť dielik alebo vymazať celé rozostavenie.
 
-Pred zaradením do knižnice musí každé vygenerované zadanie prejsť presným riešičom a samostatnou kontrolou uloženého riešenia. Generátor kola musí navyše skontrolovať spoločnú spotrebu dielikov všetkých hráčov. Tieto kontroly overujú geometrickú riešiteľnosť; presnosť vytlačených dielikov treba overiť na fyzickej vzorke.
+Počas skúšania môžu mať čiastočne poskladané dieliky dočasne nepodopreté kocky. Dokončenie sa overuje nezávisle: všetky pridelené dieliky musia mať správny tvar a presne vyplniť obe poschodia bez medzier a prekrytia. Platí aj iné usporiadanie než uložené vzorové riešenie.
 
-Prvá webová verzia slúži na prezeranie a kontrolu hlavolamov. Otvorenie na viacerých zariadeniach samo osebe nevytvorí synchronizovanú online hru: časovač spustite spoločne a poradie dokončenia si zaznamenajte.
+Pri kontrole odhaľte vzorové riešenie, otáčajte 3D pohľad, prechádzajte dieliky po krokoch alebo si prezrite jednotlivé poschodia. Ak WebGL nie je dostupné, použite očíslované 2D náhľady poschodí. Odhalením riešenia počas súťažného kola hráč stráca nárok na odmenu za svoje zadanie v danom kole.
+
+Každé zverejnené zadanie prejde presným riešičom aj samostatnou kontrolou uloženého riešenia. Plánovač kola kontroluje aj spoločnú spotrebu dielikov. Tieto kontroly overujú geometrickú riešiteľnosť; presnosť tlače treba overiť na fyzickej vzorke.
+
+Tréning funguje lokálne v prehliadači. Online hra nie je synchronizovaná: pri rodinnej hre spustite spoločný časovač, zapíšte poradie dokončenia a spočítajte body za drahokamy sami.
 
 ## Neskoršia tlač
 

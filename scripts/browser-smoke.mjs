@@ -1,13 +1,61 @@
 import assert from 'node:assert/strict';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { chromium } from 'playwright';
 
+const catalogue = JSON.parse(await readFile(new URL('../src/data/puzzles.json', import.meta.url),'utf8'));
+const pieces = JSON.parse(await readFile(new URL('../src/data/pieces.json', import.meta.url),'utf8'));
+const normalized = cubes => {
+  const mins = [0,1,2].map(axis=>Math.min(...cubes.map(v=>v[axis])));
+  return cubes.map(v=>v.map((n,axis)=>n-mins[axis])).sort((a,b)=>a[2]-b[2]||a[1]-b[1]||a[0]-b[0]);
+};
+const geometryKey = cubes => JSON.stringify(normalized(cubes));
+function rotationPath(from, to) {
+  const pending = [{cubes:normalized(from),path:[]}], seen = new Set();
+  for (let i=0;i<pending.length;i++) {
+    const item=pending[i], signature=geometryKey(item.cubes);
+    if(signature===geometryKey(to))return item.path;
+    if(seen.has(signature))continue;
+    seen.add(signature);
+    for (const axis of ['x','y','z']) pending.push({cubes:normalized(item.cubes.map(([x,y,z])=>axis==='x'?[x,-z,y]:axis==='y'?[z,y,-x]:[-y,x,z])),path:[...item.path,axis]});
+  }
+  throw new Error('Saved witness is not reachable with physical piece rotations');
+}
+
+async function solveInBrowser(page, puzzle) {
+  await page.getByRole('button', { name: 'Try this puzzle', exact: true }).click();
+  await page.locator('.practice-board').waitFor();
+  // An oversized proposal must never be placeable.
+  const outsideCell = page.locator('.practice-cell[data-z="1"]').last();
+  await outsideCell.click();
+  assert.ok(await page.locator('.practice-place').isDisabled());
+  for (const placement of puzzle.solution) {
+    await page.locator(`[data-practice-piece-id="${placement.pieceId}"]`).click();
+    const piece=pieces.find(p=>p.id===placement.pieceId);
+    for (const axis of rotationPath(piece.cubes,placement.cubes)) await page.locator(`[data-practice-rotate="${axis}"]`).click();
+    const anchor=[0,1,2].map(axis=>Math.min(...placement.cubes.map(v=>v[axis])));
+    await page.locator(`.practice-cell[data-x="${anchor[0]}"][data-y="${anchor[1]}"][data-z="${anchor[2]}"]`).click();
+    assert.ok(await page.locator('.practice-place').isEnabled(),`Legal witness blocked for ${puzzle.code} piece ${placement.pieceId}`);
+    await page.locator('.practice-place').click();
+  }
+  await page.locator('.practice-complete').filter({hasText:'Solved! Every cell in both layers is filled exactly once.'}).waitFor();
+  assert.equal(await page.locator('.practice-filled').count(),puzzle.footprint.length*2);
+  assert.equal(await page.locator('.solution-layers').count(),0,'Practice leaked stored solution diagrams');
+  await page.locator('.practice-board').screenshot({path:`test-results/practice-${puzzle.code}.png`});
+  await page.getByRole('button',{name:'Undo',exact:true}).click();
+  assert.equal(await page.locator('.practice-complete').count(),0);
+  await page.getByRole('button',{name:'Reset puzzle',exact:true}).click();
+  assert.equal(await page.locator('.practice-filled').count(),0);
+}
+
 // Run against a production build, so asset paths and static downloads are tested too.
-const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', '5182', '--strictPort'], { stdio: ['ignore', 'pipe', 'pipe'] });
+const remoteOrigin = process.env.FONGO_BASE_URL;
+const server = remoteOrigin ? null : spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', '5182', '--strictPort'], { stdio: ['ignore', 'pipe', 'pipe'] });
 let browser;
+let page;
+const failures = [];
 try {
-  await new Promise((resolve, reject) => {
+  if (server) await new Promise((resolve, reject) => {
     server.stdout.on('data', data => { if (data.toString().includes('Local:')) resolve(); });
     server.once('exit', code => reject(new Error(`Preview server exited: ${code}`)));
     server.stderr.on('data', data => process.stderr.write(data));
@@ -16,23 +64,33 @@ try {
   await mkdir('test-results', { recursive: true });
   browser = await chromium.launch({
     headless: true,
+    ...(remoteOrigin && process.env.HTTPS_PROXY ? { proxy: { server: process.env.HTTPS_PROXY } } : {}),
     ...(process.env.FONGO_CHROMIUM_PATH ? { executablePath: process.env.FONGO_CHROMIUM_PATH,
       args: ['--no-sandbox', '--no-zygote', '--single-process', '--use-gl=angle', '--use-angle=swiftshader'] } : {}),
   });
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
-  const failures = [];
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, ignoreHTTPSErrors: process.env.FONGO_IGNORE_HTTPS_ERRORS === '1' });
+  page = await context.newPage();
   page.on('pageerror', error => failures.push(error.message));
   page.on('requestfailed', request => failures.push(`${request.url()}: ${request.failure()?.errorText}`));
-  const origin = 'http://127.0.0.1:5182';
+  const origin = remoteOrigin ? new URL(remoteOrigin).origin : 'http://127.0.0.1:5182';
   await page.goto(origin);
   await page.getByRole('heading', { name: 'Good things fit together.' }).waitFor();
   await page.locator('canvas').waitFor();
+  // Printing through the browser menu works before the application's print button is used.
+  await page.evaluate(()=>window.dispatchEvent(new Event('beforeprint')));
+  assert.equal(await page.locator('.print-card').count(),1);
+  await page.evaluate(()=>window.dispatchEvent(new Event('afterprint')));
+  await solveInBrowser(page,catalogue[0]);
+  await page.getByRole('button',{name:'Close practice',exact:true}).click();
   await page.getByRole('button', { name: 'Reveal solution', exact: true }).click();
   await page.getByRole('button', { name: 'Top layer', exact: true }).click();
   await page.getByRole('button', { name: 'Bottom layer', exact: true }).click();
   await page.getByRole('button', { name: 'Both layers', exact: true }).click();
   await page.getByRole('slider', { name: 'Pieces shown' }).fill('2');
   await page.getByRole('checkbox', { name: 'Separate pieces' }).check();
+  await page.getByRole('button',{name:'Rotate left',exact:true}).click();
+  await page.getByRole('button',{name:'Zoom in',exact:true}).click();
+  assert.equal(await page.locator('.solution-layers svg').count(),2);
   await page.screenshot({ path: 'test-results/solution-desktop.png' });
   await page.getByRole('button', { name: 'Hide solution', exact: true }).click();
   await page.getByRole('textbox', { name: /Find a puzzle/ }).fill('f3-h-048');
@@ -40,6 +98,11 @@ try {
   await page.locator('.puzzle-card').click();
   assert.equal(new URL(page.url()).searchParams.get('p'), 'F3-H-048');
   assert.match(await page.locator('.viewer-heading').innerText(), /F3-H-048/);
+  await solveInBrowser(page,catalogue.find(p=>p.code==='F3-H-048'));
+  await page.getByRole('button',{name:'Reveal solution',exact:true}).click();
+  assert.equal(await page.locator('.practice-board').count(),0);
+  await page.locator('.puzzle-card').click();
+  assert.ok(await page.getByRole('button',{name:'Reveal solution',exact:true}).isVisible(),'Reselecting a puzzle must hide its solution');
   await page.reload();
   await page.getByRole('button', { name: 'Reveal solution', exact: true }).waitFor();
   assert.match(await page.locator('.viewer-heading').innerText(), /F3-H-048/);
@@ -59,6 +122,11 @@ try {
   await page.emulateMedia({ media: 'screen' });
 
   await page.getByRole('button', { name: 'The pieces', exact: true }).click();
+  assert.equal(new URL(page.url()).searchParams.get('tab'),'pieces');
+  await page.goBack();
+  assert.match(await page.locator('.viewer-heading').innerText(),/F3-H-048/);
+  await page.goForward();
+  await page.getByRole('heading',{name:'Sixteen shapes. Endless possibilities.',exact:true}).waitFor();
   assert.equal(await page.locator('.piece-tile').count(), 16);
   const stlLink = page.getByRole('link', { name: 'Download STL', exact: true });
   const stl = await page.request.get(origin + await stlLink.getAttribute('href'));
@@ -91,6 +159,33 @@ try {
   await page.getByRole('button', { name: 'Knižnica hlavolamov', exact: true }).click();
   await page.screenshot({ path: 'test-results/puzzle-mobile.png', fullPage: true });
 
+  await page.getByRole('button',{name:'EN',exact:true}).click();
+  await page.waitForFunction(()=>localStorage.getItem('fongo-language')==='en');
+  await page.goto(`${origin}/?p=NOT-A-REAL-CODE`);
+  await page.getByRole('heading',{name:'Unknown puzzle code',exact:true}).waitFor();
+  assert.equal(await page.locator('.workbench').count(),0);
+  await page.getByRole('button',{name:'Open first puzzle',exact:true}).click();
+  assert.match(await page.locator('.viewer-heading').innerText(),/F3-E-001/);
+  await page.goBack();
+  await page.getByRole('heading',{name:'Unknown puzzle code',exact:true}).waitFor();
+  await page.goForward();
+  assert.match(await page.locator('.viewer-heading').innerText(),/F3-E-001/);
+
+  // Both reading a solution and completing a puzzle still work without GPU/WebGL support.
+  const fallbackPage = await page.context().newPage();
+  await fallbackPage.setViewportSize({width:390,height:844});
+  await fallbackPage.addInitScript(()=>{
+    const original=HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext=function(type,...args){return String(type).includes('webgl')?null:original.call(this,type,...args);};
+  });
+  await fallbackPage.goto(origin);
+  await fallbackPage.getByRole('button',{name:'Reveal solution',exact:true}).click();
+  assert.equal(await fallbackPage.locator('.solution-layers svg').count(),2);
+  await fallbackPage.getByRole('button',{name:'Hide solution',exact:true}).click();
+  await solveInBrowser(fallbackPage,catalogue[0]);
+  assert.ok(await fallbackPage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Mobile practice layout overflows horizontally');
+  await fallbackPage.close();
+
   for (const lang of ['en', 'sk']) {
     await page.setViewportSize({ width: 1200, height: 1000 });
     await page.goto(`${origin}/downloads/rulebook-${lang}.html`);
@@ -106,8 +201,14 @@ try {
     await page.emulateMedia({ media: 'screen' });
   }
   assert.deepEqual(failures, [], 'Browser reported runtime errors or failed requests');
-  console.log('Browser checks passed: lookup, solution controls, downloads, eight-player rounds, mobile, and physical print scale.');
+  console.log(`Browser checks passed${remoteOrigin?' on '+origin:''}: manual solving, no-WebGL fallback, code errors, history, lookup, solution controls, downloads, eight-player rounds, mobile, rulebooks and physical print scale.`);
+} catch (error) {
+  if (page && !page.isClosed()) {
+    await page.screenshot({path:'test-results/browser-failure.png',fullPage:true}).catch(()=>{});
+    console.error('At:',page.url(),'Headings:',await page.getByRole('heading').allTextContents().catch(()=>[]),'Errors:',failures);
+  }
+  throw error;
 } finally {
   await browser?.close();
-  server.kill();
+  server?.kill();
 }

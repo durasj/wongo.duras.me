@@ -1,7 +1,8 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { pieces } from '../src/lib/pieces';
 import { assemblyOrder, footprintKey, solve, validateSolution, type Footprint } from '../src/lib/solver';
 import type { Puzzle } from '../src/lib/puzzles';
+import { assertPublishedCatalogueUnchanged } from '../src/lib/catalogue';
 
 // Never import the generated library at runtime: this script bootstraps a fresh checkout.
 const seed = 20261025;
@@ -77,6 +78,9 @@ for (const puzzle of generated) {
   totalNodes += result.nodes;
 }
 mkdirSync('src/data',{recursive:true});
+if (existsSync('src/data/puzzles.json')) {
+  assertPublishedCatalogueUnchanged(JSON.parse(readFileSync('src/data/puzzles.json','utf8')) as Puzzle[],generated);
+}
 writeFileSync('src/data/puzzles.json',JSON.stringify(generated,null,2)+'\n');
 writeFileSync('src/data/validation.json',JSON.stringify({
   schemaVersion:1, generatorVersion:'fongo-1', seed, puzzles:generated.length,

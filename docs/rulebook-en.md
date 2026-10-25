@@ -64,11 +64,15 @@ For mixed abilities, keep each person's chosen level consistent throughout a gam
 
 Every puzzle has a permanent **problem code**. Enter or search that code to return to the same footprint, piece list and saved solution. Codes identify Fongo-generated puzzles, not the publisher's original cards.
 
-Study the puzzle with the solution hidden. When checking a puzzle, reveal its stored solution and inspect both layers; rotate the 3D view, step through the pieces, or inspect the bottom and top layers separately. A different arrangement is also valid if it obeys all building rules. Revealing a solution during a competitive round makes that player's puzzle ineligible for rewards that round.
+Choose **Try this puzzle** to build your own solution. Select a piece, rotate it about X, Y or Z, and choose its anchor on the lower or upper grid. The anchor is the lower corner of the piece’s bounding box, which may itself be empty; **+X points right and +Y up the grid**. Place the piece, then repeat. Overlaps and placements outside the two-layer board are rejected. You can undo, remove a placed piece, or reset the board.
 
-Before entering the playable collection, each generated puzzle must pass an exact solver check and a separate check of its saved arrangement. The round generator must also check total piece demand for all players. These checks establish geometric solvability; printed fit still needs a physical sample test.
+During practice, a partly built arrangement may temporarily have unsupported cubes. Completion is checked independently: all assigned pieces must form their correct shapes and exactly fill both layers without gaps or overlaps. Any valid arrangement counts, even if it differs from the saved solution.
 
-The first web version is a puzzle viewer and checking tool. Opening it on multiple devices does not by itself create a synchronized online match: start the shared timer and record finishing order together.
+To check the reference solution, reveal it, rotate the 3D view, step through the pieces, or inspect either layer. If WebGL is unavailable, use the numbered 2D layer views. Revealing a solution during a competitive round makes that player's puzzle ineligible for rewards that round.
+
+Each published puzzle passes an exact solver check and a separate saved-solution check. The round planner also checks total piece demand. These establish geometric solvability; printed fit still needs a physical sample test.
+
+Practice runs locally in your browser. There is no synchronized online multiplayer: for family games, start a shared timer, record finish order and count gem scores yourselves.
 
 ## Print later
 
