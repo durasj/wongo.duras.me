@@ -20,7 +20,7 @@ Skladajte na vytlačenom plániku skôr, než vyprší čas. Všetci hrajú nara
 
 ## Príprava
 
-1. Najprv zoskupte karty podľa veľkého označenia **SADA 01–12** na oboch stranách. Jedna sada obsahuje osem kariet; blok A/B a číslo karty sú uvedené samostatne. Zamiešajte **celé sady**, ich karty držte spolu a vyberte deväť sád na deväť kôl. Použité sady odkladajte bokom: vystačia na štyri partie bez opakovania kariet. Jednotlivé hlavolamy sa môžu zopakovať. V jednom kole musia mať všetci rovnaké číslo sady, ale každý skladá vlastný pôdorys. Nerozdávajte nesúvisiace karty: spotreba dielikov je overená pre konkrétnu sadu a hod.
+1. Najprv zoskupte karty podľa veľkého označenia **SADA 01–36** na oboch stranách. Jedna sada obsahuje osem kariet; blok A/B a číslo karty sú uvedené samostatne. Zamiešajte **celé sady**, ich karty držte spolu a vyberte deväť sád na deväť kôl. Použité sady odkladajte bokom: vystačia na štyri partie bez opakovania kariet. Jednotlivé hlavolamy sa môžu zopakovať. V jednom kole musia mať všetci rovnaké číslo sady, ale každý skladá vlastný pôdorys. Nerozdávajte nesúvisiace karty: spotreba dielikov je overená pre konkrétnu sadu a hod.
 2. Pre **2–4 hráčov** použite iba karty 1–4 (blok A) alebo iba 5–8 (blok B) z jednej sady. Každému dajte inú kartu z toho bloku. Pre **5–8** použite karty 1 až N z jednej sady a zásobu 80 dielikov. Menšie skupiny sa tiež zmestia do zásoby.
 3. Zvoľte **jednu spoločnú náročnosť**. Ľahká strana používa tri rôzne farby, ťažká štyri dieliky, po jednom z každej farby. Všetky karty otočte na túto stranu. Overenie zásoby neplatí pri miešaní úrovní, rôznych sád ani blokov so 40 dielikmi.
 4. Limit sú **dve minúty na kolo**, prípadne dlhší dohodnutý spoločný čas. Začiatočníkom doprajte skúšobné kolo.
