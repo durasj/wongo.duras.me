@@ -74,7 +74,7 @@ Tréning funguje lokálne v prehliadači. Online hra nie je synchronizovaná: pr
 
 ## Neskoršia tlač
 
-Po zvolení veľkosti dielikov (úvodné modely používajú 15 mm kocky) tlačte karty na **100 % / v skutočnej veľkosti**, bez prispôsobenia strane. Pred použitím zmerajte kalibračnú značku na karte. Riešenia tlačte samostatne alebo na inú stranu, aby ich pri hre nebolo vidieť. Pred tlačou celej súpravy najprv otestujte, či niekoľko dielikov správne pasuje.
+Po zvolení veľkosti dielikov (úvodné modely používajú 20 mm kocky) tlačte karty na **100 % / v skutočnej veľkosti**, bez prispôsobenia strane. Pred použitím zmerajte kalibračnú značku na karte. Riešenia tlačte samostatne alebo na inú stranu, aby ich pri hre nebolo vidieť. Pred tlačou celej súpravy najprv otestujte, či niekoľko dielikov správne pasuje.
 
 ## Tréning pre jedného
 

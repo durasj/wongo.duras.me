@@ -156,7 +156,7 @@ try {
   const calibration = await page.locator('.calibration span').evaluate(el => el.getBoundingClientRect().width);
   assert.ok(Math.abs(calibration - 30 * 96 / 25.4) < 0.1, '30mm calibration reference has incorrect size');
   const cell = await page.locator('.print-board .footprint rect').first().evaluate(el => el.getBoundingClientRect().width);
-  assert.ok(Math.abs(cell - 15 * 96 / 25.4) < 0.1, 'Printed puzzle cell is not 15 mm');
+  assert.ok(Math.abs(cell - 20 * 96 / 25.4) < 0.1, 'Printed puzzle cell is not 20 mm');
   assert.equal(await page.locator('.print-solution').count(), 0);
   await page.pdf({ path: 'test-results/puzzle-card.pdf', preferCSSPageSize: true, printBackground: true });
   await page.emulateMedia({ media: 'screen' });

@@ -23,7 +23,7 @@ Generated artwork uses the built-in image generator. The final prompts are in `d
 
 Flashforge PLA Matte, 1.75 mm: Mango Yellow (IDs 01–04), Blue (072C) (05–08), Red (09–12), Mint Green (13–16). Screen values originate in `src/data/pieces.json` and feed the pieces, sidebar swatches, logo, UI accents and score gems. Cream, ink and grey are neutral surfaces and text colours. Artwork shows approximate material colours.
 
-Preserve the 16 shapes, physical dimensions, inventory counts, puzzle codes and verified solutions. Decorative artwork stays outside actual-size puzzle grids. Piece IDs and 30 mm calibration marks remain legible. Printed puzzle cards use a 15 mm grid at 100% scale.
+Preserve the 16 shapes, physical dimensions, inventory counts, puzzle codes and verified solutions. Decorative artwork stays outside actual-size puzzle grids. Piece IDs and 30 mm calibration marks remain legible. Printed puzzle cards use a 20 mm grid at 100% scale.
 
 ## Regeneration
 

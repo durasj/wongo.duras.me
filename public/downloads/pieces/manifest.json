@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "unitMm": 15,
+  "unitMm": 20,
   "shapeCount": 16,
   "inventory4": 40,
   "inventory8": 80,
@@ -42,7 +42,7 @@
       "filament": "Mango Yellow",
       "filename": "wongo-piece-01-yellow.stl",
       "scadFilename": "wongo-piece-01-yellow.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -72,15 +72,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        45,
-        30
+        40,
+        60,
+        40
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 44,
-        "volumeMm3": 16875
+        "volumeMm3": 39999.99999999999
       }
     },
     {
@@ -120,7 +120,7 @@
       "filament": "Mango Yellow",
       "filename": "wongo-piece-02-yellow.stl",
       "scadFilename": "wongo-piece-02-yellow.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -150,15 +150,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        45,
-        30,
-        30
+        60,
+        40,
+        40
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 44,
-        "volumeMm3": 16875
+        "volumeMm3": 40000
       }
     },
     {
@@ -193,7 +193,7 @@
       "filament": "Mango Yellow",
       "filename": "wongo-piece-03-yellow.stl",
       "scadFilename": "wongo-piece-03-yellow.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -218,15 +218,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        30,
-        30
+        40,
+        40,
+        40
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 36,
-        "volumeMm3": 13500
+        "volumeMm3": 32000
       }
     },
     {
@@ -266,7 +266,7 @@
       "filament": "Mango Yellow",
       "filename": "wongo-piece-04-yellow.stl",
       "scadFilename": "wongo-piece-04-yellow.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -296,15 +296,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        45,
-        15
+        40,
+        60,
+        20
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 44,
-        "volumeMm3": 16875
+        "volumeMm3": 40000.00000000001
       }
     },
     {
@@ -344,7 +344,7 @@
       "filament": "Blue (072C)",
       "filename": "wongo-piece-05-blue.stl",
       "scadFilename": "wongo-piece-05-blue.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -374,15 +374,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        45,
-        30
+        40,
+        60,
+        40
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 44,
-        "volumeMm3": 16875
+        "volumeMm3": 40000.00000000001
       }
     },
     {
@@ -422,7 +422,7 @@
       "filament": "Blue (072C)",
       "filename": "wongo-piece-06-blue.stl",
       "scadFilename": "wongo-piece-06-blue.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -452,15 +452,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        45,
-        30,
-        30
+        60,
+        40,
+        40
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 44,
-        "volumeMm3": 16875
+        "volumeMm3": 39999.99999999999
       }
     },
     {
@@ -500,7 +500,7 @@
       "filament": "Blue (072C)",
       "filename": "wongo-piece-07-blue.stl",
       "scadFilename": "wongo-piece-07-blue.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -530,15 +530,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        45,
-        15
+        40,
+        60,
+        20
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 40,
-        "volumeMm3": 16875
+        "volumeMm3": 40000
       }
     },
     {
@@ -568,7 +568,7 @@
       "filament": "Blue (072C)",
       "filename": "wongo-piece-08-blue.stl",
       "scadFilename": "wongo-piece-08-blue.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -588,15 +588,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        30,
-        15
+        40,
+        40,
+        20
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 28,
-        "volumeMm3": 10125
+        "volumeMm3": 23999.999999999996
       }
     },
     {
@@ -636,7 +636,7 @@
       "filament": "Red",
       "filename": "wongo-piece-09-red.stl",
       "scadFilename": "wongo-piece-09-red.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -666,15 +666,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        30,
-        30
+        40,
+        40,
+        40
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 40,
-        "volumeMm3": 16875
+        "volumeMm3": 40000
       }
     },
     {
@@ -709,7 +709,7 @@
       "filament": "Red",
       "filename": "wongo-piece-10-red.stl",
       "scadFilename": "wongo-piece-10-red.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -734,15 +734,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        30,
-        30
+        40,
+        40,
+        40
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 36,
-        "volumeMm3": 13500
+        "volumeMm3": 32000
       }
     },
     {
@@ -782,7 +782,7 @@
       "filament": "Red",
       "filename": "wongo-piece-11-red.stl",
       "scadFilename": "wongo-piece-11-red.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -812,15 +812,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        45,
-        30
+        40,
+        60,
+        40
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 44,
-        "volumeMm3": 16875
+        "volumeMm3": 40000.00000000001
       }
     },
     {
@@ -855,7 +855,7 @@
       "filament": "Red",
       "filename": "wongo-piece-12-red.stl",
       "scadFilename": "wongo-piece-12-red.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -880,15 +880,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        45,
-        15
+        40,
+        60,
+        20
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 36,
-        "volumeMm3": 13500
+        "volumeMm3": 32000.000000000004
       }
     },
     {
@@ -928,7 +928,7 @@
       "filament": "Mint Green",
       "filename": "wongo-piece-13-green.stl",
       "scadFilename": "wongo-piece-13-green.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -958,15 +958,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        45,
-        30
+        40,
+        60,
+        40
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 44,
-        "volumeMm3": 16875
+        "volumeMm3": 40000.00000000001
       }
     },
     {
@@ -1006,7 +1006,7 @@
       "filament": "Mint Green",
       "filename": "wongo-piece-14-green.stl",
       "scadFilename": "wongo-piece-14-green.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -1036,15 +1036,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        45,
-        30,
-        30
+        60,
+        40,
+        40
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 44,
-        "volumeMm3": 16875
+        "volumeMm3": 39999.99999999999
       }
     },
     {
@@ -1079,7 +1079,7 @@
       "filament": "Mint Green",
       "filename": "wongo-piece-15-green.stl",
       "scadFilename": "wongo-piece-15-green.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -1104,15 +1104,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        45,
-        15
+        40,
+        60,
+        20
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 36,
-        "volumeMm3": 13500
+        "volumeMm3": 32000
       }
     },
     {
@@ -1147,7 +1147,7 @@
       "filament": "Mint Green",
       "filename": "wongo-piece-16-green.stl",
       "scadFilename": "wongo-piece-16-green.scad",
-      "unitMm": 15,
+      "unitMm": 20,
       "printCubes": [
         [
           0,
@@ -1172,15 +1172,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        30,
-        45,
-        15
+        40,
+        60,
+        20
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 36,
-        "volumeMm3": 13500
+        "volumeMm3": 31999.999999999993
       }
     }
   ]

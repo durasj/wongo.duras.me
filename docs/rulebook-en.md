@@ -74,7 +74,7 @@ Practice runs locally in your browser. There is no synchronized online multiplay
 
 ## Print later
 
-Print puzzle cards at **100% / actual size**, with page fitting disabled, after choosing your piece size (the initial models use 15 mm cubes). Measure the card's calibration guide before using it with printed pieces. Print solutions separately or on a separate page so they are not visible during play. Start with a small fit test before printing the whole collection.
+Print puzzle cards at **100% / actual size**, with page fitting disabled, after choosing your piece size (the initial models use 20 mm cubes). Measure the card's calibration guide before using it with printed pieces. Print solutions separately or on a separate page so they are not visible during play. Start with a small fit test before printing the whole collection.
 
 ## Solo practice
 

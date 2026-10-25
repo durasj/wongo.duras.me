@@ -1,6 +1,6 @@
 WONGO PRINTABLE PIECES
 
-16 distinct shapes. All STL files use millimetres; unit cube side 15 mm.
+16 distinct shapes. All STL files use millimetres; unit cube side 20 mm.
 Each STL is an outer union surface: no internal coincident faces.
 All are oriented with flat supported layers; supports are not required for ideal geometry.
 Print quantities are in manifest.json: quantity4 (40 total) or quantity8 (80 total).
@@ -15,7 +15,7 @@ IDs 13-16: Mint Green (10 / 20 copies)
 Screen hex colours in manifest.json are visual approximations, not calibrated filament values.
 STL files contain geometry only; select the matching filament in your slicer.
 
-Start with PLA, 0.2 mm layers, 3 walls, 15-20% infill; use your filament profile.
+Start with PLA, 0.1 mm layers, 3 walls, 20% gyroid infill; use your calibrated filament profile.
 Print a small fit sample before committing to the full set. Inspect first-layer flare.
 No scale clearance or rounding is applied: STL retains the solver's exact geometry.
 SCAD files expose the unit size. Scale all pieces AND future puzzle cards together.
