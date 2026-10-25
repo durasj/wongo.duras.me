@@ -34,7 +34,7 @@ The generated puzzle has **at least one** solution. We do not claim uniqueness o
 
 ## Simultaneous play
 
-`selectRound(playerCount, difficulty, seed, inventory?)` assigns distinct puzzle codes for 4–8 players. It counts every requested piece across the entire round against the physical inventory and backtracks when necessary. Four players use the 40-piece pool; five to eight players use the proposed doubled 80-piece pool. A custom inventory is supported for testing. Unsupported player counts, invalid inventories and impossible allocations raise an error instead of silently overbooking pieces.
+`selectRound(playerCount, difficulty, seed, inventory?)` assigns distinct puzzle codes for 2–8 players. It counts every requested piece across the entire round against the physical inventory and backtracks when necessary. Two to four players use the 40-piece pool; five to eight players use the proposed doubled 80-piece pool. A custom inventory is supported for testing. Unsupported player counts, invalid inventories and impossible allocations raise an error instead of silently overbooking pieces.
 
 The initial version checks final assembled geometry and a collision-free vertical assembly order. It does not simulate hands, friction, print tolerances, or structural loading. These loose, separable pieces should still receive a small physical fit check before printing the full set.
 

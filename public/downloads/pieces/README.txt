@@ -4,6 +4,7 @@ WONGO PRINTABLE PIECES
 Each STL is an outer union surface: no internal coincident faces.
 All are oriented with flat supported layers; supports are not required for ideal geometry.
 Print quantities are in manifest.json: quantity4 (40 total) or quantity8 (80 total).
+Use the 40-piece pool for 2-4 players or the 80-piece pool for 5-8 players.
 These are a shared inventory, not 16 pieces per player.
 
 FILAMENT: Flashforge PLA Matte, 1.75 mm

@@ -33,11 +33,11 @@ Use **Flashforge PLA Matte, 1.75 mm** for all four piece groups. Match the same 
 
 These screen colours are estimates from the purchased-product screenshots, not measured or manufacturer-certified colour values. STL files store geometry only: assign the specified filament in the slicer. The stable filenames retain `yellow`, `blue`, `red`, and `green`. Piece numbers identify shapes even when colours are hard to distinguish.
 
-## Shared inventory for four to eight players
+## Shared inventory for two to eight players
 
 These counts describe a shared pool, not a personal full set. Generated rounds must be checked against the selected pool before play. For 4 players use `quantity4`; for **5–8 players use the 80-piece `quantity8` pool**.
 
-| ID | Colour | Cubes | Four-player pool | Eight-player pool |
+| ID | Colour | Cubes | 2–4-player pool | 5–8-player pool |
 |---|---|---:|---:|---:|
 | 1 | yellow | 5 | 2 | 4 |
 | 2 | yellow | 5 | 2 | 4 |

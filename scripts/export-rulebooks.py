@@ -38,8 +38,8 @@ for lang,break1,break2,title,printlabel,back,section in [
 ('en','## The building challenge','## Use the virtual puzzle library','Family rulebook','Print rulebook','Back to Wongo','Rules'),
 ('sk','## Úloha pri skladaní','## Virtuálna knižnica zadaní','Rodinné pravidlá','Vytlačiť pravidlá','Späť na Wongo','Pravidlá')]:
     source=(ROOT/f'docs/rulebook-{lang}.md').read_text();a,rest=source.split(break1,1);b,c=rest.split(break2,1);pages=[a,break1+b,break2+c]
-    body=''.join(f'<section class="sheet"><div class="brand"><span>Wongo / 3D</span><span class="mark">4–8 players · 9 rounds</span></div>{md(p)}<footer class="folio"><span>WONGO 3D · {section} · {lang.upper()}</span><span>{i+1} / 3</span></footer></section>' for i,p in enumerate(pages))
-    if lang=='sk':body=body.replace('4–8 players · 9 rounds','4–8 hráčov · 9 kôl')
+    body=''.join(f'<section class="sheet"><div class="brand"><span>Wongo / 3D</span><span class="mark">2–8 players · 9 rounds</span></div>{md(p)}<footer class="folio"><span>WONGO 3D · {section} · {lang.upper()}</span><span>{i+1} / 3</span></footer></section>' for i,p in enumerate(pages))
+    if lang=='sk':body=body.replace('2–8 players · 9 rounds','2–8 hráčov · 9 kôl')
     body=body.replace('Wongo / 3D',html.escape(EDITION))
     result=f'<!doctype html>\n<html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{html.escape(EDITION)} — {title}</title><style>{css}</style></head><body><nav class="toolbar" aria-label="{title}"><a href="/">← {back}</a><button type="button" onclick="window.print()">{printlabel}</button></nav><main>{body}</main></body></html>\n'
     (ROOT/f'public/downloads/rulebook-{lang}.html').write_text(result)

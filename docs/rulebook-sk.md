@@ -1,18 +1,18 @@
 # Wongo 3D
 ## Rodinné pravidlá · Slovenčina · Verzia 1.0
 
-**4–8 hráčov · 9 kôl · Odporúčaný vek 10+ · Približne 25–40 minút**
+**2–8 hráčov · 9 kôl · Odporúčaný vek 10+ · Približne 25–40 minút**
 
 Poskladajte malý priestorový hlavolam skôr, než vyprší čas. Všetci naraz riešia vlastné zadanie, získavajú drahokamy a snažia sa nazbierať čo najviac bodov.
 
-Wongo je vlastná rodinná úprava inšpirovaná hrou Ubongo 3D Master. Nie je to oficiálny produkt Ubongo. Tieto pravidlá platia pre našu verziu pre štyroch až ôsmich hráčov.
+Wongo je vlastná rodinná úprava inšpirovaná hrou Ubongo 3D Master. Nie je to oficiálny produkt Ubongo. Tieto pravidlá platia pre našu verziu pre dvoch až ôsmich hráčov.
 
 ## Čo potrebujete
 
-- 16 očíslovaných tvarov dielikov v počtoch uvedených v tlačovom zozname Wongo: **80 dielikov v celej zásobe pre ôsmich hráčov**. Rovnaká zásoba funguje aj pre štyroch až siedmich. Ide o spoločnú zásobu, nie o 16 dielikov pre každého hráča.
+- Kópie 16 očíslovaných tvarov: **40 dielikov pre 2–4 hráčov alebo 80 pre 5–8 hráčov**, podľa počtov v tlačovom zozname. Zásoba 80 dielikov funguje aj pre 2–4 hráčov. Ide o spoločnú zásobu, nie o 16 dielikov pre každého.
 - Jedno pridelené zadanie pre každého hráča v každom kole, zobrazené v aplikácii alebo vytlačené v mierke zodpovedajúcej dielikom.
 - Časovač, nepriehľadné vrecúško na drahokamy a papier na zapisovanie výsledkov.
-- **90 drahokamov:** 18 červených, 27 modrých, 18 zelených a 27 jantárových. Táto súprava stačí pre štyroch až ôsmich hráčov.
+- **90 drahokamov:** 18 červených, 27 modrých, 18 zelených a 27 jantárových. Táto súprava stačí pre dvoch až ôsmich hráčov.
 
 | Drahokam | Body |
 | --- | ---: |
@@ -23,7 +23,7 @@ Wongo je vlastná rodinná úprava inšpirovaná hrou Ubongo 3D Master. Nie je t
 
 ## Príprava
 
-1. Zvoľte počet hráčov od štyroch do ôsmich. Použite generátor kola, ktorý vyberie zadania tak, aby vystačila spoločná zásoba dielikov. Nevyberajte každému ľubovoľné zadanie nezávisle od ostatných.
+1. Zvoľte počet hráčov od dvoch do ôsmich. Použite generátor kola, ktorý vyberie zadania tak, aby vystačila spoločná zásoba dielikov. Nevyberajte každému ľubovoľné zadanie nezávisle od ostatných.
 2. Vopred sa dohodnite na náročnosti. **Ľahké zadania používajú tri dieliky troch rôznych farieb; ťažké štyri dieliky, po jednom z každej farby.** Žiadna farba sa v jednom zadaní neopakuje. Označenie vyjadruje počet dielikov, nie zaručenú náročnosť pre konkrétneho človeka. Úvodný plánovač kola používa jednu spoločnú úroveň. Ako rodinnú obmenu môžete hráčom prideliť rôzne úrovne, iba ak vopred overíte spoločnú spotrebu dielikov voči dostupnej zásobe.
 3. Nastavte časovač na **dve minúty na kolo**. Môžete sa dohodnúť aj na dlhšom limite pre celú hru. Začiatočníkom doprajte skúšobné kolo.
 4. Vyložte **deväť modrých a deväť jantárových drahokamov** do dvoch radov. Každá dvojica predstavuje jedno kolo. Všetky zvyšné drahokamy vložte do vrecúška: na začiatku je v ňom **18 z každej farby**.

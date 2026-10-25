@@ -44,7 +44,7 @@ export function seededRandom(seed: number): () => number {
 
 /** Assign simultaneous challenges without exceeding the shared physical piece pool. */
 export function selectRound(playerCount: number, difficulty: Difficulty, seed = 1, inventory?: Record<number, number>): Puzzle[] {
-  if (!Number.isInteger(playerCount) || playerCount < 4 || playerCount > 8) throw new Error('Choose between 4 and 8 players.');
+  if (!Number.isInteger(playerCount) || playerCount < 2 || playerCount > 8) throw new Error('Choose between 2 and 8 players.');
   if (!['easy','hard'].includes(difficulty)) throw new Error('Unknown difficulty.');
   const remaining = new Map(pieces.map(piece => [piece.id, inventory ? (inventory[piece.id] ?? 0) : (playerCount <= 4 ? piece.quantity4 : piece.quantity8)]));
   if ([...remaining.values()].some(n => !Number.isInteger(n) || n < 0)) throw new Error('Inventory quantities must be nonnegative integers.');
