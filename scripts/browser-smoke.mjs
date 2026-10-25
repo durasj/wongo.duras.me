@@ -3,7 +3,10 @@ import { mkdir, readFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { chromium } from 'playwright';
 
-const catalogue = JSON.parse(await readFile(new URL('../src/data/puzzles.json', import.meta.url),'utf8'));
+const catalogue = [
+ ...JSON.parse(await readFile(new URL('../src/data/puzzles.json', import.meta.url),'utf8')),
+ ...JSON.parse(await readFile(new URL('../src/data/dice-puzzles.json', import.meta.url),'utf8')),
+];
 const editions = JSON.parse(await readFile(new URL('../src/data/editions.json', import.meta.url),'utf8'));
 const pieces = JSON.parse(await readFile(new URL('../src/data/pieces.json', import.meta.url),'utf8'));
 const normalized = cubes => {
