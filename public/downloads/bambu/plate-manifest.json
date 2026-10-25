@@ -1,0 +1,395 @@
+{
+  "unitMm": 20,
+  "layerHeightMm": 0.1,
+  "nozzleMm": 0.4,
+  "plates": [
+    {
+      "file": "01-yellow-20mm-P1S.3mf",
+      "color": "Mango Yellow",
+      "count": 9,
+      "objects": [
+        {
+          "pieceId": 1,
+          "copy": 1,
+          "x": 28,
+          "y": 58,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 1,
+          "copy": 2,
+          "x": 98,
+          "y": 58,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 2,
+          "copy": 1,
+          "x": 168,
+          "y": 58,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 2,
+          "copy": 2,
+          "x": 28,
+          "y": 108,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 3,
+          "copy": 1,
+          "x": 108,
+          "y": 108,
+          "width": 40,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 3,
+          "copy": 2,
+          "x": 178,
+          "y": 108,
+          "width": 40,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 3,
+          "copy": 3,
+          "x": 38,
+          "y": 158,
+          "width": 40,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 4,
+          "copy": 1,
+          "x": 98,
+          "y": 158,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 4,
+          "copy": 2,
+          "x": 168,
+          "y": 158,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "file": "02-blue-20mm-P1S.3mf",
+      "color": "Blue (072C)",
+      "count": 11,
+      "objects": [
+        {
+          "pieceId": 5,
+          "copy": 1,
+          "x": 28,
+          "y": 33,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 5,
+          "copy": 2,
+          "x": 98,
+          "y": 33,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 6,
+          "copy": 1,
+          "x": 168,
+          "y": 33,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 6,
+          "copy": 2,
+          "x": 28,
+          "y": 83,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 7,
+          "copy": 1,
+          "x": 98,
+          "y": 83,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 7,
+          "copy": 2,
+          "x": 168,
+          "y": 83,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 7,
+          "copy": 3,
+          "x": 28,
+          "y": 133,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 8,
+          "copy": 1,
+          "x": 108,
+          "y": 133,
+          "width": 40,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 8,
+          "copy": 2,
+          "x": 178,
+          "y": 133,
+          "width": 40,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 8,
+          "copy": 3,
+          "x": 38,
+          "y": 183,
+          "width": 40,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 8,
+          "copy": 4,
+          "x": 108,
+          "y": 183,
+          "width": 40,
+          "depth": 40,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "file": "03-red-20mm-P1S.3mf",
+      "color": "Red",
+      "count": 10,
+      "objects": [
+        {
+          "pieceId": 9,
+          "copy": 1,
+          "x": 38,
+          "y": 33,
+          "width": 40,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 9,
+          "copy": 2,
+          "x": 108,
+          "y": 33,
+          "width": 40,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 9,
+          "copy": 3,
+          "x": 178,
+          "y": 33,
+          "width": 40,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 10,
+          "copy": 1,
+          "x": 38,
+          "y": 83,
+          "width": 40,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 10,
+          "copy": 2,
+          "x": 108,
+          "y": 83,
+          "width": 40,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 10,
+          "copy": 3,
+          "x": 178,
+          "y": 83,
+          "width": 40,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 11,
+          "copy": 1,
+          "x": 28,
+          "y": 133,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 11,
+          "copy": 2,
+          "x": 98,
+          "y": 133,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 12,
+          "copy": 1,
+          "x": 168,
+          "y": 133,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 12,
+          "copy": 2,
+          "x": 28,
+          "y": 183,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "file": "04-green-20mm-P1S.3mf",
+      "color": "Mint Green",
+      "count": 10,
+      "objects": [
+        {
+          "pieceId": 13,
+          "copy": 1,
+          "x": 28,
+          "y": 33,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 13,
+          "copy": 2,
+          "x": 98,
+          "y": 33,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 14,
+          "copy": 1,
+          "x": 168,
+          "y": 33,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 14,
+          "copy": 2,
+          "x": 28,
+          "y": 83,
+          "width": 60,
+          "depth": 40,
+          "height": 40
+        },
+        {
+          "pieceId": 15,
+          "copy": 1,
+          "x": 98,
+          "y": 83,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 15,
+          "copy": 2,
+          "x": 168,
+          "y": 83,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 16,
+          "copy": 1,
+          "x": 28,
+          "y": 133,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 16,
+          "copy": 2,
+          "x": 98,
+          "y": 133,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 16,
+          "copy": 3,
+          "x": 168,
+          "y": 133,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        },
+        {
+          "pieceId": 16,
+          "copy": 4,
+          "x": 28,
+          "y": 183,
+          "width": 60,
+          "depth": 40,
+          "height": 20
+        }
+      ]
+    }
+  ]
+}

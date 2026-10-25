@@ -23,8 +23,9 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
-      - run: npm run generate:pieces
-      - run: git diff --exit-code -- public/downloads/pieces
+      - run: npm run test:print
+      - run: npm run generate:print-kit
+      - run: git diff --exit-code -- public/downloads/pieces public/downloads/bambu public/downloads/puzzles
       - run: npm run generate:puzzles
       - run: git diff --exit-code -- src/data/puzzles.json src/data/validation.json
       - run: npm run export:rulebooks

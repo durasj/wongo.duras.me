@@ -16,7 +16,7 @@ Nine shapes are chiral: IDs **1, 2, 3, 5, 6, 10, 11, 13, 14**. Their mirror imag
 2. **Primary cube definitions:** [ps78/Ubongo blockfactory/blockfactory.go](https://github.com/ps78/Ubongo/blob/master/blockfactory/blockfactory.go), Git blob `63c1a892046543f1973b375d3dfba89f90c8114e`. Axis semantics confirmed in `base/array3d/array3d.go`, blob `554c1d7d20f43aed3d136ce00d2c59be7a85ab1a`. This catalogue is adapted from that GPL-3.0 project; retain its attribution and the repository's GPL-3.0 license.
 3. **Independent geometry cross-check:** [m-kasahr/ubongo-utils data/3d](https://github.com/m-kasahr/ubongo-utils/tree/master/data/3d), lettered files A–P, same order as IDs 1–16. Each reference shape was normalized and compared with the catalogue under all 24 proper rotations. **All 16 matched without reflection.** Source blob hashes and results are recorded in `docs/piece-verification.json`.
 
-This establishes lattice geometry, not a measurement of commercial manufacturing dimensions. The **15 mm cube side is our chosen size**, not a claim about the retail product. The generated puzzle cards must use the same unit size.
+This establishes lattice geometry, not a measurement of commercial manufacturing dimensions. The **20 mm cube side is our chosen size**, not a claim about the retail product. The generated puzzle cards must use the same unit size.
 
 No official puzzle cards or artwork are copied into the generated Wongo puzzle collection.
 
@@ -77,9 +77,9 @@ A support-free orientation is selected automatically: every occupied cube above 
 
 ## Printing
 
-**Recommended starting point:** regular PLA, 0.2 mm layers, 3 walls, 15–20% infill; use the filament manufacturer's temperature profile. These are starting settings, not a guarantee across printers. PETG is an alternative for greater impact/heat resistance, with more attention to strings and surface blobs. Material comparison references: [Prusa PLA](https://help.prusa3d.com/article/pla_2062), [Prusa PETG](https://help.prusa3d.com/article/petg_2059).
+**Recommended starting point:** regular PLA, 0.1 mm layers, 3 walls, 20% gyroid infill; use the filament manufacturer's temperature profile. These are starting settings, not a guarantee across printers. PETG is an alternative for greater impact/heat resistance, with more attention to strings and surface blobs. Material comparison references: [Prusa PLA](https://help.prusa3d.com/article/pla_2062), [Prusa PETG](https://help.prusa3d.com/article/petg_2059).
 
-Print a few representative pieces first. Check first-layer flare, flatness, fit against the 15 mm card grid, and how stacked pieces feel before printing all 80. The default export has exact square edges, no engraved IDs, and no clearance offsets: there is no hidden geometry change between the solver and STL. Lightly deburr sharp edges if needed without changing the cube pitch.
+Print a few representative pieces first. Check first-layer flare, flatness, fit against the 20 mm card grid, and how stacked pieces feel before printing all 80. The default export has exact square edges, no engraved IDs, and no clearance offsets: there is no hidden geometry change between the solver and STL. Lightly deburr sharp edges if needed without changing the cube pitch.
 
 Never scale individual piece files independently. If choosing another size, regenerate every piece and print cards with the same unit:
 
@@ -88,4 +88,4 @@ node scripts/export-pieces.mjs
 node scripts/export-pieces.mjs --unit=18 --out=/tmp/wongo-18mm
 ```
 
-The second command writes an alternate set without replacing the canonical 15 mm downloads. Keep generated metadata alongside any alternate set.
+The second command writes an alternate set without replacing the canonical 20 mm downloads. Keep generated metadata alongside any alternate set.

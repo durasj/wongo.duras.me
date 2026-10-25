@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright';
+import { spawn } from 'node:child_process';
+import { mkdir, readFile } from 'node:fs/promises';
+const server=spawn(process.execPath,['node_modules/vite/bin/vite.js','preview','--host','127.0.0.1','--port','5184','--strictPort'],{stdio:'ignore'});
+const origin='http://127.0.0.1:5184';let browser;
+try{
+ let ready=false;for(let i=0;i<100;i++){try{if((await fetch(origin)).ok){ready=true;break;}}catch{}await new Promise(r=>setTimeout(r,100));}
+ assert.ok(ready,'Preview did not start');
+ browser=await chromium.launch({headless:true,...(process.env.WONGO_CHROMIUM_PATH?{executablePath:process.env.WONGO_CHROMIUM_PATH,args:['--no-sandbox']}: {})});
+ const page=await browser.newPage({viewport:{width:1300,height:900}});
+ await page.goto(origin+'/downloads/puzzles/wongo-20mm-duplex.html');
+ await page.emulateMedia({media:'print'});
+ assert.equal(await page.locator('.sheet').count(),500);assert.equal(await page.locator('.card').count(),1000);
+ const mm=96/25.4;
+ const dimensions=await page.locator('.sheet').first().evaluate(el=>({w:el.getBoundingClientRect().width,h:el.getBoundingClientRect().height}));
+ assert.ok(Math.abs(dimensions.w-297*mm)<.1);assert.ok(Math.abs(dimensions.h-210*mm)<.1);
+ const issues=await page.locator('.card').evaluateAll(cards=>cards.flatMap(card=>{
+  const outer=card.getBoundingClientRect(),board=card.querySelector('.board').getBoundingClientRect(),footer=card.querySelector('footer').getBoundingClientRect();
+  const box=card.querySelector('.board').viewBox.baseVal;
+  const cellW=board.width/box.width;
+  return [Math.abs(cellW-20*96/25.4)>.1?'cell size':null,board.left<outer.left||board.right>outer.right?'board width':null,footer.bottom>outer.bottom-4?'footer overflow':null].filter(Boolean).map(issue=>card.dataset.code+': '+issue);
+ }));
+ assert.deepEqual(issues,[]);
+ const guide=await page.locator('.calibration span').first().evaluate(el=>el.getBoundingClientRect().width);assert.ok(Math.abs(guide-40*mm)<.1);
+ await mkdir('test-results',{recursive:true});
+ await page.locator('.sheet').first().screenshot({path:'test-results/duplex-front.png'});
+ await page.locator('.sheet').nth(1).screenshot({path:'test-results/duplex-back.png'});
+ const manifest=JSON.parse(await readFile('public/downloads/puzzles/manifest.json','utf8'));
+ const pdf=await page.request.get(origin+'/downloads/puzzles/wongo-20mm-duplex.pdf');
+ assert.equal(pdf.status(),200);assert.ok((await pdf.body()).subarray(0,4).toString()==='%PDF');
+ assert.equal(manifest.sheets,250);
+ console.log('Print checks passed: all 1000 cards, 20 mm cells, A4/A5 bounds, 40 mm calibration and PDF download.');
+}finally{await browser?.close();server.kill('SIGTERM');}

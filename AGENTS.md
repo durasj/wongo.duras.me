@@ -25,7 +25,7 @@ Wongo is a family 3D puzzle workshop for 2–8 simultaneous players, inspired by
 ## Working conventions
 
 - Keep English and Slovak rules consistent with implementation.
-- Printable boards use a 15 mm grid at 100% scale by default. Include a calibration reference and make scaling explicit.
+- Printable boards use a 20 mm grid at 100% scale by default. Include a calibration reference and make scaling explicit.
 - Keep printable assets and regeneration scripts in this repository. Exclude dependencies and build output.
 - Preserve source attribution and GPL compatibility. The piece catalogue is adapted from ps78/Ubongo; see provenance documentation and LICENSE.
 - Run `npm test` and `npm run build` before submitting code. Run `npm run test:browser` for UI changes; `WONGO_BASE_URL` runs the same flow against a deployment. Regenerate puzzles and meshes when their inputs change, and inspect browser and printable output for relevant UI changes.

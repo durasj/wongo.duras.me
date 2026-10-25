@@ -1,0 +1,116 @@
+// Deterministic print assets: 20 mm Bambu plates and A4 duplex puzzle cards.
+// Geometry data derives from ps78/Ubongo; see LICENSE and docs/PIECES.md.
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const unit=JSON.parse(await readFile(path.join(root,'src/data/print.json'),'utf8')).unitMm;
+if(unit!==20)throw Error('Update the physical layout and revalidate before changing the 20 mm print format.');
+const pieces=JSON.parse(await readFile(path.join(root,'src/data/pieces.json'),'utf8'));
+const puzzles=JSON.parse(await readFile(path.join(root,'src/data/puzzles.json'),'utf8'));
+const manifest=JSON.parse(await readFile(path.join(root,'public/downloads/pieces/manifest.json'),'utf8'));
+if(manifest.unitMm!==unit)throw Error('Regenerate piece meshes first.');
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const get=id=>pieces.find(p=>p.id===id);
+function utf8(s){const out=[];for(const ch of s){const c=ch.codePointAt(0);if(c<128)out.push(c);else if(c<2048)out.push(192|(c>>6),128|(c&63));else if(c<65536)out.push(224|(c>>12),128|((c>>6)&63),128|(c&63));else out.push(240|(c>>18),128|((c>>12)&63),128|((c>>6)&63),128|(c&63));}return new Uint8Array(out);}
+function zip(input){const parts=[],central=[];let offset=0;const put=(a,n,v,size)=>{for(let k=0;k<size;k++)a[n+k]=(v>>>(k*8))&255;};function crc(data){let x=0xffffffff;for(const b of data){x^=b;for(let k=0;k<8;k++)x=(x>>>1)^((x&1)?0xedb88320:0);}return (x^0xffffffff)>>>0;}for(const [n,s] of input){const name=utf8(n),data=typeof s==="string"?utf8(s):s,c=crc(data),a=new Uint8Array(30),b=new Uint8Array(46);put(a,0,0x04034b50,4);put(a,4,20,2);put(a,12,33,2);put(a,14,c,4);put(a,18,data.length,4);put(a,22,data.length,4);put(a,26,name.length,2);parts.push(a,name,data);put(b,0,0x02014b50,4);put(b,4,20,2);put(b,6,20,2);put(b,14,33,2);put(b,16,c,4);put(b,20,data.length,4);put(b,24,data.length,4);put(b,28,name.length,2);put(b,42,offset,4);central.push(b,name);offset+=30+name.length+data.length;}const len=central.reduce((n,a)=>n+a.length,0),end=new Uint8Array(22);put(end,0,0x06054b50,4);put(end,8,input.length,2);put(end,10,input.length,2);put(end,12,len,4);put(end,16,offset,4);const all=[...parts,...central,end],out=new Uint8Array(offset+len+22);let p=0;for(const a of all){out.set(a,p);p+=a.length;}return out;}
+const write=async(relative,data)=>{await mkdir(path.dirname(path.join(root,relative)),{recursive:true});await writeFile(path.join(root,relative),data);};
+const profilesRoot=path.join(root,'scripts/bambu-profiles');
+async function resolve(kind,name){const d=JSON.parse(await readFile(path.join(profilesRoot,kind,name+'.json'),'utf8'));let out=d.inherits?await resolve(kind,d.inherits):{};for(const n of d.include??[])Object.assign(out,await resolve(kind,n));return {...out,...d};}
+const machine=await resolve('machine','Bambu Lab P1S 0.4 nozzle'),process=await resolve('process','0.12mm Fine @BBL X1C'),filament=await resolve('filament','Generic PLA');
+Object.assign(process,{layer_height:'0.1',initial_layer_print_height:'0.1',wall_loops:'3',sparse_infill_density:'20%',sparse_infill_pattern:'gyroid',top_shell_layers:'8',bottom_shell_layers:'8',top_shell_thickness:'0.8',bottom_shell_thickness:'0.8',enable_support:'0',brim_type:'no_brim',brim_width:'0',enable_prime_tower:'0',print_sequence:'by layer',outer_wall_speed:['80'],inner_wall_speed:['150'],sparse_infill_speed:['180'],internal_solid_infill_speed:['150'],top_surface_speed:['80'],initial_layer_speed:['30'],initial_layer_infill_speed:['40'],support_top_z_distance:'0.1',support_bottom_z_distance:'0.1',print_settings_id:'Wongo 20mm - 0.10mm - 3 walls - 20% gyroid'});
+Object.assign(filament,{filament_max_volumetric_speed:['8'],additional_cooling_fan_speed:['0'],filament_vendor:['Flashforge'],filament_type:['PLA'],filament_density:['1.24'],nozzle_temperature:['220'],nozzle_temperature_initial_layer:['220'],textured_plate_temp:['55'],textured_plate_temp_initial_layer:['55']});
+const excluded=new Set(['type','name','inherits','from','setting_id','instantiation','description','include','compatible_printers','compatible_printers_condition','filament_id']);
+const colours=['yellow','blue','red','green'],plateList=[],kitEntries=[];
+for(let ci=0;ci<colours.length;ci++){
+ const color=colours[ci],group=manifest.pieces.filter(p=>p.color===color),instances=group.flatMap(p=>Array.from({length:p.quantity4},(_,i)=>({p,copy:i+1}))),records=[],resources=[],build=[],objects=[],models=[];
+ const rows=Math.ceil(instances.length/3),x0=23,y0=(256-rows*50)/2;
+ for(let i=0;i<instances.length;i++){
+  const {p,copy}=instances[i],stl=await readFile(path.join(root,'public/downloads/pieces',p.filename),'utf8');
+  let vertices=[...stl.matchAll(/vertex\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)/g)].map(m=>m.slice(1).map(Number));
+  let [w,d,h]=p.dimensionsMm;if(d>w){vertices=vertices.map(([x,y,z])=>[d-y,x,z]);[w,d]=[d,w];}
+  const x=x0+(i%3)*70+(70-w)/2,y=y0+Math.floor(i/3)*50+(50-d)/2;
+  if(w>60||d>40||x<20||y<30||x+w>246||y+d>246)throw Error('Piece does not fit safe bed layout');
+  const unique=[],indices=new Map(),tri=[];
+  for(let j=0;j<vertices.length;j+=3){const ids=vertices.slice(j,j+3).map(v=>{const k=v.join(',');if(!indices.has(k)){indices.set(k,unique.length);unique.push(v);}return indices.get(k);});tri.push(ids);}
+  const mid=2*i+1,oid=mid+1,name='Wongo '+String(p.id).padStart(2,'0')+' - '+p.name+' - copy '+copy;
+  resources.push('<object id="'+mid+'" type="model" name="'+esc(name)+'"><mesh><vertices>'+unique.map(([a,b,c])=>'<vertex x="'+a+'" y="'+b+'" z="'+c+'"/>').join('')+'</vertices><triangles>'+tri.map(([a,b,c])=>'<triangle v1="'+a+'" v2="'+b+'" v3="'+c+'"/>').join('')+'</triangles></mesh></object><object id="'+oid+'" type="model" name="'+esc(name)+'"><components><component objectid="'+mid+'"/></components></object>');
+  build.push('<item objectid="'+oid+'" transform="1 0 0 0 1 0 0 0 1 '+x+' '+y+' 0" printable="1"/>');
+  objects.push('<object id="'+oid+'"><metadata key="name" value="'+esc(name)+'"/><metadata key="extruder" value="1"/><part id="'+mid+'" subtype="normal_part"><metadata key="name" value="'+esc(name)+'"/><metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/></part></object>');
+  models.push('<model_instance><metadata key="object_id" value="'+oid+'"/><metadata key="instance_id" value="0"/><metadata key="identify_id" value="'+(i+1)+'"/></model_instance>');
+  records.push({pieceId:p.id,copy,x,y,width:w,depth:d,height:h});
+ }
+ for(let i=0;i<records.length;i++)for(let j=i+1;j<records.length;j++){const a=records[i],b=records[j],sep=Math.max(a.x-b.x-b.width,b.x-a.x-a.width,a.y-b.y-b.depth,b.y-a.y-a.depth);if(sep<6)throw Error('Plate gap too small');}
+ const cfg={};for(const d of [machine,process,filament])for(const [k,v] of Object.entries(d))if(!excluded.has(k))cfg[k]=v;
+ Object.assign(cfg,{printer_settings_id:'Bambu Lab P1S 0.4 nozzle',printer_model:'Bambu Lab P1S',printer_variant:'0.4',filament_settings_id:['Wongo Flashforge Matte '+group[0].filament+' - starting profile'],filament_colour:[group[0].hex.toUpperCase()],filament_ids:['GFL99'],curr_bed_type:'Textured PEI Plate',filament_is_support:['0']});
+ const data=zip([
+ ['[Content_Types].xml','<?xml version="1.0"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/><Default Extension="config" ContentType="application/octet-stream"/></Types>'],
+ ['_rels/.rels','<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>'],
+ ['3D/3dmodel.model','<?xml version="1.0" encoding="UTF-8"?><model xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02" unit="millimeter" xml:lang="en-US"><metadata name="Application">BambuStudio-02.08.02.61</metadata><metadata name="BambuStudio:3mfVersion">1</metadata><metadata name="Title">Wongo 20mm - '+esc(group[0].filament)+'</metadata><resources>'+resources.join('')+'</resources><build>'+build.join('')+'</build></model>'],
+ ['Metadata/model_settings.config','<?xml version="1.0"?><config>'+objects.join('')+'<plate><metadata key="plater_id" value="1"/><metadata key="plater_name" value="'+esc(group[0].filament)+'"/><metadata key="locked" value="false"/><metadata key="bed_type" value="Textured PEI Plate"/><metadata key="print_sequence" value="by layer"/>'+models.join('')+'</plate></config>'],
+ ['Metadata/project_settings.config',JSON.stringify(cfg,null,2)]
+ ]);
+ const filename=String(ci+1).padStart(2,'0')+'-'+color+'-20mm-P1S.3mf';
+ await write('public/downloads/bambu/'+filename,data);kitEntries.push(['Plates/'+filename,data]);plateList.push({file:filename,color:group[0].filament,count:instances.length,objects:records});
+}
+const estimates=JSON.parse(await readFile(path.join(root,'docs/print-estimates.json'),'utf8'));
+const readme='WONGO / BAMBU P1S / 20 mm\n\nOpen each Plates/*.3mf as a PROJECT in Bambu Studio, not as geometry only.\nConfirm P1S, 0.4 mm nozzle, build plate and matching Flashforge PLA Matte spool.\nSlice and preview before printing. Projects are editable and contain no G-code.\nPrint each colour once for 40 pieces (2-4 players); twice for 80 (5-8 players).\n\n0.10 mm layers including first layer; 3 walls; 20% gyroid; 0.8 mm top/bottom.\nNo supports, brim or prime tower; by-layer printing; at least 6 mm object gaps.\nTextured PEI starting profile: nozzle 220 C, bed 55 C, volumetric cap 8 mm3/s.\nThe filament settings derive from Generic PLA and are not physically calibrated.\nUse your calibrated filament profile if available. Print a small sample first.\nModels have exact square corners; no embossed IDs or tolerance offsets.\n\nUse ONLY matching 20 mm puzzle grids at 100% / actual size.\nCards: downloads/puzzles/wongo-20mm-duplex.pdf or the companion HTML.\nA4 landscape, two A5 cards per side. Duplex: flip on SHORT edge.\nEasy puzzles on fronts, hard on backs; backs deliberately reverse the two slots.\nCut along the centre line after checking one test sheet. No solutions on backs.\n500 pages = 250 A4 sheets = 500 double-sided A5 cards = 1000 puzzles.\n\nSource/provenance: https://github.com/durasj/wongo.duras.me\nGeometry adapted from ps78/Ubongo, GPL-3.0. See LICENSE and Source/.\nBundled Bambu profile inputs: BambuStudio v02.08.02.61, AGPL-3.0.\n';
+await write('public/downloads/bambu/README.txt',readme);
+await write('public/downloads/bambu/plate-manifest.json',JSON.stringify({unitMm:unit,layerHeightMm:0.1,nozzleMm:0.4,plates:plateList},null,2)+'\n');
+await write('public/downloads/bambu/slicer-estimates.json',JSON.stringify(estimates,null,2)+'\n');
+kitEntries.push(['START-HERE.txt',readme],['slicer-estimates.json',JSON.stringify(estimates,null,2)],['plate-manifest.json',JSON.stringify(plateList,null,2)]);
+for(const p of manifest.pieces)kitEntries.push(['STL-20mm/'+p.filename,await readFile(path.join(root,'public/downloads/pieces',p.filename),'utf8')]);
+kitEntries.push(['LICENSE.txt',await readFile(path.join(root,'LICENSE'),'utf8')],['Source/pieces.json',JSON.stringify(pieces,null,2)],['Source/print.json',JSON.stringify({unitMm:unit})],['Source/export-pieces.mjs',await readFile(path.join(root,'scripts/export-pieces.mjs'),'utf8')],['Source/export-print-kit.mjs',await readFile(path.join(root,'scripts/export-print-kit.mjs'),'utf8')]);
+const profiles=JSON.parse(await readFile(path.join(root,'scripts/bambu-profiles/index.json'),'utf8'));
+for(const [kind,name] of profiles)kitEntries.push(['Source/bambu-profiles/'+kind+'/'+name+'.json',await readFile(path.join(profilesRoot,kind,name+'.json'),'utf8')]);
+kitEntries.push(['Source/bambu-profiles/index.json',JSON.stringify(profiles)],['Source/bambu-profiles/LICENSE-AGPL-3.0.txt',await readFile(path.join(profilesRoot,'LICENSE-AGPL-3.0.txt'),'utf8')]);
+await write('public/downloads/bambu/wongo-20mm-P1S-print-kit.zip',zip(kitEntries));
+
+// One easy side followed by its matching hard reverse. With short-edge duplex,
+// the reverse's LEFT card is behind the front's RIGHT card.
+const easy=puzzles.filter(p=>p.difficulty==='easy'),hard=puzzles.filter(p=>p.difficulty==='hard');
+if(easy.length!==500||hard.length!==500)throw Error('Expected 500 easy and 500 hard puzzles.');
+const pages=[];
+for(let i=0;i<easy.length;i+=2){pages.push([easy[i],easy[i+1]]);pages.push([hard[i+1],hard[i]]);}
+const bounds=p=>({w:Math.max(...p.footprint.map(v=>v[0]))+1,h:Math.max(...p.footprint.map(v=>v[1]))+1});
+for(const p of puzzles){const {w,h}=bounds(p);if(w>5||h>5)throw Error('Puzzle exceeds A5 board layout: '+p.code);}
+function polygons(piece){const points=piece.cubes.map(([x,y,z])=>[28*(x-y),14*(x+y)-30*z]);const minX=Math.min(...points.map(p=>p[0]))-31,minY=Math.min(...points.map(p=>p[1]))-32,w=Math.max(...points.map(p=>p[0]))-minX+31,h=Math.max(...points.map(p=>p[1]))-minY+31;
+ const shapes=[];for(const [x,y,z] of [...piece.cubes].sort((a,b)=>(a[0]+a[1]+a[2]*4)-(b[0]+b[1]+b[2]*4))){const px=28*(x-y),py=14*(x+y)-30*z;for(const [coords,shade] of [[[[0,-2],[28,-16],[28,14],[0,28]],1],[[[0,-2],[-28,-16],[-28,14],[0,28]],.78],[[[0,-30],[28,-16],[0,-2],[-28,-16]],1.15]])shapes.push({points:coords.map(([a,b])=>[a+px,b+py]),shade});}
+ return {minX,minY,w,h,shapes};}
+const rgb=(hex,shade=1)=>[1,3,5].map(i=>Math.min(255,parseInt(hex.slice(i,i+2),16)*shade)/255);
+const iconSymbols='<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>'+pieces.map(piece=>{const s=polygons(piece);return '<symbol id="piece-'+piece.id+'" viewBox="'+[s.minX,s.minY,s.w,s.h].join(' ')+'">'+s.shapes.map(a=>'<polygon points="'+a.points.map(p=>p.join(',')).join(' ')+'" fill="rgb('+rgb(piece.hex,a.shade).map(n=>Math.round(n*255)).join(',')+')" stroke="#25332c" stroke-width="1"/>').join('')+'</symbol>';}).join('')+'</defs></svg>';
+const icon=piece=>'<svg aria-hidden="true"><use href="#piece-'+piece.id+'" width="100%" height="100%"/></svg>';
+const footprint=p=>{const {w,h}=bounds(p),maxY=h-1;return '<svg class="board" width="'+w*unit+'mm" height="'+h*unit+'mm" viewBox="0 0 '+w+' '+h+'">'+p.footprint.map(([x,y])=>'<rect x="'+x+'" y="'+(maxY-y)+'" width="1" height="1" fill="white" stroke="#444" stroke-width=".015"/>').join('')+'</svg>';};
+const card=p=>'<article class="card" data-code="'+p.code+'"><header><b>WONGO</b><strong>'+p.code+'</strong></header><p class="level">'+(p.difficulty==='easy'?'EASY / 3 pieces':'HARD / 4 pieces')+' · 2 layers / poschodia</p><div class="board-area">'+footprint(p)+'</div><p class="required">PIECES / DIELIKY</p><div class="pieces">'+p.pieceIds.map(id=>'<div>'+icon(get(id))+'<b>#'+String(id).padStart(2,'0')+'</b></div>').join('')+'</div><footer><p>Fill the footprint exactly 2 cubes high.<br>Vyplňte pôdorys do výšky presne 2 kociek.</p><div class="calibration"><span></span> 40 mm</div><p class="scale">20 mm grid · Print 100% / Tlač 100 %</p></footer></article>';
+const css='@page{size:A4 landscape;margin:0}*{box-sizing:border-box}html,body{margin:0;background:#eee;font-family:Arial,sans-serif;color:#25332c}.sheet{width:297mm;height:210mm;display:grid;grid-template-columns:148.5mm 148.5mm;margin:8mm auto;background:white;position:relative;break-after:page}.sheet:last-child{break-after:auto}.sheet:after{content:"";position:absolute;left:148.5mm;top:6mm;bottom:6mm;border-left:.2mm dashed #999}.card{width:148.5mm;height:210mm;padding:9mm 10mm;display:flex;flex-direction:column;align-items:stretch;break-inside:avoid}.card header{display:flex;justify-content:space-between;align-items:center;height:10mm;border-bottom:.3mm solid #bbb;font-size:12pt}.card header b{font-size:17pt}.level{font-size:9pt;margin:4mm 0}.board-area{height:104mm;display:flex;justify-content:center;align-items:center;flex-shrink:0}.board{display:block;flex-shrink:0;overflow:visible}.required{font-size:8pt;font-weight:bold;margin:3mm 0 2mm}.pieces{display:flex;justify-content:space-around;height:30mm;flex-shrink:0;gap:3mm}.pieces>div{width:25mm;display:flex;flex-direction:column;align-items:center;gap:1mm}.pieces svg{width:23mm;height:23mm}.pieces b{font-size:9pt}footer{margin-top:auto;font-size:7pt}footer p{margin:2mm 0;line-height:1.4}.calibration{display:flex;align-items:center;gap:3mm}.calibration span{width:40mm;height:2mm;display:block;border:solid #444;border-width:0 .2mm .2mm}.scale{color:#555}.toolbar{max-width:1000px;margin:20px auto;padding:20px;background:white;line-height:1.6}.toolbar button{padding:12px;font-size:16px}.card svg{print-color-adjust:exact;-webkit-print-color-adjust:exact}@media print{html,body{background:white}.toolbar{display:none}.sheet{margin:0}}';
+const html='<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><title>Wongo — 20 mm duplex A5 cards</title><style>'+css+'</style></head><body><nav class="toolbar"><h1>Wongo: 1,000 puzzles / 1 000 hlavolamov</h1><p>A4 landscape, 100% / actual size, no margins or headers. Duplex: flip on SHORT edge. 500 pages = 250 sheets. Cut in half after checking one sheet. Easy fronts, hard backs. Back slots are deliberately reversed for duplex alignment.</p><p>A4 na šírku, mierka 100 %, bez okrajov a hlavičiek. Obojstranne: otáčať po KRATŠEJ hrane. 500 strán = 250 listov. Najprv overte jeden list, potom rozstrihnite na polovicu.</p><button onclick="window.print()">Print / Vytlačiť</button> <a href="wongo-20mm-duplex.pdf">Download PDF / Stiahnuť PDF</a></nav>'+iconSymbols+pages.map((p,i)=>'<section class="sheet" data-side="'+(i%2?'back':'front')+'">'+p.map(card).join('')+'</section>').join('')+'</body></html>\n';
+await write('public/downloads/puzzles/wongo-20mm-duplex.html',html);
+
+// Vector PDF: millimetre-exact boards, vector piece illustrations, standard fonts.
+// Coordinates below are in millimetres from the top-left; conversion is centralized.
+const MM=72/25.4,W=297*MM,H=210*MM,objects=[null,'','', '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>'],kids=[];
+const fmt=n=>Number(n.toFixed(4)).toString(),pdfs=s=>String(s).replaceAll('\\','\\\\').replaceAll('(','\\(').replaceAll(')','\\)');
+function text(s,x,y,size=9,bold=false){return 'BT /'+(bold?'B':'F')+' '+size+' Tf '+fmt(x*MM)+' '+fmt(H-y*MM)+' Td ('+pdfs(s)+') Tj ET\n';}
+function line(x,y,a,b){return fmt(x*MM)+' '+fmt(H-y*MM)+' m '+fmt(a*MM)+' '+fmt(H-b*MM)+' l S\n';}
+const xobjRefs=pieces.map(piece=>{const shape=polygons(piece),scale=Math.min(23/shape.w,23/shape.h),lx=(23-shape.w*scale)/2,ty=(23-shape.h*scale)/2;let stream='';
+ for(const a of shape.shapes){stream+=rgb(piece.hex,a.shade).map(fmt).join(' ')+' rg 0.15 0.2 0.17 RG 0.22 w\n';const pts=a.points.map(([x,y])=>[(lx+(x-shape.minX)*scale)*MM,(23-ty-(y-shape.minY)*scale)*MM]);stream+=pts.map(([x,y],j)=>fmt(x)+' '+fmt(y)+(j?' l':' m')).join(' ')+' h B\n';}
+ const id=objects.length;objects.push('<< /Type /XObject /Subtype /Form /BBox [0 0 '+fmt(23*MM)+' '+fmt(23*MM)+'] /Resources << >> /Length '+utf8(stream).length+' >>\nstream\n'+stream+'endstream');return '/P'+piece.id+' '+id+' 0 R';}).join(' ');
+function pdfcard(p,ox){const {w,h}=bounds(p);let s='0.15 0.2 0.17 rg 0.6 w\n'+text('WONGO',ox+10,17,17,true)+text(p.code,ox+82,17,12,true)+line(ox+10,21,ox+138.5,21)+text((p.difficulty==='easy'?'EASY / 3 pieces':'HARD / 4 pieces')+' / 2 layers',ox+10,29,9);
+ const left=ox+(148.5-w*unit)/2,top=33+(104-h*unit)/2;
+ s+='0.25 0.25 0.25 RG 0.35 w\n';
+ for(const [x,y] of p.footprint)s+=fmt((left+x*unit)*MM)+' '+fmt(H-(top+(h-y)*unit)*MM)+' '+fmt(unit*MM)+' '+fmt(unit*MM)+' re S\n';
+ s+=text('PIECES',ox+10,143,8,true);
+ const n=p.pieceIds.length;
+ for(let i=0;i<n;i++){const pce=get(p.pieceIds[i]),cx=ox+10+(128.5/n)*(i+.5);s+='q 1 0 0 1 '+fmt((cx-11.5)*MM)+' '+fmt(H-170*MM)+' cm /P'+pce.id+' Do Q\n0.15 0.2 0.17 rg\n'+text('#'+String(pce.id).padStart(2,'0'),cx-3,175,9,true);}
+ s+='0.15 0.2 0.17 rg 0.4 w\n'+text('Fill the footprint exactly 2 cubes high.',ox+10,183,7)+line(ox+10,191,ox+50,191)+line(ox+10,189,ox+10,191)+line(ox+50,189,ox+50,191)+text('40 mm scale check',ox+54,191,7)+text('20 mm grid / Print 100% actual size / wongo.duras.me',ox+10,198,7);
+ return s;}
+for(let i=0;i<pages.length;i++){const stream='0.65 G 0.3 w [2 3] 0 d\n'+line(148.5,6,148.5,204)+'[] 0 d\n'+pages[i].map((p,j)=>pdfcard(p,j*148.5)).join(''),pageId=objects.length,contentId=pageId+1;
+ objects.push('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+fmt(W)+' '+fmt(H)+'] /Resources << /Font << /F 3 0 R /B 4 0 R >> /XObject << '+xobjRefs+' >> >> /Contents '+contentId+' 0 R >>');
+ objects.push('<< /Length '+utf8(stream).length+' >>\nstream\n'+stream+'endstream');kids.push(pageId+' 0 R');}
+objects[1]='<< /Type /Catalog /Pages 2 0 R >>';objects[2]='<< /Type /Pages /Count '+pages.length+' /Kids ['+kids.join(' ')+'] >>';
+let pdf='%PDF-1.4\n',offsets=[0],len=utf8(pdf).length;
+for(let i=1;i<objects.length;i++){offsets[i]=len;const s=i+' 0 obj\n'+objects[i]+'\nendobj\n';pdf+=s;len+=utf8(s).length;}
+const xref=len;pdf+='xref\n0 '+objects.length+'\n0000000000 65535 f \n'+offsets.slice(1).map(n=>String(n).padStart(10,'0')+' 00000 n \n').join('')+'trailer\n<< /Size '+objects.length+' /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF\n';
+await write('public/downloads/puzzles/wongo-20mm-duplex.pdf',utf8(pdf));
+await write('public/downloads/puzzles/manifest.json',JSON.stringify({unitMm:unit,puzzles:puzzles.length,pages:pages.length,sheets:pages.length/2,duplex:'short-edge',paper:'A4 landscape',cardsPerPage:2,cardsPerSheet:4,front:'easy',back:'hard',backSlotsReversed:true,layout:pages.map((p,i)=>({page:i+1,side:i%2?'back':'front',codes:p.map(a=>a.code)}))},null,2)+'\n');
+console.log('Generated four Bambu plates, print kit and 500-page duplex catalogue (250 A4 sheets).');

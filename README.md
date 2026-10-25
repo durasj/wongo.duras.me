@@ -34,7 +34,7 @@ npm run build
 npm run test:browser
 ```
 
-An existing Chromium executable can be supplied with `WONGO_CHROMIUM_PATH`. Browser checks cover manual solving, undo/reset, no-WebGL fallback, invalid codes, Back/Forward navigation, printing from the browser menu, solution controls, downloads, eight-player assignments, Slovak UI, mobile layout, rulebook pagination, and the physical 15 mm card grid. Fonts are served locally; the app does not require third-party font requests.
+An existing Chromium executable can be supplied with `WONGO_CHROMIUM_PATH`. Browser checks cover manual solving, undo/reset, no-WebGL fallback, invalid codes, Back/Forward navigation, printing from the browser menu, solution controls, downloads, eight-player assignments, Slovak UI, mobile layout, rulebook pagination, and the physical 20 mm card grid. Fonts are served locally; the app does not require third-party font requests.
 
 To run the same checks against the deployed site:
 
@@ -95,3 +95,11 @@ The production application is hosted at [wongo.duras.me](https://wongo.duras.me)
 Wongo is an independent family adaptation, not an official Ubongo product. Ubongo is the original game by Grzegorz Rejchtman, published by KOSMOS/Albi. The official Master rules provide the reference piece numbering and game mechanics. Piece coordinate data is adapted from [ps78/Ubongo](https://github.com/ps78/Ubongo), under GPL-3.0; attribution and detailed sources are documented in this repository. This project is distributed under **GPL-3.0-or-later**, with the full license in `LICENSE`.
 
 Puzzle challenges are generated for Wongo rather than reproducing the commercial card collection.
+
+## 20 mm physical print kit
+
+Download `/downloads/bambu/wongo-20mm-P1S-print-kit.zip` for four colour-separated P1S projects (0.4 mm nozzle, 0.1 mm layers, 3 walls, 20% gyroid). Print each once for 40 pieces or twice for 80. Starting filament settings derive from Generic PLA; use a calibrated Flashforge Matte profile when available.
+
+`/downloads/puzzles/wongo-20mm-duplex.pdf` and the companion `.html` contain all 1,000 published puzzles on 500 A4 landscape pages. Print at 100%, duplex, **flip on the short edge**: two easy fronts and two hard backs per sheet, then cut into two A5 cards. Back slots are reversed for physical alignment. Check one sheet first. Total: 250 A4 sheets. No solutions are printed on the cards.
+
+Run `npm run generate:print-kit` to rebuild the models, plates, kit ZIP and duplex catalogue. See `docs/PRINTING.md` and `docs/print-estimates.json`. Changing physical scale does not change any published code, piece shape or saved solution.

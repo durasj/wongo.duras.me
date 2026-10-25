@@ -1,0 +1,40 @@
+name: Refresh 20 mm rulebook PDFs
+on:
+  push:
+    branches: [feat/wongo-20mm-a5]
+    paths:
+      - src/data/print.json
+      - docs/rulebook-en.md
+      - docs/rulebook-sk.md
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  refresh:
+    if: github.repository == 'durasj/wongo.duras.me' && github.ref == 'refs/heads/feat/wongo-20mm-a5'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run export:rulebook-pdfs
+      - run: npm test && npm run test:browser && npm run test:print
+      - name: Commit regenerated bilingual edition PDFs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add public/downloads/rulebook-en.pdf public/downloads/rulebook-sk.pdf public/downloads/tacustav/rulebook-en.pdf public/downloads/tacustav/rulebook-sk.pdf
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Regenerate bilingual rulebook PDFs for 20 mm pieces"
+          AUTH=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          git -c http.https://github.com/.extraheader="AUTHORIZATION: basic $AUTH" push origin HEAD:feat/wongo-20mm-a5
