@@ -4,7 +4,7 @@ The cube pitch is **20 mm**. Models use a **0.5 mm 45-degree chamfer on every vo
 
 ## Physical A5 D6 cards
 
-Download `/downloads/puzzles/wongo-d6-20mm.pdf` or its bilingual HTML companion. The file has **96 A4 landscape pages on 48 duplex sheets**, producing **96 double-sided A5 cards in 12 packs of eight**. Every card side has one footprint and six distinct die-selected piece lists. The pack contains 1,152 assignments drawn from **327 different independently verified puzzles**. The full original 1,000-puzzle single-card catalogue is retained separately at `/downloads/puzzles/wongo-20mm-duplex.pdf` and in the app.
+Download `/downloads/puzzles/wongo-d6-20mm.pdf` or its bilingual HTML companion. The file has **288 A4 landscape pages on 144 duplex sheets**, producing **288 double-sided A5 cards in 36 packs of eight**. Every card side has one footprint and six distinct die-selected piece lists. The pack contains 3,456 assignments drawn from **902 different independently verified puzzles**. The full original 1,000-puzzle single-card catalogue is retained separately at `/downloads/puzzles/wongo-20mm-duplex.pdf` and in the app.
 
 Print **100% / actual size**, no fitting, no margins or browser headers/footers, and duplex **flip on the short edge**. Measure the 40 mm reference before a batch, check one sheet and cut in the centre. Back slots are reversed so the easy and hard sides share the correct card ID and slot.
 
@@ -33,3 +33,7 @@ No universally proven minimum exists for this exact geometry/material. **5% gyro
 `npm run generate:print-kit` regenerates chamfered STL/SCAD, frozen D6 data, plates, ZIP and both PDF/HTML catalogues offline. `npm run generate:dice-cards` groups footprints using only proper XY rotations, independently solves all alternatives and verifies every die result against each four-player block and eight-player pack. Original puzzle codes and D6 mappings are permanent. Pinned Bambu profile sources and their AGPL license live in `scripts/bambu-profiles/`.
 
 Run `npm test`, `npm run build`, `npm run test:browser`, `npm run test:print` and `npm run generate:puzzles`; repeated generation must leave committed assets unchanged. Physical print testing remains necessary.
+
+The expanded deck adds 547 verified `WD6` puzzles; the online library now contains 1,547 puzzles including the unchanged original 1,000 `W3` entries. Sets 01–12 and every existing code retain their meanings. New sets 13–36 add different six-choice card faces, with usage balancing to reduce repeated individual puzzles. The 3,456 printed assignments use 902 unique puzzles: individual puzzles still recur. Keep used packs aside for four nine-round games without reusing a card.
+
+Already printed sets 01–12? Print only `/downloads/puzzles/wongo-d6-expansion-13-36.pdf`: 192 pages on 96 A4 duplex sheets. The full deck uses 144 sheets. Sort by the prominent SADA / SET number, then block and card slot.

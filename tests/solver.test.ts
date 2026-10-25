@@ -26,14 +26,14 @@ test('rotation group includes all 24 rigid rotations, never reflections', () => 
   for (const rotated of rotations) assert.equal(orientations(rotated).map(shapeKey).sort().join('|'),rotations.map(shapeKey).sort().join('|'));
 });
 
-test('1000 generated challenges independently solve from an empty target', () => {
-  assert.equal(puzzles.length,1000);
-  assert.equal(puzzles.filter(puzzle=>puzzle.difficulty==='easy').length,500);
-  assert.equal(puzzles.filter(puzzle=>puzzle.difficulty==='hard').length,500);
+test('all original and supplemental challenges independently solve from an empty target', () => {
+  assert.equal(puzzles.filter(p=>p.code.startsWith('W3-')).length,1000);
+  assert.equal(puzzles.filter(puzzle=>puzzle.code.startsWith('W3-')&&puzzle.difficulty==='easy').length,500);
+  assert.equal(puzzles.filter(puzzle=>puzzle.code.startsWith('W3-')&&puzzle.difficulty==='hard').length,500);
   const seen = new Set<string>();
   for (const puzzle of puzzles) {
     assert.equal(puzzle.pieceIds.length,puzzle.difficulty==='easy'?3:4);
-    assert.match(puzzle.code,/^W3-[EH]-\d{3}$/);
+    assert.match(puzzle.code,/^(?:W3-[EH]-\d{3}|WD6-[EH]-\d{4})$/);
     assert.equal(isPlayablePuzzle(puzzle),true,puzzle.code);
     assert.equal(new Set(puzzle.pieceIds.map(id=>getPiece(id).color)).size,puzzle.pieceIds.length,puzzle.code);
     const signature = `${footprintKey(puzzle.footprint)}|${[...puzzle.pieceIds].sort((a,b)=>a-b)}`;
@@ -96,7 +96,7 @@ test('every player count from two to eight and both difficulties fit the real in
     assert.equal(new Set(round.map(p=>p.code)).size,count);
     const used = new Map<number,number>();
     for (const puzzle of round) for (const id of puzzle.pieceIds) used.set(id,(used.get(id)??0)+1);
-    assert.ok(round.every(p=>p.code.startsWith('W3-') && p.difficulty===difficulty && isPlayablePuzzle(p)));
+    assert.ok(round.every(p=>p.difficulty===difficulty && isPlayablePuzzle(p)));
     for (const piece of pieces) assert.ok((used.get(piece.id)??0) <= (count<=4?piece.quantity4:piece.quantity8));
   }
   assert.throws(()=>selectRound(2,'easy',1,{}),/Not enough pieces/);
@@ -133,7 +133,7 @@ test('validation report accounts for every candidate and reflects the full catal
   assert.equal(report.uniqueColourVerified,1000);
   assert.equal(report.attempts,report.puzzles+report.rejectedUnsolvable+report.rejectedBudget+report.rejectedAssembly+report.rejectedDuplicate);
   for (const difficulty of ['easy','hard'] as const) {
-    const category=puzzles.filter(p=>p.difficulty===difficulty);
+    const category=puzzles.filter(p=>p.code.startsWith('W3-')&&p.difficulty===difficulty);
     assert.equal(report.diversity[difficulty].puzzles,500);
     assert.equal(report.diversity[difficulty].uniqueFootprints,new Set(category.map(p=>footprintKey(p.footprint))).size);
     assert.equal(report.diversity[difficulty].uniquePieceSets,new Set(category.map(p=>p.pieceIds.join(','))).size);

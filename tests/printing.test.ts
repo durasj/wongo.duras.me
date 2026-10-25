@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import config from '../src/data/print.json';
-import { puzzles } from '../src/lib/puzzles';
+import puzzles from '../src/data/puzzles.json';
 
 const json=(p:string)=>JSON.parse(readFileSync(new URL('../'+p,import.meta.url),'utf8'));
 test('20 mm meshes and full colour plates agree with the shared physical inventory',()=>{

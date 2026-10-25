@@ -43,7 +43,7 @@ test('retired F3 archive preserves every byte and original puzzle meaning withou
 
 // Solutions/metrics are deliberately excluded: a better valid witness is fine.
 test('original 96 W3 codes retain their complete records and unique-colour meanings', () => {
-  const original=puzzles.filter(puzzle=>Number(puzzle.code.slice(-3))<=48);
+  const original=puzzles.filter(puzzle=>puzzle.code.startsWith('W3-')&&Number(puzzle.code.slice(-3))<=48);
   assert.equal(original.length,96);
   assert.equal(createHash('sha256').update(JSON.stringify(original,null,2)+'\n').digest('hex'),
     'bc0c04d9aae44a55aaf118c5386451a22773f30eb0320feda73ee45123e03ce7',

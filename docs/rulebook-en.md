@@ -8,7 +8,7 @@ Build on your printed card before time runs out. Everyone plays at once and earn
 ## What you need
 
 - The shared pool of 16 numbered shapes: **40 pieces for 2–4 players or 80 for 5–8**, in the manifest quantities. These are not personal complete sets. Cube pitch is 20 mm, with 0.5 mm edge chamfers.
-- **Double-sided A5 D6 cards**, a normal six-sided die, timer, opaque gem bag and score paper. The download has **12 numbered packs of 8 cards**. Easy is on the front, hard on the back. Each side has one footprint and six piece lists.
+- **Double-sided A5 D6 cards**, a normal six-sided die, timer, opaque gem bag and score paper. The download has **36 numbered packs of 8 cards**. Easy is on the front, hard on the back. Each side has one footprint and six piece lists.
 - **90 gems:** 18 red, 27 blue, 18 green and 27 amber. One set works for every player count.
 
 | Gem | Points |
@@ -20,7 +20,7 @@ Build on your printed card before time runs out. Everyone plays at once and earn
 
 ## Set up
 
-1. Shuffle **complete numbered packs**, keep their cards together and choose nine packs for nine rounds. Never deal unrelated cards: inventories are checked per pack and die face.
+1. First group cards by the large **SADA / SET 01–36** label on both sides. Each pack contains eight cards; the A/B block and card number are shown separately. Shuffle **complete packs**, keep their cards together and choose nine packs for nine rounds. Keep used packs aside for four games without reusing cards; individual puzzles may recur. Everyone in a round must use the same set number, while each player solves their own footprint. Never deal unrelated cards: inventories are checked per pack and die face.
 2. For **2–4 players**, use only slots 1–4 (block A) or only 5–8 (block B) from one pack. Give each player a different card from that block. For **5–8**, use slots 1–N from one pack and the 80-piece pool. Smaller groups still fit.
 3. Choose **one common difficulty**. Easy uses three different colours; hard four pieces, one of each colour. Turn all cards to that side. The inventory guarantee does not cover mixed difficulties, mixed packs, or mixed blocks with 40 pieces.
 4. Use **two minutes per round**, or a longer agreed common limit. Give beginners a practice round.
@@ -63,7 +63,7 @@ Every printed alternative is independently solved, and every common die result c
 
 ## Printing and care
 
-Download the **D6 physical cards**. Use A4 landscape, **100% / actual size**, no fitting, margins, headers or footers, and duplex **flip on the short edge**. The 96-page file uses **48 A4 sheets** and yields 96 double-sided A5 cards. Back slots are intentionally reversed. Measure the **40 mm guide**, check one sheet, then cut at the centre. Keep packs and blocks together. Do not print solutions on the backs.
+Download the **D6 physical cards**. Use A4 landscape, **100% / actual size**, no fitting, margins, headers or footers, and duplex **flip on the short edge**. The 288-page file uses **144 A4 sheets** and yields 288 double-sided A5 cards. Back slots are intentionally reversed. Measure the **40 mm guide**, check one sheet, then cut at the centre. Keep packs and blocks together. Do not print solutions on the backs.
 
 Models use 20 mm cubes, 0.5 mm chamfers, 0.1 mm layers, 3 walls and a 5% gyroid starting profile. Print a small fit sample first: low infill and printer settings need a physical test.
 
