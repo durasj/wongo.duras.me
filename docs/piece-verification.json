@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "primary": {
+    "repository": "ps78/Ubongo",
+    "path": "blockfactory/blockfactory.go",
+    "blob": "63c1a892046543f1973b375d3dfba89f90c8114e",
+    "license": "GPL-3.0",
+    "axes": "x,y,z"
+  },
+  "independent": {
+    "repository": "m-kasahr/ubongo-utils",
+    "directory": "data/3d",
+    "mapping": "A-P correspond to IDs 1-16",
+    "method": "Normalize integer cube origins; compare canonical shape under all24 determinant+1 signed-permutation matrices; test reflected orbit separately",
+    "all16Matched": true,
+    "results": [
+      {
+        "pieceId": 1,
+        "referencePath": "data/3d/A.piece",
+        "referenceBlob": "f1c2ee4ee83e2165777f5981a7a3cc7c9db92c34",
+        "properRotationMatch": true,
+        "chiral": true
+      },
+      {
+        "pieceId": 2,
+        "referencePath": "data/3d/B.piece",
+        "referenceBlob": "cc436aa9eab0023aa0f89ba5ec46ecef3dd04b93",
+        "properRotationMatch": true,
+        "chiral": true
+      },
+      {
+        "pieceId": 3,
+        "referencePath": "data/3d/C.piece",
+        "referenceBlob": "4ddee5b3a999729c983e63d781a324cb679c809e",
+        "properRotationMatch": true,
+        "chiral": true
+      },
+      {
+        "pieceId": 4,
+        "referencePath": "data/3d/D.piece",
+        "referenceBlob": "1741fadc3a4fa6673d8e5fe561ceb80c831d0e83",
+        "properRotationMatch": true,
+        "chiral": false
+      },
+      {
+        "pieceId": 5,
+        "referencePath": "data/3d/E.piece",
+        "referenceBlob": "fc5c288e83be0d7a79800d6d3a986d3d4110ec13",
+        "properRotationMatch": true,
+        "chiral": true
+      },
+      {
+        "pieceId": 6,
+        "referencePath": "data/3d/F.piece",
+        "referenceBlob": "80fb4fb39d53ec2ce01615d86a89c7f5f4f685b1",
+        "properRotationMatch": true,
+        "chiral": true
+      },
+      {
+        "pieceId": 7,
+        "referencePath": "data/3d/G.piece",
+        "referenceBlob": "c9c215dce0c7a0e4f5f19c2d1933e0c30dbbe4f3",
+        "properRotationMatch": true,
+        "chiral": false
+      },
+      {
+        "pieceId": 8,
+        "referencePath": "data/3d/H.piece",
+        "referenceBlob": "ed45ab0780e134a3915f7a51a6899e38043931c1",
+        "properRotationMatch": true,
+        "chiral": false
+      },
+      {
+        "pieceId": 9,
+        "referencePath": "data/3d/I.piece",
+        "referenceBlob": "d4a919e5175fa3abf0e7682beba97af9c10828f7",
+        "properRotationMatch": true,
+        "chiral": false
+      },
+      {
+        "pieceId": 10,
+        "referencePath": "data/3d/J.piece",
+        "referenceBlob": "e22ee59036db17f5feb0c9a795187275e2f739a1",
+        "properRotationMatch": true,
+        "chiral": true
+      },
+      {
+        "pieceId": 11,
+        "referencePath": "data/3d/K.piece",
+        "referenceBlob": "f533934d9bf364d4443ec9174b53aa815a97aeca",
+        "properRotationMatch": true,
+        "chiral": true
+      },
+      {
+        "pieceId": 12,
+        "referencePath": "data/3d/L.piece",
+        "referenceBlob": "fed1e7d9650c9f3d4422beae83938ca6385454be",
+        "properRotationMatch": true,
+        "chiral": false
+      },
+      {
+        "pieceId": 13,
+        "referencePath": "data/3d/M.piece",
+        "referenceBlob": "3e349c206c2fcff98eb5627455053360a8c87f95",
+        "properRotationMatch": true,
+        "chiral": true
+      },
+      {
+        "pieceId": 14,
+        "referencePath": "data/3d/N.piece",
+        "referenceBlob": "dff468d54d1f5f05d92a64eea81f116b390e311e",
+        "properRotationMatch": true,
+        "chiral": true
+      },
+      {
+        "pieceId": 15,
+        "referencePath": "data/3d/O.piece",
+        "referenceBlob": "1320746983682aa92be269dfda56915f2e42360c",
+        "properRotationMatch": true,
+        "chiral": false
+      },
+      {
+        "pieceId": 16,
+        "referencePath": "data/3d/P.piece",
+        "referenceBlob": "6a4ced0171cc4afc3d27658c9be06fa0128170d8",
+        "properRotationMatch": true,
+        "chiral": false
+      }
+    ]
+  }
+}

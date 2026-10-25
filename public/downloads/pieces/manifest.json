@@ -1,0 +1,1171 @@
+{
+  "schemaVersion": 1,
+  "unitMm": 15,
+  "shapeCount": 16,
+  "inventory4": 40,
+  "inventory8": 80,
+  "pieces": [
+    {
+      "id": 1,
+      "name": "Hello",
+      "color": "yellow",
+      "hex": "#e8b936",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "quantity4": 2,
+      "quantity8": 4,
+      "filename": "fongo-piece-01-yellow.stl",
+      "scadFilename": "fongo-piece-01-yellow.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        45,
+        30
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 44,
+        "volumeMm3": 16875
+      }
+    },
+    {
+      "id": 2,
+      "name": "Long hook",
+      "color": "yellow",
+      "hex": "#e8b936",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "quantity4": 2,
+      "quantity8": 4,
+      "filename": "fongo-piece-02-yellow.stl",
+      "scadFilename": "fongo-piece-02-yellow.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        45,
+        30,
+        30
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 44,
+        "volumeMm3": 16875
+      }
+    },
+    {
+      "id": 3,
+      "name": "Twisted hook",
+      "color": "yellow",
+      "hex": "#e8b936",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "quantity4": 3,
+      "quantity8": 6,
+      "filename": "fongo-piece-03-yellow.stl",
+      "scadFilename": "fongo-piece-03-yellow.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        30,
+        30
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 36,
+        "volumeMm3": 13500
+      }
+    },
+    {
+      "id": 4,
+      "name": "Gate",
+      "color": "yellow",
+      "hex": "#e8b936",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ],
+      "quantity4": 2,
+      "quantity8": 4,
+      "filename": "fongo-piece-04-yellow.stl",
+      "scadFilename": "fongo-piece-04-yellow.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        45,
+        15
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 44,
+        "volumeMm3": 16875
+      }
+    },
+    {
+      "id": 5,
+      "name": "Raised hook",
+      "color": "blue",
+      "hex": "#4382d1",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "quantity4": 2,
+      "quantity8": 4,
+      "filename": "fongo-piece-05-blue.stl",
+      "scadFilename": "fongo-piece-05-blue.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        45,
+        30
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 44,
+        "volumeMm3": 16875
+      }
+    },
+    {
+      "id": 6,
+      "name": "Lightning",
+      "color": "blue",
+      "hex": "#4382d1",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "quantity4": 2,
+      "quantity8": 4,
+      "filename": "fongo-piece-06-blue.stl",
+      "scadFilename": "fongo-piece-06-blue.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        45,
+        30,
+        30
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 44,
+        "volumeMm3": 16875
+      }
+    },
+    {
+      "id": 7,
+      "name": "Step",
+      "color": "blue",
+      "hex": "#4382d1",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "quantity4": 3,
+      "quantity8": 6,
+      "filename": "fongo-piece-07-blue.stl",
+      "scadFilename": "fongo-piece-07-blue.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        45,
+        15
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 40,
+        "volumeMm3": 16875
+      }
+    },
+    {
+      "id": 8,
+      "name": "Corner",
+      "color": "blue",
+      "hex": "#4382d1",
+      "cubes": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ]
+      ],
+      "quantity4": 4,
+      "quantity8": 8,
+      "filename": "fongo-piece-08-blue.stl",
+      "scadFilename": "fongo-piece-08-blue.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        30,
+        15
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 28,
+        "volumeMm3": 10125
+      }
+    },
+    {
+      "id": 9,
+      "name": "Stool",
+      "color": "red",
+      "hex": "#e46459",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "quantity4": 3,
+      "quantity8": 6,
+      "filename": "fongo-piece-09-red.stl",
+      "scadFilename": "fongo-piece-09-red.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        30,
+        30
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 40,
+        "volumeMm3": 16875
+      }
+    },
+    {
+      "id": 10,
+      "name": "Tripod",
+      "color": "red",
+      "hex": "#e46459",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "quantity4": 3,
+      "quantity8": 6,
+      "filename": "fongo-piece-10-red.stl",
+      "scadFilename": "fongo-piece-10-red.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        30,
+        30
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 36,
+        "volumeMm3": 13500
+      }
+    },
+    {
+      "id": 11,
+      "name": "End hook",
+      "color": "red",
+      "hex": "#e46459",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "quantity4": 2,
+      "quantity8": 4,
+      "filename": "fongo-piece-11-red.stl",
+      "scadFilename": "fongo-piece-11-red.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        45,
+        30
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 44,
+        "volumeMm3": 16875
+      }
+    },
+    {
+      "id": 12,
+      "name": "Zigzag",
+      "color": "red",
+      "hex": "#e46459",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "quantity4": 2,
+      "quantity8": 4,
+      "filename": "fongo-piece-12-red.stl",
+      "scadFilename": "fongo-piece-12-red.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        45,
+        15
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 36,
+        "volumeMm3": 13500
+      }
+    },
+    {
+      "id": 13,
+      "name": "Twisted lightning",
+      "color": "green",
+      "hex": "#3d9e7a",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "quantity4": 2,
+      "quantity8": 4,
+      "filename": "fongo-piece-13-green.stl",
+      "scadFilename": "fongo-piece-13-green.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        45,
+        30
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 44,
+        "volumeMm3": 16875
+      }
+    },
+    {
+      "id": 14,
+      "name": "Upright hook",
+      "color": "green",
+      "hex": "#3d9e7a",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "quantity4": 2,
+      "quantity8": 4,
+      "filename": "fongo-piece-14-green.stl",
+      "scadFilename": "fongo-piece-14-green.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        45,
+        30,
+        30
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 44,
+        "volumeMm3": 16875
+      }
+    },
+    {
+      "id": 15,
+      "name": "T",
+      "color": "green",
+      "hex": "#3d9e7a",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "quantity4": 2,
+      "quantity8": 4,
+      "filename": "fongo-piece-15-green.stl",
+      "scadFilename": "fongo-piece-15-green.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        45,
+        15
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 36,
+        "volumeMm3": 13500
+      }
+    },
+    {
+      "id": 16,
+      "name": "L",
+      "color": "green",
+      "hex": "#3d9e7a",
+      "cubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "quantity4": 4,
+      "quantity8": 8,
+      "filename": "fongo-piece-16-green.stl",
+      "scadFilename": "fongo-piece-16-green.scad",
+      "unitMm": 15,
+      "printCubes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "supportsRequired": false,
+      "dimensionsMm": [
+        30,
+        45,
+        15
+      ],
+      "validation": {
+        "watertight": true,
+        "consistentlyOriented": true,
+        "triangles": 36,
+        "volumeMm3": 13500
+      }
+    }
+  ]
+}

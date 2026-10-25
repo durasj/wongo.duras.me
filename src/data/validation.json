@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "fongo-1",
+  "seed": 20261025,
+  "puzzles": 96,
+  "easy": 48,
+  "hard": 48,
+  "attempts": 430,
+  "rejectedUnsolvable": 334,
+  "rejectedBudget": 0,
+  "rejectedAssembly": 0,
+  "independentlySolved": 96,
+  "witnessesValidated": 96,
+  "verticalAssemblyVerified": 96,
+  "deduplication": "Footprint D4 symmetry plus sorted piece IDs",
+  "solutionCount": "At least one; uniqueness is not claimed",
+  "difficulty": "Three pieces (easy) or four pieces (hard); human calibration pending",
+  "totalBacktestNodes": 1356
+}
