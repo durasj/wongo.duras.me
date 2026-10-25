@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import dice from '../src/data/dice-cards.json';
 import { getPuzzle, puzzles } from '../src/lib/puzzles';
 import { pieces } from '../src/lib/pieces';
@@ -25,5 +26,13 @@ test('every shared die roll fits each physical player count and both common diff
    const usage=new Map<number,number>();for(const card of selected)for(const id of getPuzzle(card.codes[roll])!.pieceIds)usage.set(id,(usage.get(id)??0)+1);
    for(const p of pieces)assert.ok((usage.get(p.id)??0)<=(count<=4?p.quantity4:p.quantity8),`${pack.id}, ${level}, roll ${roll+1}, ${count} players, piece ${p.id}`);
   }
+ }
+});
+
+test('both PDF catalogues retain their page counts and white outlines on red and blue pieces',()=>{
+ for(const [name,count] of [['wongo-20mm-duplex.pdf',500],['wongo-d6-20mm.pdf',96]] as const){
+  const pdf=readFileSync(new URL('../public/downloads/puzzles/'+name,import.meta.url),'utf8');
+  assert.equal((pdf.match(/\/Type \/Page \/Parent/g)??[]).length,count,name);
+  for(const id of [5,9]){const match=pdf.match(new RegExp('/P'+id+' (\\d+) 0 R'));assert.ok(match);const body=pdf.split(match[1]+' 0 obj\n')[1]?.split('endobj')[0];assert.ok(body?.includes('1 1 1 RG 0.3 w'),name+' piece '+id);}
  }
 });

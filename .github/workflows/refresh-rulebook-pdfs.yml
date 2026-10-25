@@ -3,6 +3,7 @@ on:
   push:
     branches: [feat/chamfer-d6-physical]
     paths:
+      - scripts/**
       - src/data/print.json
       - docs/rulebook-en.md
       - docs/rulebook-sk.md

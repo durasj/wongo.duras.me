@@ -112,7 +112,7 @@ objects[1]='<< /Type /Catalog /Pages 2 0 R >>';objects[2]='<< /Type /Pages /Coun
 let pdf='%PDF-1.4\n',offsets=[0],len=utf8(pdf).length;
 for(let i=1;i<objects.length;i++){offsets[i]=len;const s=i+' 0 obj\n'+objects[i]+'\nendobj\n';pdf+=s;len+=utf8(s).length;}
 const xref=len;pdf+='xref\n0 '+objects.length+'\n0000000000 65535 f \n'+offsets.slice(1).map(n=>String(n).padStart(10,'0')+' 00000 n \n').join('')+'trailer\n<< /Size '+objects.length+' /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF\n';
-await write('public/downloads/puzzles/wongo-d6-20mm.pdf',utf8(pdf));
+await write('public/downloads/puzzles/wongo-20mm-duplex.pdf',utf8(pdf));
 await write('public/downloads/puzzles/manifest.json',JSON.stringify({unitMm:unit,puzzles:puzzles.length,pages:pages.length,sheets:pages.length/2,duplex:'short-edge',paper:'A4 landscape',cardsPerPage:2,cardsPerSheet:4,front:'easy',back:'hard',backSlotsReversed:true,layout:pages.map((p,i)=>({page:i+1,side:i%2?'back':'front',codes:p.map(a=>a.code)}))},null,2)+'\n');
 console.log('Generated four Bambu plates, print kit and 500-page duplex catalogue (250 A4 sheets).');
 
