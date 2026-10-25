@@ -1,4 +1,6 @@
-# Wongo
+# Wongo - tačustav edition 2026
+
+Edition branch: `wongo-tacustav-edition-2026`. Visual references and filament colours are pending; see `docs/EDITION.md`.
 
 A family 3D puzzle workshop for **4–8 players**, inspired by Ubongo 3D Master. Solve original generated challenges virtually, inspect their solutions, search a printed card's code, prepare a round that fits your piece inventory, and print the physical game.
 

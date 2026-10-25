@@ -7,6 +7,7 @@ import { PieceIcon } from './components/PieceIcon';
 import { SceneBoundary } from './components/SceneBoundary';
 import { SolutionLayers } from './components/SolutionLayers';
 import { readRoute, routeUrl, type Tab } from './components/navigation';
+import edition from './data/edition.json';
 const PuzzleScene = lazy(() => import('./components/PuzzleScene').then(module => ({ default: module.PuzzleScene })));
 const PracticeBoard = lazy(() => import('./components/PracticeBoard').then(module => ({ default: module.PracticeBoard })));
 function SceneLoading({language}:{language:Language}){return <div className="scene-loading" role="status">{language==='en'?'Loading 3D view…':'Načítava sa 3D pohľad…'}</div>;}
@@ -28,7 +29,7 @@ function Footprint({ puzzle, printable = false }: { puzzle:Puzzle; printable?:bo
   </svg>;
 }
 
-function Brand(){return <div className="brand"><span className="brand-mark"><i/><i/><i/></span><span>wongo<span className="brand-dot">.</span></span></div>;}
+function Brand(){return <div className="brand"><span className="brand-mark"><i/><i/><i/></span><span>wongo<span className="brand-dot">.</span><small className="edition-label">{edition.name}</small></span></div>;}
 
 export default function App(){
   const [language,setLanguage]=useState<Language>(()=>{try{return localStorage.getItem('wongo-language')==='sk'?'sk':'en';}catch{return 'en';}});
@@ -67,7 +68,7 @@ export default function App(){
   const share=async()=>{if(!selected)return;const url=routeUrl(location.href,{tab:'puzzles',code:selected.code});try{await navigator.clipboard.writeText(url.href);setCopied(true);setTimeout(()=>setCopied(false),2000);}catch{window.prompt('Copy puzzle link',url.href);}};
   const navigation:[Tab,typeof Box,string][]=[['puzzles',Layers3,t.library],['pieces',Box,t.pieces],['rounds',Users,t.rounds],['rules',BookOpen,t.rules]];
   return <>
-    <div className="app-shell">
+    <div className="app-shell" data-edition={edition.slug}>
       <aside className={`sidebar ${mobileMenu?'is-open':''}`}>
         <Brand/><button className="mobile-close icon-button" onClick={()=>setMobileMenu(false)} aria-label="Close menu"><X size={20}/></button>
         <div className="sidebar-label">{t.lab}</div>
@@ -76,7 +77,7 @@ export default function App(){
       </aside>
       <main>
         <header className="topbar"><div className="breadcrumb"><button className="mobile-toggle icon-button" onClick={()=>setMobileMenu(true)} aria-label="Open menu" aria-expanded={mobileMenu}><Menu size={21}/></button><span>Wongo 3D</span><ChevronRight size={13}/><strong>{navigation.find(n=>n[0]===tab)?.[2]}</strong></div><div className="language" aria-label="Language"><button className={language==='en'?'selected':''} aria-pressed={language==='en'} onClick={()=>setLanguage('en')}>EN</button><button className={language==='sk'?'selected':''} aria-pressed={language==='sk'} onClick={()=>setLanguage('sk')}>SK</button></div></header>
-        <div className="main-content">
+        <div className="main-content"><div className="edition-banner">{edition.name}</div>
         {tab==='puzzles'&&<>
           <section className="page-intro"><div><div className="eyebrow"><Sparkles size={14}/> {t.challenge}</div><h1>{t.title}</h1><p>{t.intro}</p></div><div className="intro-stat"><strong>{puzzles.length}</strong><span>{language==='en'?'verified puzzles':'overených hlavolamov'}</span><div className="stat-dots"><i/><i/><i/><i/></div></div></section>
           {!selected&&<section className="unknown-code" role="alert"><Search size={23}/><div><h2>{language==='en'?'Unknown puzzle code':'Neznámy kód hlavolamu'}</h2><p>{language==='en'?`We could not find “${selectedCode || '(empty)'}”. Check the printed code or choose a puzzle below.`:`Kód „${selectedCode || '(prázdny)'}“ sa nenašiel. Skontrolujte kód na karte alebo si vyberte hlavolam nižšie.`}</p><button className="outline-button" onClick={()=>choose(puzzles[0])}>{language==='en'?'Open first puzzle':'Otvoriť prvý hlavolam'}</button></div></section>}
