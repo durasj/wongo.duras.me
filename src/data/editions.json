@@ -1,0 +1,14 @@
+{
+  "classic": {
+    "name": "Wongo 3D",
+    "rulesPath": "/downloads",
+    "artwork": "/art/wongo-classic.webp",
+    "url": "https://wongo.duras.me/?edition=classic"
+  },
+  "tacustav-2026": {
+    "name": "Wongo – Tačustav edition 2026",
+    "rulesPath": "/downloads/tacustav",
+    "artwork": "/art/tacustav-workshop.webp",
+    "url": "https://wongo.duras.me/?edition=tacustav-2026"
+  }
+}

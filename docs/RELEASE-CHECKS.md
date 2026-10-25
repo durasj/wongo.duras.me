@@ -1,5 +1,11 @@
 # Release checks
 
+## Version 0.6: editions and illustrated rulebooks
+
+Classic and Tačustav 2026 now share the main app, with explicit edition links, a persistent local-storage preference and a visible selector. Both English and Slovak rulebooks have a generated illustrated cover, a vector QR code to the matching production edition, three readable rules pages, and downloadable PDFs. The Tačustav interface includes family-crew artwork and a bilingual workshop intro; Classic keeps a neutral layout and separate artwork. Decorative colours now follow the purchased filament palette throughout the interface.
+
+Local validation passes 26 tests, the production build, and the browser suite including both edition choices, plain-link persistence, switching, Back/Forward navigation, storage-disabled operation, mobile layout and rulebook footer clearance. The four exported PDFs each contain four A4 pages. Their QR codes were independently decoded from rasterized PDF covers and match the configured production links. The cover and rule pages were visually reviewed. Piece geometry and all 1,000 published puzzles remain unchanged.
+
 ## Version 0.5: two through eight players
 
 Competitive round assignment now supports every integer player count from two to eight. Two through four players use the existing 40-piece pool; five through eight use the 80-piece pool. Both difficulties retain the same strict colour rules and all 1,000 verified puzzles.
@@ -16,7 +22,7 @@ Generation is deterministic and considered 14,599 candidates: 1,000 accepted, 11
 
 Every active easy puzzle has exactly three pieces in three different colour groups. Every active hard puzzle has exactly four pieces, one per colour group. No selectable puzzle repeats a colour. The new W3 catalogue contains 48 puzzles of each difficulty, independently solved and checked for exact coverage and vertical assembly order. All 22 tests pass.
 
-The previous F3 collection is preserved byte-for-byte in a verification archive and retired from lookup and round assignment. Its codes are not reused for different puzzles. Runtime guards and generation tests enforce the new rule, including inventory-checked rounds for two through eight players. Piece shapes and print scale are unchanged.
+The previous F3 collection is preserved byte-for-byte in a verification archive and retired from lookup and round assignment. Its codes are not reused for different puzzles. Runtime guards and generation tests enforce the new rule, including inventory-checked rounds for four through eight players. Piece shapes and print scale are unchanged.
 
 ## Version 0.2: production follow-up
 
@@ -49,7 +55,7 @@ Checked locally on 25 October 2026 against the production Vite build.
 - All 96 puzzles independently solve from an empty board and pass a separate exact coverage validator.
 - Every stored solution has a verified vertical assembly order.
 - Corrupted, unsolvable and search-budget fixtures behave as expected.
-- Inventory allocation passes for 2–8 players and both difficulty categories over multiple seeds.
+- Inventory allocation passes for 4–8 players and both difficulty categories over multiple seeds.
 - 11 automated tests pass. Generated piece exports and puzzle data are reproducible.
 
 ### Browser and print

@@ -23,3 +23,11 @@ export function getPiece(id: number): Piece {
   if (!piece) throw new Error(`Unknown piece ID: ${id}`);
   return piece;
 }
+
+/** UI accents use the same four purchased filaments as the numbered pieces. */
+export const filamentPalette = {
+  yellow: getPiece(1).hex,
+  blue: getPiece(5).hex,
+  red: getPiece(9).hex,
+  green: getPiece(13).hex,
+};

@@ -31,6 +31,8 @@ Use **Flashforge PLA Matte, 1.75 mm** for all four piece groups. Match the same 
 | 09–12 | Red | `#d9432f` | 10 / 20 |
 | 13–16 | Mint Green | `#93cfc2` | 10 / 20 |
 
+UI accent tokens are installed from this same catalogue in `src/main.tsx`; `src/palette.css` applies them to the sidebar, logo, swatches, avatars, controls and score gems. Neutral cream, ink and grey remain available for surfaces and readable text.
+
 These screen colours are estimates from the purchased-product screenshots, not measured or manufacturer-certified colour values. STL files store geometry only: assign the specified filament in the slicer. The stable filenames retain `yellow`, `blue`, `red`, and `green`. Piece numbers identify shapes even when colours are hard to distinguish.
 
 ## Shared inventory for two to eight players

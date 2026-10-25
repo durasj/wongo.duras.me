@@ -28,4 +28,4 @@ jobs:
       - run: npm run generate:puzzles
       - run: git diff --exit-code -- src/data/puzzles.json src/data/validation.json
       - run: npm run export:rulebooks
-      - run: git diff --exit-code -- public/downloads/rulebook-en.html public/downloads/rulebook-sk.html
+      - run: git diff --exit-code -- public/downloads/rulebook-en.html public/downloads/rulebook-sk.html public/downloads/tacustav/rulebook-en.html public/downloads/tacustav/rulebook-sk.html

@@ -1,6 +1,6 @@
 {
   "name": "wongo",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "type": "module",
   "license": "GPL-3.0-or-later",
@@ -12,11 +12,13 @@
     "generate:puzzles": "node --import tsx scripts/generate-puzzles.ts",
     "generate:pieces": "node scripts/export-pieces.mjs",
     "export:rulebooks": "python3 scripts/export-rulebooks.py",
-    "test:browser": "node scripts/browser-smoke.mjs"
+    "test:browser": "node scripts/browser-smoke.mjs",
+    "export:rulebook-pdfs": "npm run export:rulebooks && npm run build && node scripts/export-rulebook-pdfs.mjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",
     "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource-variable/oswald": "^5.3.0",
     "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^9.8.2",
     "lucide-react": "^1.61.0",

@@ -1,8 +1,15 @@
-# Wongo
+# Wongo 3D
 
-A family 3D puzzle workshop for **2–8 players**, inspired by Ubongo 3D Master. Solve original generated challenges virtually, inspect their solutions, search a printed card's code, prepare a round that fits your piece inventory, and print the physical game.
+A family 3D puzzle workshop for **2–8 players**, inspired by Ubongo 3D Master. Solve 1,000 verified challenges, search printed puzzle codes, inspect solutions, prepare inventory-safe rounds, and print the physical game.
 
-The library contains **1,000 verified puzzles: 500 easy and 500 hard**, with searchable codes, pagination and direct page jumps.
+Two editions share one production app at **https://wongo.duras.me**:
+
+- **Classic:** https://wongo.duras.me/?edition=classic — neutral tabletop artwork and the purchased filament palette.
+- **Tačustav 2026:** https://wongo.duras.me/?edition=tacustav-2026 — a family renovation crew, hard-hat dog, workshop intro, and poster-style interface.
+
+The QR codes on both bilingual rulebook covers open the matching edition. The app remembers the choice in local storage without a timestamp or expiry; the sidebar edition selector changes it. Browser storage can still be cleared by the user or browser. Explicit edition links override a remembered choice. If storage is unavailable, the query parameter still works.
+
+Printable HTML/PDF rulebooks are at `/downloads/rulebook-en.html` and `/downloads/rulebook-sk.html` for Classic, and `/downloads/tacustav/rulebook-en.html` and `/downloads/tacustav/rulebook-sk.html` for Tačustav. Each has an illustrated cover with a QR code plus three rules pages. See `docs/EDITION.md` for artwork and regeneration details.
 
 ## Run locally
 
@@ -64,7 +71,7 @@ The piece exporter requires only Node.js; the rulebook exporter uses Python 3's 
 
 Choose a puzzle and select **Try this puzzle** to solve it yourself. Select a piece, rotate around X/Y/Z, choose its bounding-box anchor in either layer grid, and place it. The 3D preview shows your assembly and proposed move; numbered grids remain usable without WebGL. Invalid moves are blocked, and undo, remove and reset are available. Any complete legal arrangement passes, even if it differs from the saved example. Practice is a grid editor rather than a gravity simulation; progress resets when the editor is closed or another puzzle is selected.
 
-Reveal the saved solution only when ready. Inspect it from different angles and by layer, including numbered 2D diagrams. The round planner assigns 2–8 puzzles while accounting for the shared inventory (40 pieces for two to four players; 80 for five to eight). Keep the physical game's timer, gems and finishing order together at the table; there is no synchronized online multiplayer room.
+Reveal the saved solution only when ready. Inspect it from different angles and by layer, including numbered 2D diagrams. The round planner assigns 2–8 puzzles while accounting for the shared inventory (40 pieces for four players; 80 for five to eight). Keep the physical game's timer, gems and finishing order together at the table; there is no synchronized online multiplayer room.
 
 Use the browser's print action for puzzle cards and the download pages for the English and Slovak rulebooks. Print at **100% / actual size**, with browser headers and footers disabled. Check the calibration reference before printing a batch; board cells and printable models must use the same physical unit size.
 

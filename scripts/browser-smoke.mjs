@@ -4,6 +4,7 @@ import { spawn } from 'node:child_process';
 import { chromium } from 'playwright';
 
 const catalogue = JSON.parse(await readFile(new URL('../src/data/puzzles.json', import.meta.url),'utf8'));
+const editions = JSON.parse(await readFile(new URL('../src/data/editions.json', import.meta.url),'utf8'));
 const pieces = JSON.parse(await readFile(new URL('../src/data/pieces.json', import.meta.url),'utf8'));
 const normalized = cubes => {
   const mins = [0,1,2].map(axis=>Math.min(...cubes.map(v=>v[axis])));
@@ -88,6 +89,22 @@ try {
   await page.goto(origin);
   await page.getByRole('heading', { name: 'Good things fit together.' }).waitFor();
   await page.locator('canvas').waitFor();
+  // Decorative swatches must match the physical filament groups, too.
+  const expectedPalette = [1,5,9,13].map(id => pieces.find(piece => piece.id === id).hex);
+  for (const selector of ['.tiny-pieces i', '.stat-dots i']) {
+    const actual = await page.locator(selector).evaluateAll(nodes => nodes.map(node => getComputedStyle(node).backgroundColor));
+    const expected = expectedPalette.map(hex => `rgb(${[1,3,5].map(index => parseInt(hex.slice(index,index+2),16)).join(', ')})`);
+    assert.deepEqual(actual, expected, `${selector} differs from the purchased filament palette`);
+  }
+
+  const isTacustav = await page.locator('.app-shell[data-edition="tacustav-2026"]').count() > 0;
+  if (isTacustav) {
+    await page.locator('.workshop-portrait img').evaluate(image => image.decode());
+    assert.equal(await page.locator('.workshop-intro').count(),1,'Edition intro is missing');
+    await page.screenshot({path:'test-results/tacustav-intro-desktop.png'});
+    await page.locator('.workshop-actions .primary-button').click();
+    assert.equal(await page.locator('.workshop-intro').count(),0,'Start building must take the player to the puzzle');
+  }
   if(catalogue.length>24){
     const firstCode=await page.locator('.puzzle-card .card-header').first().innerText();
     await page.getByRole('button',{name:'Next',exact:true}).click();
@@ -160,12 +177,12 @@ try {
   assert.equal((await zip.body()).readUInt32LE(0), 0x04034b50);
 
   await page.getByRole('button', { name: 'Family table', exact: true }).click();
-  await page.getByRole('combobox').first().selectOption('2');
+  await page.locator('.round-toolbar select').first().selectOption('2');
   assert.equal(await page.locator('.assignment').count(),2);
-  await page.getByRole('combobox').first().selectOption('3');
+  await page.locator('.round-toolbar select').first().selectOption('3');
   assert.equal(await page.locator('.assignment').count(),3);
-  await page.getByRole('combobox').first().selectOption('8');
-  await page.getByRole('combobox').nth(1).selectOption('hard');
+  await page.locator('.round-toolbar select').first().selectOption('8');
+  await page.locator('.round-toolbar select').nth(1).selectOption('hard');
   assert.equal(await page.locator('.assignment').count(), 8);
   const codes = await page.locator('.assignment .code-label').allTextContents();
   assert.equal(new Set(codes).size, 8);
@@ -213,9 +230,75 @@ try {
   assert.ok(await fallbackPage.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Mobile practice layout overflows horizontally');
   await fallbackPage.close();
 
-  for (const lang of ['en', 'sk']) {
+  if (isTacustav) {
+    await page.setViewportSize({width:390,height:844});
+    await page.goto(origin);
+    await page.locator('.workshop-portrait img').evaluate(image => image.decode());
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Edition intro overflows mobile width');
+    await page.screenshot({path:'test-results/tacustav-intro-mobile.png',fullPage:true});
+    await page.locator('.site-rules-link').click();
+    await page.locator('.rulebook-card').first().waitFor();
+    await page.screenshot({path:'test-results/tacustav-rules-mobile.png',fullPage:true});
+    await page.getByRole('button',{name:'Open menu',exact:true}).click();
+    await page.locator('.brand-home').click();
+    await page.locator('.workshop-intro').waitFor();
+  }
+
+  // The printed QR chooses the edition, and a later plain visit remembers it.
+  await page.setViewportSize({width:1440,height:1000});
+  await page.goto(`${origin}/?edition=tacustav-2026`);
+  await page.locator('[data-edition="tacustav-2026"] .workshop-intro').waitFor();
+  await page.waitForFunction(()=>localStorage.getItem('wongo-edition')==='tacustav-2026');
+  await page.locator('.workshop-portrait img').evaluate(image=>image.decode());
+  await page.screenshot({path:'test-results/tacustav-intro-desktop.png'});
+  await page.goto(origin);
+  await page.locator('.workshop-intro').waitFor();
+  await page.setViewportSize({width:390,height:844});
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Remembered edition overflows mobile width');
+  await page.screenshot({path:'test-results/tacustav-intro-mobile.png',fullPage:true});
+  await page.locator('.site-rules-link').click();
+  assert.ok((await page.locator('.rulebook-card').first().getAttribute('href')).includes('/tacustav/'));
+  await page.screenshot({path:'test-results/tacustav-rules-mobile.png',fullPage:true});
+  await page.goto(`${origin}/?edition=classic`);
+  await page.locator('.app-shell[data-edition="classic"]').waitFor();
+  await page.waitForFunction(()=>localStorage.getItem('wongo-edition')==='classic');
+  assert.equal(await page.locator('.workshop-intro').count(),0);
+  await page.goto(origin);
+  await page.locator('.app-shell[data-edition="classic"]').waitFor();
+  await page.setViewportSize({width:1440,height:1000});
+  await page.locator('.edition-switch select').selectOption('tacustav-2026');
+  await page.locator('.workshop-intro').waitFor();
+  await page.locator('.workshop-actions .primary-button').click();
+  assert.equal(await page.locator('.workshop-intro').count(),0);
+  await page.locator('.edition-switch select').selectOption('classic');
+  await page.goBack();
+  await page.locator('.app-shell[data-edition="tacustav-2026"]').waitFor();
+  await page.goForward();
+  await page.locator('.app-shell[data-edition="classic"]').waitFor();
+
+  const noStorage=await context.newPage();
+  await noStorage.addInitScript(()=>{
+    Storage.prototype.getItem=()=>{throw new Error('Storage disabled');};
+    Storage.prototype.setItem=()=>{throw new Error('Storage disabled');};
+  });
+  await noStorage.goto(`${origin}/?edition=tacustav-2026`);
+  await noStorage.locator('.workshop-intro').waitFor();
+  await noStorage.close();
+
+  for (const [editionId, edition] of Object.entries(editions)) for (const lang of ['en', 'sk']) {
     await page.setViewportSize({ width: 1200, height: 1000 });
-    await page.goto(`${origin}/downloads/rulebook-${lang}.html`);
+    await page.goto(`${origin}${edition.rulesPath}/rulebook-${lang}.html`);
+    {
+      assert.equal(await page.locator('.rulebook-cover').count(),1,'Bilingual rulebook needs its illustrated cover');
+      await page.locator('.cover-art').evaluate(image=>image.decode());
+      await page.screenshot({path:`test-results/${editionId}-cover-${lang}.png`});
+    }
+    assert.equal(await page.locator('.cover-access').getAttribute('href'),edition.url,'QR cover link points at wrong edition');
+    await page.locator('.cover-qr').evaluate(image=>image.decode());
+    assert.ok((await page.locator('.cover-specs').innerText()).includes('2–8'));
+    const printablePdf=await page.request.get(`${origin}${edition.rulesPath}/rulebook-${lang}.pdf`);
+    assert.equal(printablePdf.status(),200);
+    assert.equal((await printablePdf.body()).subarray(0,4).toString(),'%PDF');
     await page.emulateMedia({ media: 'print' });
     const overflow = await page.locator('.sheet').evaluateAll(sheets => sheets.map(sheet => {
       const folio = sheet.querySelector('.folio').getBoundingClientRect();
@@ -223,8 +306,8 @@ try {
       return Math.max(...content.map(el => el.getBoundingClientRect().bottom)) - folio.top;
     }));
     assert.ok(overflow.every(value => value < -8), `Rulebook ${lang} overlaps page footer: ${overflow}`);
-    await page.pdf({ path: `test-results/rulebook-${lang}.pdf`, preferCSSPageSize: true, printBackground: true });
-    await page.screenshot({ path: `test-results/rulebook-${lang}.png`, fullPage: true });
+    await page.pdf({ path: `test-results/${editionId}-rulebook-${lang}.pdf`, preferCSSPageSize: true, printBackground: true });
+    await page.screenshot({ path: `test-results/${editionId}-rulebook-${lang}.png`, fullPage: true });
     await page.emulateMedia({ media: 'screen' });
   }
   assert.deepEqual(failures, [], 'Browser reported runtime errors or failed requests');
