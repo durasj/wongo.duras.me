@@ -302,7 +302,7 @@ try {
     assert.equal(await page.locator('.cover-access').getAttribute('href'),edition.url,'QR cover link points at wrong edition');
     await page.locator('.cover-qr').evaluate(image=>image.decode());
     if(editionId==='tacustav-2026'){
-      assert.equal(await page.locator('.cover-crew .crew-photo').count(),5);
+      assert.equal(await page.locator('.cover-art').getAttribute('src'),'/art/tacustav-construction.webp','Cover keeps the blocks and reference-based crew construction scene');
       assert.equal(await page.locator('.sheet .axel-guide').count(),3,'Axel explains every rules page');
       await page.locator('.crew-photo-crop img').evaluateAll(images=>Promise.all(images.map(image=>image.decode())));
     }
