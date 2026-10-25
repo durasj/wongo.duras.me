@@ -32,7 +32,7 @@ export function PracticeScene({ puzzle, placements, candidate, language }: Props
         {placements.flatMap((placement, index) => placement.cubes.map(([x,y,z]) => <mesh key={`placed-${index}-${x}-${y}-${z}`} position={[x-cx, z+.5, -y+cy]} castShadow receiveShadow>
           <boxGeometry args={[.96, .96, .96]} />
           <meshStandardMaterial color={getPiece(placement.pieceId).hex} roughness={.45} />
-          {getPiece(placement.pieceId).color==='blue'&&<Edges color="#ffffff"/>}
+          {['blue','red'].includes(getPiece(placement.pieceId).color)&&<Edges color="#ffffff"/>}
         </mesh>))}
         {candidate?.cubes.map(([x,y,z]) => <group key={`candidate-${x}-${y}-${z}`} position={[x-cx, z+.5, -y+cy]}>
           <mesh renderOrder={2}>
@@ -41,7 +41,7 @@ export function PracticeScene({ puzzle, placements, candidate, language }: Props
           </mesh>
           <mesh renderOrder={3}>
             <boxGeometry args={[.995, .995, .995]} />
-            <meshBasicMaterial color={candidate.valid ? (getPiece(candidate.pieceId).color==='blue' ? '#ffffff' : filamentPalette.blue) : filamentPalette.red} wireframe transparent opacity={.75} depthWrite={false} />
+            <meshBasicMaterial color={candidate.valid ? (['blue','red'].includes(getPiece(candidate.pieceId).color) ? '#ffffff' : filamentPalette.blue) : filamentPalette.red} wireframe transparent opacity={.75} depthWrite={false} />
           </mesh>
         </group>)}
       </Suspense>

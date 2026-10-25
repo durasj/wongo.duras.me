@@ -19,13 +19,14 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm run generate:print-kit
       - run: npm test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
       - run: npm run test:print
       - run: npm run generate:print-kit
-      - run: git diff --exit-code -- public/downloads/pieces public/downloads/bambu public/downloads/puzzles
+      - run: git diff --exit-code -- public/downloads/pieces public/downloads/bambu public/downloads/puzzles src/data/dice-cards.json
       - run: npm run generate:puzzles
       - run: git diff --exit-code -- src/data/puzzles.json src/data/validation.json
       - run: npm run export:rulebooks

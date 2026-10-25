@@ -5,6 +5,7 @@ import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Minus, Plus } from 'lucide-react';
 import { getPiece, filamentPalette, type Piece } from '../lib/pieces';
 import type { Puzzle } from '../lib/puzzles';
+import printConfig from '../data/print.json';
 
 type Layer = 'all' | 'bottom' | 'top';
 export function PuzzleScene({ puzzle, piece, revealed, step, layer, exploded, language='en' }: { puzzle?: Puzzle; piece?: Piece; revealed: boolean; step: number; layer: Layer; exploded: boolean; language?:'en'|'sk' }) {
@@ -21,7 +22,7 @@ export function PuzzleScene({ puzzle, piece, revealed, step, layer, exploded, la
       <Suspense fallback={null}>
         <group position={piece ? [-1,0,0] : [0,0,0]}>
           {footprint.map(([x,y]) => <RoundedBox key={`${x},${y}`} args={[.98,.12,.98]} radius={.035} smoothness={2} position={[x-cx,-.12,-y+cy]} receiveShadow><meshStandardMaterial color="#d9d4c6" roughness={.85}/></RoundedBox>)}
-          {voxels.map(({pieceId,cubes},index)=>cubes.filter(c=>layer==='all'||c[2]===(layer==='bottom'?0:1)).map(([x,y,z])=><RoundedBox key={`${pieceId}-${index}-${x}-${y}-${z}`} args={[.97,.97,.97]} radius={.045} smoothness={3} castShadow receiveShadow position={[x-cx,z+.45+(exploded?index*.42:0),-y+cy]}><meshStandardMaterial color={getPiece(pieceId).hex} roughness={.45}/>{getPiece(pieceId).color==='blue'&&<Edges color="#ffffff" threshold={15}/>}</RoundedBox>))}
+          {voxels.map(({pieceId,cubes},index)=>cubes.filter(c=>layer==='all'||c[2]===(layer==='bottom'?0:1)).map(([x,y,z])=><RoundedBox key={`${pieceId}-${index}-${x}-${y}-${z}`} args={[1,1,1]} radius={printConfig.chamferMm/printConfig.unitMm} smoothness={1} castShadow receiveShadow position={[x-cx,z+.45+(exploded?index*.42:0),-y+cy]}><meshStandardMaterial color={getPiece(pieceId).hex} roughness={.45}/>{['blue','red'].includes(getPiece(pieceId).color)&&<Edges color="#ffffff" threshold={15}/>}</RoundedBox>))}
         </group>
         <mesh rotation={[-Math.PI/2,0,0]} position={[0,-.23,0]} receiveShadow><planeGeometry args={[200,200]}/><shadowMaterial transparent opacity={.11}/></mesh>
       </Suspense>

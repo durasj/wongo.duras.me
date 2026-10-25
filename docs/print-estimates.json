@@ -4,47 +4,48 @@
   "layerHeightMm": 0.1,
   "nozzleMm": 0.4,
   "wallLoops": 3,
-  "infillPercent": 20,
+  "infillPercent": 5,
   "infill": "gyroid",
   "densityAssumptionGPerCm3": 1.24,
   "physicallyPrintTested": false,
-  "method": "Bambu Studio CLI import, native export and roundtrip slicing on 2026-10-25. Conservative Generic PLA-derived Flashforge Matte starting profile.",
+  "method": "Bambu Studio 02.08.02.61 CLI slicing of all four chamfered-voxel plate projects at 0.10 mm layers, 3 walls, 5% gyroid, 0.8 mm top/bottom. No physical print test.",
   "plates": [
     {
       "color": "Mango Yellow",
       "pieces": 9,
-      "grams": 161.4,
-      "seconds": 36607,
-      "time": "10h 10m"
+      "grams": 117.8,
+      "seconds": 24766,
+      "time": "6h 53m"
     },
     {
       "color": "Blue (072C)",
       "pieces": 11,
-      "grams": 176.8,
-      "seconds": 39697,
-      "time": "11h 02m"
+      "grams": 128.9,
+      "seconds": 26982,
+      "time": "7h 30m"
     },
     {
       "color": "Red",
       "pieces": 10,
-      "grams": 170.3,
-      "seconds": 38648,
-      "time": "10h 44m"
+      "grams": 124.2,
+      "seconds": 26250,
+      "time": "7h 18m"
     },
     {
       "color": "Mint Green",
       "pieces": 10,
-      "grams": 168.5,
-      "seconds": 37875,
-      "time": "10h 31m"
+      "grams": 123.0,
+      "seconds": 25665,
+      "time": "7h 08m"
     }
   ],
   "total40": {
-    "grams": 677,
-    "hours": 42.45
+    "grams": 493.9,
+    "hours": 28.8
   },
   "total80": {
-    "grams": 1354,
-    "hours": 84.9
-  }
+    "grams": 987.7,
+    "hours": 57.59
+  },
+  "chamferMm": 0.5
 }

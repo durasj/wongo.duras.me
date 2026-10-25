@@ -4,12 +4,17 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { chamferedMesh, chamferedVoxel } from './lib/chamfered-voxel.mjs';
+import { piecePreviewSVG } from './lib/piece-preview.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(process.argv.slice(2).map((arg) => arg.replace(/^--/, '').split('=')));
 const defaults = JSON.parse(await readFile(path.join(root, 'src/data/print.json'), 'utf8'));
 const unit = Number(args.unit ?? defaults.unitMm);
 if (!Number.isFinite(unit) || unit <= 0 || unit > 100) throw new Error('--unit must be >0 and <=100 mm');
+const chamfer = Number(args.chamfer ?? defaults.chamferMm ?? 0);
+if (!Number.isFinite(chamfer) || chamfer < 0 || chamfer >= unit/4) throw Error('Invalid chamfer');
+const voxelVolume = unit**3 - 6*unit*chamfer**2 + 16/3*chamfer**3;
 const output = args.out ? path.resolve(args.out) : path.join(root, 'public/downloads/pieces');
 const pieces = JSON.parse(await readFile(path.join(root, 'src/data/pieces.json'), 'utf8'));
 const key = (v) => v.join(',');
@@ -74,7 +79,7 @@ function validateMesh(triangles, cubeCount) {
     }
   }
   if ([...edges.values()].some((e) => e.count !== 2 || e.direction !== 0)) throw new Error('STL is not a closed consistently oriented two-manifold');
-  if (Math.abs(signedVolume-cubeCount*unit**3) > 1e-5) throw new Error('STL volume does not match catalogue');
+  if (Math.abs(signedVolume-cubeCount*voxelVolume) > 1e-5) throw new Error('STL volume does not match the specified chamfered voxel union');
   return {watertight:true,consistentlyOriented:true,triangles:triangles.length,volumeMm3:signedVolume};
 }
 function stl(name, triangles) {
@@ -127,21 +132,25 @@ for (const piece of pieces) {
   const signature=orientations(piece.cubes).map((o) => JSON.stringify(o)).sort()[0];
   if (signatures.has(signature)) throw new Error(`Duplicate shape under rotations: ${piece.id}`);
   signatures.add(signature);
-  const cubes=printOrientation(piece.cubes), triangles=mesh(cubes), validation=validateMesh(triangles,cubes.length);
+  const cubes=printOrientation(piece.cubes), triangles=chamfer ? chamferedMesh(cubes,unit,chamfer) : mesh(cubes), validation=validateMesh(triangles,cubes.length);
   const basename=`wongo-piece-${String(piece.id).padStart(2,'0')}-${piece.color}`;
   const data=stl(basename,triangles);
-  const scad=`// Wongo piece ${piece.id}: ${piece.name}. GPL-3.0; see README.txt.\n// All cube positions derive from the canonical catalogue. z points up.\nunit = ${unit}; // mm, scale all pieces AND cards together\npositions = ${JSON.stringify(cubes)};\nunion() { for (p = positions) translate(p * unit) cube([unit, unit, unit]); }\n`;
+  const voxel = chamfer ? chamferedVoxel(unit,chamfer) : null;
+  const geometry = voxel ? `scale([unit,unit,unit]) polyhedron(points=${JSON.stringify(voxel.vertices.map(v=>v.map(x=>x/unit)))}, faces=${JSON.stringify(voxel.faces.map(f=>[...f.indices].reverse()))}, convexity=10);` : 'cube([unit,unit,unit]);';
+  const scad=`// Wongo piece ${piece.id}: ${piece.name}. GPL-3.0; see README.txt.\n// ${chamfer} mm chamfer at the default ${unit} mm pitch; unit scales everything.\nunit = ${unit};\npositions = ${JSON.stringify(cubes)};\nunion() { for (p = positions) translate(p * unit) { ${geometry} } }\n`;
+
   await writeFile(path.join(output,`${basename}.stl`),data); await writeFile(path.join(output,`${basename}.scad`),scad);
   entries.push([`${basename}.stl`,data],[`${basename}.scad`,scad]);
-  exports.push({...piece,filename:`${basename}.stl`,scadFilename:`${basename}.scad`,unitMm:unit,printCubes:cubes,supportsRequired:false,dimensionsMm:[0,1,2].map((axis) => (Math.max(...cubes.map((v) => v[axis]))+1)*unit),validation});
+  exports.push({...piece,filename:`${basename}.stl`,scadFilename:`${basename}.scad`,unitMm:unit,chamferMm:chamfer,printCubes:cubes,supportsRequired:false,dimensionsMm:[0,1,2].map((axis) => (Math.max(...cubes.map((v) => v[axis]))+1)*unit),validation});
 }
-const manifest={schemaVersion:1,unitMm:unit,shapeCount:pieces.length,inventory4:pieces.reduce((n,p) => n+p.quantity4,0),inventory8:pieces.reduce((n,p) => n+p.quantity8,0),pieces:exports};
+if(chamfer){const preview=piecePreviewSVG(exports.find(p=>p.id===7),unit,chamfer,chamferedVoxel);await writeFile(path.join(output,'chamfer-preview.svg'),preview);entries.push(['chamfer-preview.svg',preview]);}
+const manifest={schemaVersion:2,unitMm:unit,chamferMm:chamfer,geometryVersion:chamfer?'chamfered-voxels-v1':'sharp-voxels-v1',shapeCount:pieces.length,inventory4:pieces.reduce((n,p) => n+p.quantity4,0),inventory8:pieces.reduce((n,p) => n+p.quantity8,0),pieces:exports};
 const manifestText=JSON.stringify(manifest,null,2)+'\n';
-const readme=`WONGO PRINTABLE PIECES\n\n16 distinct shapes. All STL files use millimetres; unit cube side ${unit} mm.\nEach STL is an outer union surface: no internal coincident faces.\nAll are oriented with flat supported layers; supports are not required for ideal geometry.\nPrint quantities are in manifest.json: quantity4 (40 total) or quantity8 (80 total).\nUse the 40-piece pool for 2-4 players or the 80-piece pool for 5-8 players.\nThese are a shared inventory, not 16 pieces per player.\n\nFILAMENT: Flashforge PLA Matte, 1.75 mm\nIDs 01-04: Mango Yellow (9 / 18 copies for 4 / 8 players)\nIDs 05-08: Blue (072C) (11 / 22 copies)\nIDs 09-12: Red (10 / 20 copies)\nIDs 13-16: Mint Green (10 / 20 copies)\nScreen hex colours in manifest.json are visual approximations, not calibrated filament values.\nSTL files contain geometry only; select the matching filament in your slicer.\n\nStart with PLA, 0.1 mm layers, 3 walls, 20% gyroid infill; use your calibrated filament profile.\nPrint a small fit sample before committing to the full set. Inspect first-layer flare.\nNo scale clearance or rounding is applied: STL retains the solver's exact geometry.\nSCAD files expose the unit size. Scale all pieces AND future puzzle cards together.\n\nGeometry data adapted from ps78/Ubongo blockfactory/blockfactory.go,\nblob 63c1a892046543f1973b375d3dfba89f90c8114e, GPL-3.0.\nSource: https://github.com/ps78/Ubongo\nWongo source and provenance: https://github.com/durasj/wongo.duras.me\nGame concept: Grzegorz Rejchtman / KOSMOS. Independent family project.\nSee repository LICENSE and docs/PIECES.md.\n`;
+const readme=`WONGO PRINTABLE PIECES\n\n16 distinct shapes. All STL files use millimetres; unit cube side ${unit} mm.\nEach STL is an outer union surface: no internal coincident faces.\nAll are oriented with flat supported layers; supports are not required for ideal geometry.\nPrint quantities are in manifest.json: quantity4 (40 total) or quantity8 (80 total).\nUse the 40-piece pool for 2-4 players or the 80-piece pool for 5-8 players.\nThese are a shared inventory, not 16 pieces per player.\n\nFILAMENT: Flashforge PLA Matte, 1.75 mm\nIDs 01-04: Mango Yellow (9 / 18 copies for 4 / 8 players)\nIDs 05-08: Blue (072C) (11 / 22 copies)\nIDs 09-12: Red (10 / 20 copies)\nIDs 13-16: Mint Green (10 / 20 copies)\nScreen hex colours in manifest.json are visual approximations, not calibrated filament values.\nSTL files contain geometry only; select the matching filament in your slicer.\n\nStart with PLA, 0.1 mm layers, 3 walls, 5% gyroid infill; use your calibrated filament profile.\nPrint a small fit sample before committing to the full set. Inspect first-layer flare.\nLattice pitch and occupied cells are unchanged. Each voxel has a ${chamfer} mm 45-degree edge chamfer; joining faces are fused, leaving visible shallow seam grooves. The physical solid is intentionally smaller at edges than the exact solver volume.\nSCAD files expose the unit size. Scale all pieces AND future puzzle cards together.\n\nGeometry data adapted from ps78/Ubongo blockfactory/blockfactory.go,\nblob 63c1a892046543f1973b375d3dfba89f90c8114e, GPL-3.0.\nSource: https://github.com/ps78/Ubongo\nWongo source and provenance: https://github.com/durasj/wongo.duras.me\nGame concept: Grzegorz Rejchtman / KOSMOS. Independent family project.\nSee repository LICENSE and docs/PIECES.md.\n`;
 await writeFile(path.join(output,'manifest.json'),manifestText); await writeFile(path.join(output,'README.txt'),readme);
 entries.push(['manifest.json',manifestText],['README.txt',readme]);
 const license=await readFile(path.join(root,'LICENSE'),'utf8');
 await writeFile(path.join(output,'LICENSE.txt'),license);
 entries.push(['LICENSE.txt',license]);
 await writeFile(path.join(output,'all-pieces.zip'),zip(entries));
-console.log(`Exported ${pieces.length} distinct watertight STL + SCAD pairs at ${unit} mm. Inventories ${manifest.inventory4}/${manifest.inventory8}. All support-free; no mirrored/duplicate shapes.`);
+console.log(`Exported ${pieces.length} distinct watertight STL + SCAD pairs at ${unit} mm. Inventories ${manifest.inventory4}/${manifest.inventory8}. ${chamfer} mm chamfer; support-free lattice orientations; no mirrored/duplicate shapes.`);

@@ -30,5 +30,12 @@ try{
  const pdf=await page.request.get(origin+'/downloads/puzzles/wongo-20mm-duplex.pdf');
  assert.equal(pdf.status(),200);assert.ok((await pdf.body()).subarray(0,4).toString()==='%PDF');
  assert.equal(manifest.sheets,250);
+ await page.goto(origin+'/downloads/puzzles/wongo-d6-20mm.html');
+ await page.emulateMedia({media:'print'});
+ assert.equal(await page.locator('.sheet').count(),96);assert.equal(await page.locator('.dice-card').count(),192);assert.equal(await page.locator('.dice-choice').count(),1152);
+ const d6issues=await page.locator('.dice-card').evaluateAll(cards=>cards.flatMap(card=>{const b=card.getBoundingClientRect(),board=card.querySelector('.board').getBoundingClientRect(),v=card.querySelector('.board').viewBox.baseVal,f=card.querySelector('footer').getBoundingClientRect();return [Math.abs(board.width/v.width-20*96/25.4)>.1?'cell':null,f.bottom>b.bottom-4?'overflow':null].filter(Boolean).map(x=>card.dataset.id+': '+x);}));assert.deepEqual(d6issues,[]);
+ for(const id of [5,6,7,8,9,10,11,12])assert.ok(await page.locator('#piece-'+id+' polygon').evaluateAll(nodes=>nodes.length>0&&nodes.every(n=>n.getAttribute('stroke')==='#ffffff')));
+ await page.locator('.sheet').first().screenshot({path:'test-results/d6-front.png'});await page.locator('.sheet').nth(1).screenshot({path:'test-results/d6-back.png'});
+ const d6pdf=await page.request.get(origin+'/downloads/puzzles/wongo-d6-20mm.pdf');assert.equal(d6pdf.status(),200);assert.equal((await d6pdf.body()).subarray(0,4).toString(),'%PDF');
  console.log('Print checks passed: all 1000 cards, 20 mm cells, A4/A5 bounds, 40 mm calibration and PDF download.');
 }finally{await browser?.close();server.kill('SIGTERM');}

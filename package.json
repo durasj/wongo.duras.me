@@ -14,8 +14,9 @@
     "export:rulebooks": "python3 scripts/export-rulebooks.py",
     "test:browser": "node scripts/browser-smoke.mjs",
     "export:rulebook-pdfs": "npm run export:rulebooks && npm run build && node scripts/export-rulebook-pdfs.mjs",
-    "generate:print-kit": "npm run generate:pieces && node scripts/export-print-kit.mjs",
-    "test:print": "node scripts/print-smoke.mjs"
+    "generate:print-kit": "npm run generate:pieces && npm run generate:dice-cards && node scripts/export-print-kit.mjs",
+    "test:print": "node scripts/print-smoke.mjs",
+    "generate:dice-cards": "node --import tsx scripts/generate-dice-cards.ts"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",

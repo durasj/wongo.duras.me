@@ -71,15 +71,15 @@ The official manual's itemized labels sum to **40**: yellow 9, blue 11, red 10, 
 - `all-pieces.zip` with every model and the manifest.
 - `README.txt` with print guidance and provenance.
 
-STLs use millimetres and are **outer union surfaces**. Internal faces between adjacent cubes are removed. They are not disconnected overlapping cube shells. Export checks every mesh edge is shared by exactly two oppositely wound triangles and verifies signed volume against cube count. It also verifies no two of the 16 catalogue shapes are equal under rotation.
+STLs use millimetres and are **outer union surfaces**. Internal faces between adjacent cubes are removed. They are not disconnected overlapping cube shells. Export checks every mesh edge is shared by exactly two oppositely wound triangles and verifies signed volume against the analytical chamfered-voxel volume and cube count. It also verifies no two of the 16 catalogue shapes are equal under rotation.
 
 A support-free orientation is selected automatically: every occupied cube above z=0 has an occupied cube directly below. For these orientations the ideal geometry requires no supports or bridging. Normal bed adhesion and printer calibration still matter.
 
 ## Printing
 
-**Recommended starting point:** regular PLA, 0.1 mm layers, 3 walls, 20% gyroid infill; use the filament manufacturer's temperature profile. These are starting settings, not a guarantee across printers. PETG is an alternative for greater impact/heat resistance, with more attention to strings and surface blobs. Material comparison references: [Prusa PLA](https://help.prusa3d.com/article/pla_2062), [Prusa PETG](https://help.prusa3d.com/article/petg_2059).
+**Recommended starting point:** regular PLA, 0.1 mm layers, 3 walls, 5% gyroid infill; use the filament manufacturer's temperature profile. These are starting settings, not a guarantee across printers. PETG is an alternative for greater impact/heat resistance, with more attention to strings and surface blobs. Material comparison references: [Prusa PLA](https://help.prusa3d.com/article/pla_2062), [Prusa PETG](https://help.prusa3d.com/article/petg_2059).
 
-Print a few representative pieces first. Check first-layer flare, flatness, fit against the 20 mm card grid, and how stacked pieces feel before printing all 80. The default export has exact square edges, no engraved IDs, and no clearance offsets: there is no hidden geometry change between the solver and STL. Lightly deburr sharp edges if needed without changing the cube pitch.
+Print a few representative pieces first. Check first-layer flare, flatness, fit against the 20 mm card grid, and how stacked pieces feel before printing all 80. The default export has a 0.5 mm 45-degree chamfer on every unit voxel. Shared square joining faces are fused; chamfer valleys remain as visible seams. The 20 mm pitch, occupied lattice cells and chirality are unchanged, while the physical solid loses a small amount of edge material. There are no engraved IDs or scale clearance offsets. Physical fit and strength still need a test print.
 
 Never scale individual piece files independently. If choosing another size, regenerate every piece and print cards with the same unit:
 
@@ -89,3 +89,11 @@ node scripts/export-pieces.mjs --unit=18 --out=/tmp/wongo-18mm
 ```
 
 The second command writes an alternate set without replacing the canonical 20 mm downloads. Keep generated metadata alongside any alternate set.
+
+## Chamfer geometry and low-infill profile
+
+`src/data/print.json` specifies the 20 mm pitch, 0.5 mm chamfer and 5% gyroid profile. `scripts/lib/chamfered-voxel.mjs` constructs the bevel planes directly. Each voxel is a cube shrunk by the chamfer distance and Minkowski-summed with an octahedron; the mesh exporter removes shared square joining faces. Joins retain a 19 × 19 mm contact square. At multi-voxel intersections the bevels leave intentional narrow channels, not floating shells.
+
+For pitch L and chamfer c, each physical voxel volume is L³ − 6Lc² + 16c³/3. Mesh checks require this volume times the occupied cube count, two-manifold edge incidence and outward winding. The independent STL ray test still recovers exactly the canonical occupied cells and handedness. `--chamfer=0` exports sharp comparison models without changing the catalogue.
+
+The 5% gyroid recommendation keeps 3 walls and 0.8 mm top/bottom. It is an engineering starting point, not a universally proven minimum. Research and slicer comparisons are in `docs/PRINTING.md` and `docs/infill-comparison.json`.

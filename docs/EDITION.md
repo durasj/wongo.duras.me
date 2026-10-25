@@ -39,6 +39,7 @@ Preserve the 16 shapes, physical dimensions, inventory counts, puzzle codes and 
 
 Tests protect edition precedence, production QR links, storage persistence, switching, storage-disabled operation, desktop/mobile layout, both rulebook covers and all normal gameplay flows. Release validation also decodes QR symbols from each final rendered PDF.
 
+Physical rules now describe D6 A5 cards, a shared die and inventory-safe packs. Both editions/languages use the same mechanical rules. The default downloadable D6 set is 96 double-sided cards on 48 A4 sheets; the 1,000 individual puzzles remain available separately. Blue and red pieces use white geometric outlines; decorative cover artwork does not define print geometry.
 ## Source-photo integrity
 
 The following SHA-256 values pin the original uploaded JPEG bytes (no cropping or recompression of the source files):

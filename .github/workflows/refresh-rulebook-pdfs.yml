@@ -1,8 +1,9 @@
-name: Refresh 20 mm rulebook PDFs
+name: Refresh physical D6 rulebook PDFs
 on:
   push:
-    branches: [feat/wongo-20mm-a5]
+    branches: [feat/chamfer-d6-physical]
     paths:
+      - scripts/**
       - src/data/print.json
       - docs/rulebook-en.md
       - docs/rulebook-sk.md
@@ -11,7 +12,7 @@ permissions:
   contents: read
 jobs:
   refresh:
-    if: github.repository == 'durasj/wongo.duras.me' && github.ref == 'refs/heads/feat/wongo-20mm-a5'
+    if: github.repository == 'durasj/wongo.duras.me' && github.ref == 'refs/heads/feat/chamfer-d6-physical'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -25,16 +26,17 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - run: npm run generate:print-kit
       - run: npm run export:rulebook-pdfs
       - run: npm test && npm run test:browser && npm run test:print
-      - name: Commit regenerated bilingual edition PDFs
+      - name: Commit regenerated physical print assets and bilingual rules
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git add public/downloads/rulebook-en.pdf public/downloads/rulebook-sk.pdf public/downloads/tacustav/rulebook-en.pdf public/downloads/tacustav/rulebook-sk.pdf
+          git add src/data/dice-cards.json public/downloads/pieces public/downloads/bambu public/downloads/puzzles public/downloads/rulebook-en.html public/downloads/rulebook-sk.html public/downloads/rulebook-en.pdf public/downloads/rulebook-sk.pdf public/downloads/tacustav/rulebook-en.html public/downloads/tacustav/rulebook-sk.html public/downloads/tacustav/rulebook-en.pdf public/downloads/tacustav/rulebook-sk.pdf
           if git diff --cached --quiet; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Regenerate bilingual rulebook PDFs for 20 mm pieces"
+          git commit -m "Regenerate chamfered plates, physical D6 cards and bilingual rules"
           AUTH=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
-          git -c http.https://github.com/.extraheader="AUTHORIZATION: basic $AUTH" push origin HEAD:feat/wongo-20mm-a5
+          git -c http.https://github.com/.extraheader="AUTHORIZATION: basic $AUTH" push origin HEAD:feat/chamfer-d6-physical

@@ -88,6 +88,6 @@ test('all exported STLs reconstruct the canonical shape using physical rotations
     // Compare signed closed-surface volume without exporter validation metadata.
     let volume=0;
     for (const [a,b,c] of mesh) volume += (a[0]*(b[1]*c[2]-b[2]*c[1]) + a[1]*(b[2]*c[0]-b[0]*c[2]) + a[2]*(b[0]*c[1]-b[1]*c[0]))/6;
-    assert.ok(Math.abs(volume-source.cubes.length*unit**3)<1e-5);
+    assert.ok(Math.abs(volume-source.cubes.length*(unit**3-6*unit*(entry.chamferMm??0)**2+16/3*(entry.chamferMm??0)**3))<1e-5);
   }
 });

@@ -1,7 +1,10 @@
 {
   "unitMm": 20,
+  "chamferMm": 0.5,
   "layerHeightMm": 0.1,
   "nozzleMm": 0.4,
+  "infillPercent": 5,
+  "infillPattern": "gyroid",
   "plates": [
     {
       "file": "01-yellow-20mm-P1S.3mf",

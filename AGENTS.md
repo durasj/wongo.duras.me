@@ -26,7 +26,10 @@ Wongo is a family 3D puzzle workshop for 2–8 simultaneous players, inspired by
 ## Working conventions
 
 - Keep English and Slovak rules consistent with implementation.
-- Printable boards use a 20 mm grid at 100% scale by default. Include a calibration reference and make scaling explicit.
+- Physical printing uses a 20 mm lattice and 0.5 mm 45-degree chamfers on each voxel, including shallow seam grooves. The solver retains exact integer lattice geometry; physical chamfer volume is intentionally smaller. Exporter, SCAD, plate meshes and volume checks must agree.
+- Printable boards use a 20 mm grid at 100% scale. Default physical D6 cards are two-sided A5 cards, printed two per A4 landscape side with short-edge duplex. Include calibration references.
+- D6 pack IDs and die-row mappings are permanent. Group only under proper XY rotations, not reflections. Each four-card block must fit quantity4 for all six common rolls at each common difficulty; the combined eight-card pack must fit quantity8. Preserve the original 1,000 puzzle codes and solutions.
+- Default P1S profile: 0.1 mm layers, 3 walls, 0.8 mm top/bottom, 5% gyroid. This is a physically untested starting profile; do not claim a universal minimum infill or measured print durability.
 - Keep printable assets and regeneration scripts in this repository. Exclude dependencies and build output.
 - Preserve source attribution and GPL compatibility. The piece catalogue is adapted from ps78/Ubongo; see provenance documentation and LICENSE.
 - Run `npm test` and `npm run build` before submitting code. Run `npm run test:browser` for UI changes; `WONGO_BASE_URL` runs the same flow against a deployment. Regenerate puzzles and meshes when their inputs change, and inspect browser and printable output for relevant UI changes.
