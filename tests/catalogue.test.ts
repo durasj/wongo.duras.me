@@ -10,5 +10,5 @@ test('regeneration cannot silently overwrite, remove or duplicate a printed prob
   assert.throws(() => assertPublishedCatalogueUnchanged([old],[{...old,pieceIds:[16,15,14]}]),/Refusing to change/);
   assert.throws(() => assertPublishedCatalogueUnchanged([old],[{...old,footprint:[[0,0]]}]),/Refusing to change/);
   assert.throws(() => assertPublishedCatalogueUnchanged([old],[old,old]),/Duplicate/);
-  assert.doesNotThrow(() => assertPublishedCatalogueUnchanged([old],[old,{...old,code:'F4-E-001'}]));
+  assert.doesNotThrow(() => assertPublishedCatalogueUnchanged([old],[old,{...old,code:'W4-E-001'}]));
 });

@@ -88,6 +88,17 @@ try {
   await page.goto(origin);
   await page.getByRole('heading', { name: 'Good things fit together.' }).waitFor();
   await page.locator('canvas').waitFor();
+  if(catalogue.length>24){
+    const firstCode=await page.locator('.puzzle-card .card-header').first().innerText();
+    await page.getByRole('button',{name:'Next',exact:true}).click();
+    assert.notEqual(await page.locator('.puzzle-card .card-header').first().innerText(),firstCode);
+    await page.getByRole('button',{name:'Previous',exact:true}).click();
+    assert.equal(await page.locator('.puzzle-card .card-header').first().innerText(),firstCode);
+    await page.getByRole('spinbutton',{name:'Library page',exact:true}).fill(String(Math.ceil(catalogue.length/24)));
+    assert.equal(await page.locator('.puzzle-card').count(),catalogue.length%24||24);
+    await page.getByRole('spinbutton',{name:'Library page',exact:true}).fill('1');
+  }
+
   // Printing through the browser menu works before the application's print button is used.
   await page.evaluate(()=>window.dispatchEvent(new Event('beforeprint')));
   assert.equal(await page.locator('.print-card').count(),1);
@@ -105,19 +116,19 @@ try {
   assert.equal(await page.locator('.solution-layers svg').count(),2);
   await page.screenshot({ path: 'test-results/solution-desktop.png' });
   await page.getByRole('button', { name: 'Hide solution', exact: true }).click();
-  await page.getByRole('textbox', { name: /Find a puzzle/ }).fill('f3-h-048');
+  await page.getByRole('textbox', { name: /Find a puzzle/ }).fill('w3-h-048');
   assert.equal(await page.locator('.puzzle-card').count(), 1);
   await page.locator('.puzzle-card').click();
-  assert.equal(new URL(page.url()).searchParams.get('p'), 'F3-H-048');
-  assert.match(await page.locator('.viewer-heading').innerText(), /F3-H-048/);
-  await solveInBrowser(page,catalogue.find(p=>p.code==='F3-H-048'));
+  assert.equal(new URL(page.url()).searchParams.get('p'), 'W3-H-048');
+  assert.match(await page.locator('.viewer-heading').innerText(), /W3-H-048/);
+  await solveInBrowser(page,catalogue.find(p=>p.code==='W3-H-048'));
   await page.getByRole('button',{name:'Reveal solution',exact:true}).click();
   assert.equal(await page.locator('.practice-board').count(),0);
   await page.locator('.puzzle-card').click();
   assert.ok(await page.getByRole('button',{name:'Reveal solution',exact:true}).isVisible(),'Reselecting a puzzle must hide its solution');
   await page.reload();
   await page.getByRole('button', { name: 'Reveal solution', exact: true }).waitFor();
-  assert.match(await page.locator('.viewer-heading').innerText(), /F3-H-048/);
+  assert.match(await page.locator('.viewer-heading').innerText(), /W3-H-048/);
   await page.getByRole('textbox', { name: /Find a puzzle/ }).fill('not-a-code');
   await page.getByText('No puzzles found. Try a different code.').waitFor();
 
@@ -136,7 +147,7 @@ try {
   await page.getByRole('button', { name: 'The pieces', exact: true }).click();
   assert.equal(new URL(page.url()).searchParams.get('tab'),'pieces');
   await page.goBack();
-  assert.match(await page.locator('.viewer-heading').innerText(),/F3-H-048/);
+  assert.match(await page.locator('.viewer-heading').innerText(),/W3-H-048/);
   await page.goForward();
   await page.getByRole('heading',{name:'Sixteen shapes. Endless possibilities.',exact:true}).waitFor();
   assert.equal(await page.locator('.piece-tile').count(), 16);
@@ -177,11 +188,11 @@ try {
   await page.getByRole('heading',{name:'Unknown puzzle code',exact:true}).waitFor();
   assert.equal(await page.locator('.workbench').count(),0);
   await page.getByRole('button',{name:'Open first puzzle',exact:true}).click();
-  assert.match(await page.locator('.viewer-heading').innerText(),/F3-E-001/);
+  assert.match(await page.locator('.viewer-heading').innerText(),/W3-E-001/);
   await page.goBack();
   await page.getByRole('heading',{name:'Unknown puzzle code',exact:true}).waitFor();
   await page.goForward();
-  assert.match(await page.locator('.viewer-heading').innerText(),/F3-E-001/);
+  assert.match(await page.locator('.viewer-heading').innerText(),/W3-E-001/);
 
   // Both reading a solution and completing a puzzle still work without GPU/WebGL support.
   const fallbackPage = await page.context().newPage();

@@ -21,12 +21,10 @@ Wongo is an original family adaptation inspired by Ubongo 3D Master. It is not a
 | Green | 2 |
 | Amber | 1 |
 
-Keep small pieces and gems away from children who might put them in their mouths.
-
 ## Set up
 
 1. Choose the number of players, from four to eight. Use the round generator so that all assigned puzzles together fit the available piece inventory. Do not independently pick arbitrary puzzles from the shared pool.
-2. Agree on difficulty before starting. **Easy uses three pieces; hard uses four.** These labels describe piece count, not a guarantee of how difficult a person will find a particular puzzle. The initial round planner uses one common level. As a family variant, players may use different levels only if the combined piece allocation has been checked against the shared inventory.
+2. Agree on difficulty before starting. **Easy uses three pieces in three different colours; hard uses four pieces, one of each colour.** No puzzle uses the same colour twice. These labels describe piece count, not a guarantee of how difficult a person will find a particular puzzle. The initial round planner uses one common level. As a family variant, players may use different levels only if the combined piece allocation has been checked against the shared inventory.
 3. Set the timer to **two minutes per round**. You may agree on a longer time for the whole game. Give beginners a practice round first.
 4. Put **nine blue and nine amber gems** in two visible rows. Each pair marks one round. Put all remaining gems in the bag: initially **18 of each colour**.
 5. Keep solutions hidden. Each player receives a different assigned puzzle and takes exactly the pieces named on it. Take time to identify the pieces before the timer starts.
@@ -81,6 +79,8 @@ Print puzzle cards at **100% / actual size**, with page fitting disabled, after 
 ## Solo practice
 
 Choose any puzzle, hide the solution, and time yourself. Try to beat your previous time or solve as many puzzles as possible in ten minutes. Gems and multiplayer inventory checks are unnecessary when solving one puzzle at a time.
+
+Keep small pieces and gems away from children who might put them in their mouths.
 
 ---
 

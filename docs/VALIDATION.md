@@ -6,17 +6,29 @@ Wongo's challenge library is generated from the numbered Master piece geometry. 
 
 Run `npm run generate:puzzles`, then `npm test`. The fixed seed, generator version and outcome counts are recorded in `src/data/validation.json`. Repeating the generator produces identical puzzle codes, footprints, piece lists and witnesses. Once codes have been printed, preserve this published JSON: later generator changes must create a new code namespace, not overwrite existing codes.
 
-The initial release contains 48 three-piece challenges (`F3-E-001` to `F3-E-048`) and 48 four-piece challenges (`F3-H-001` to `F3-H-048`). Easy/hard currently describes the number of pieces. Human difficulty calibration has not yet taken place; solver node counts are diagnostic, not a promise about solving time.
+The active release contains **1,000 challenges**: 500 three-piece challenges (`W3-E-001` to `W3-E-500`) and 500 four-piece challenges (`W3-H-001` to `W3-H-500`). **Every selectable puzzle uses each logical colour group at most once.** Easy uses exactly three pieces from three different groups; hard uses exactly four pieces, one each from yellow, blue, red and green. This rule applies to the entire library, code search and simultaneous round selection. Changing the displayed palette does not change a piece's logical group.
+
+The generator first reproduces the original 48 easy and 48 hard challenges in their original RNG sequence, including unchanged saved solutions. Only then does it extend each category to code 500. This prevents expanding easy from shifting the already published hard codes. Tests pin the original 96 complete records and all 1,000 current code meanings.
+
+Easy/hard describes the number of pieces and distinct colour groups. Human difficulty calibration has not yet taken place; solver node counts are diagnostic, not a promise about solving time.
+
+### Retired F3 catalogue
+
+The user requested the global colour rule before printing any cards. The previous F3 catalogue contained same-colour combinations, so its 96 challenges are retired from public lookup and play. Their original meanings and complete file bytes are preserved in `src/data/legacy-puzzles.json`, with SHA-256 `ff7b5467ab7059587ef75f1faf1a6b1425826a701c0a2ce2aad41cde49292335`. They are never reassigned to W3 codes and are not imported into the web application. Search for an F3 code returns not found.
+
+The generator permits this one migration only when the previous F3 file exactly matches that digest. Subsequent generation verifies the archive and refuses any incompatible change or removal of an active W3 code before writing the new files. Regression tests independently pin both namespaces' original meanings, while permitting improved valid solution witnesses.
 
 ## Acceptance gates
 
-1. Select an original connected integer-grid footprint and a distinct set of three/four pieces whose total volume is exactly twice its area.
+1. Select an original connected integer-grid footprint and exactly three/four pieces from three/four distinct logical colour groups whose total volume is exactly twice its area. Never select two pieces of the same colour, even when their shape IDs differ.
 2. An exact-cover solver enumerates legal physical rotations of those pieces. It searches from an empty target of exactly two layers. The rotation group has determinant +1; mirrored pieces are never allowed.
 3. Reject candidates with no solution. Reject search-budget failures too: a timeout is **unknown**, not proof of impossibility.
 4. A separate witness checker confirms piece identities and multiplicities, integer coordinates, congruence to a legal rotation, no overlaps, no protrusions and complete coverage.
 5. Deduplicate the footprint under the eight square-grid symmetries together with the sorted piece IDs. This deliberately conservative policy can discard reflected-but-different challenges; it does not admit duplicates.
 6. Backtest every accepted challenge again from an empty board, and check the new witness.
 7. Build a dependency graph between different pieces that occupy the lower and upper cells of each column. Reject cyclic graphs, and store the witness in topological order. This is a conservative proof that pieces can be lowered vertically into the final arrangement without passing through previously placed pieces.
+
+The validation report records each candidate outcome, including symmetry duplicates, unsolvable targets, assembly rejections and search-budget failures. Generation allows at most 1,000,000 candidates and 150,000 search nodes per candidate; independent backtesting permits 1,000,000 search nodes per puzzle. Exhausting a limit aborts or rejects an unknown candidate; it never counts as a solution. Per-category diversity statistics report unique footprint classes, distinct piece sets, areas and shape IDs used.
 
 The generated puzzle has **at least one** solution. We do not claim uniqueness or enumerate all solutions. The stored witness is one valid example; any other legal exact fill is also correct.
 
@@ -28,4 +40,4 @@ The initial version checks final assembled geometry and a collision-free vertica
 
 ## Regression tests
 
-Tests cover all published puzzles, exact coverage, corrupted witnesses, an equal-volume unsolvable target, search-budget handling, all 24 rotations without reflections, deterministic code lookup/round allocation, and inventory limits for every supported player count and difficulty over multiple seeds.
+Tests cover all active puzzles, exact colour/difficulty counts, rejection of same-colour candidates from runtime lookup and scheduling, immutable legacy bytes and retired-code exclusion, exact coverage, corrupted witnesses, an equal-volume unsolvable target, search-budget handling, all 24 rotations without reflections, deterministic code lookup/round allocation, and inventory limits for every supported player count and difficulty over multiple seeds.

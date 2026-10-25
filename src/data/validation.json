@@ -1,19 +1,85 @@
 {
-  "schemaVersion": 1,
-  "generatorVersion": "wongo-1",
+  "schemaVersion": 3,
+  "generatorVersion": "wongo-3-expanded-1000",
+  "namespace": "W3",
   "seed": 20261025,
-  "puzzles": 96,
-  "easy": 48,
-  "hard": 48,
-  "attempts": 430,
-  "rejectedUnsolvable": 334,
+  "puzzles": 1000,
+  "easy": 500,
+  "hard": 500,
+  "attempts": 14599,
+  "rejectedUnsolvable": 11985,
   "rejectedBudget": 0,
-  "rejectedAssembly": 0,
-  "independentlySolved": 96,
-  "witnessesValidated": 96,
-  "verticalAssemblyVerified": 96,
+  "rejectedAssembly": 21,
+  "rejectedDuplicate": 1593,
+  "candidateLimit": 1000000,
+  "generationSolverNodeLimit": 150000,
+  "backtestSolverNodeLimit": 1000000,
+  "diversity": {
+    "easy": {
+      "puzzles": 500,
+      "uniqueFootprints": 95,
+      "uniquePieceSets": 90,
+      "areas": [
+        6,
+        7
+      ],
+      "piecesUsed": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    "hard": {
+      "puzzles": 500,
+      "uniqueFootprints": 232,
+      "uniquePieceSets": 107,
+      "areas": [
+        8,
+        9,
+        10
+      ],
+      "piecesUsed": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ]
+    }
+  },
+  "uniqueColourVerified": 1000,
+  "colourRule": "Easy: exactly 3 pieces from 3 different logical colour groups. Hard: exactly 4 pieces, one from each of the 4 groups.",
+  "retiredLegacyPuzzles": 96,
+  "legacySha256": "ff7b5467ab7059587ef75f1faf1a6b1425826a701c0a2ce2aad41cde49292335",
+  "independentlySolved": 1000,
+  "witnessesValidated": 1000,
+  "verticalAssemblyVerified": 1000,
   "deduplication": "Footprint D4 symmetry plus sorted piece IDs",
   "solutionCount": "At least one; uniqueness is not claimed",
   "difficulty": "Three pieces (easy) or four pieces (hard); human calibration pending",
-  "totalBacktestNodes": 1356
+  "totalBacktestNodes": 12097
 }
