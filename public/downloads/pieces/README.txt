@@ -6,6 +6,14 @@ All are oriented with flat supported layers; supports are not required for ideal
 Print quantities are in manifest.json: quantity4 (40 total) or quantity8 (80 total).
 These are a shared inventory, not 16 pieces per player.
 
+FILAMENT: Flashforge PLA Matte, 1.75 mm
+IDs 01-04: Mango Yellow (9 / 18 copies for 4 / 8 players)
+IDs 05-08: Blue (072C) (11 / 22 copies)
+IDs 09-12: Red (10 / 20 copies)
+IDs 13-16: Mint Green (10 / 20 copies)
+Screen hex colours in manifest.json are visual approximations, not calibrated filament values.
+STL files contain geometry only; select the matching filament in your slicer.
+
 Start with PLA, 0.2 mm layers, 3 walls, 15-20% infill; use your filament profile.
 Print a small fit sample before committing to the full set. Inspect first-layer flare.
 No scale clearance or rounding is applied: STL retains the solver's exact geometry.

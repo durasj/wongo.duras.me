@@ -113,7 +113,7 @@ function PracticeEditor({ puzzle, language }: Props) {
           {ys.flatMap(y => [<span className="practice-axis" key={`row-${y}`} aria-hidden="true">{y}</span>, ...xs.map(x => {
             const coordinate = [x, y, z] as Voxel, cellKey = key(coordinate), inBoard = footprint.has(key([x, y]));
             const owner = occupied.get(cellKey), ghost = candidateCells.has(cellKey), selected = state.anchor.every((v, axis) => v === coordinate[axis]);
-            const style = owner ? { '--practice-piece': getPiece(owner).hex } as CSSProperties : undefined;
+            const style = owner ? { '--practice-piece': getPiece(owner).hex, '--practice-ink': getPiece(owner).color === 'blue' ? '#ffffff' : '#172a20' } as CSSProperties : undefined;
             return <button type="button" key={cellKey} data-x={x} data-y={y} data-z={z} className={`practice-cell${inBoard ? '' : ' practice-hole'}${owner ? ' practice-filled' : ''}${ghost ? ` practice-ghost${proposal.valid ? '' : ' practice-ghost-invalid'}` : ''}${selected ? ' practice-anchor-selected' : ''}`} style={style} aria-pressed={selected} aria-label={`x ${x}, y ${y}, z ${z}; ${owner ? `${t.piece} ${owner}` : inBoard ? t.empty : t.hole}${ghost ? `; ${t.proposal} ${state.selectedId}` : ''}${selected ? `; ${t.selected}` : ''}`} onClick={() => { setState(previous => ({ ...previous, anchor: coordinate })); setAnnouncement(null); }}>
               {owner ? <strong>{owner}</strong> : ghost ? <span className="practice-ghost-id">{state.selectedId}</span> : <span aria-hidden="true">{inBoard ? '·' : ''}</span>}{selected && <span className="practice-anchor-mark" aria-hidden="true">⌖</span>}
             </button>;

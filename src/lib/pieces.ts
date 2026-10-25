@@ -8,6 +8,8 @@ export interface Piece {
   name: string;
   color: string;
   hex: string;
+  /** Purchased Flashforge PLA Matte colour; hex is a screen approximation. */
+  filament: string;
   cubes: Voxel[];
   quantity4: number;
   quantity8: number;

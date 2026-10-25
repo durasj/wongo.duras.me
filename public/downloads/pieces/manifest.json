@@ -9,7 +9,7 @@
       "id": 1,
       "name": "Hello",
       "color": "yellow",
-      "hex": "#e8b936",
+      "hex": "#f4bf00",
       "cubes": [
         [
           0,
@@ -39,6 +39,7 @@
       ],
       "quantity4": 2,
       "quantity8": 4,
+      "filament": "Mango Yellow",
       "filename": "wongo-piece-01-yellow.stl",
       "scadFilename": "wongo-piece-01-yellow.scad",
       "unitMm": 15,
@@ -86,7 +87,7 @@
       "id": 2,
       "name": "Long hook",
       "color": "yellow",
-      "hex": "#e8b936",
+      "hex": "#f4bf00",
       "cubes": [
         [
           0,
@@ -116,6 +117,7 @@
       ],
       "quantity4": 2,
       "quantity8": 4,
+      "filament": "Mango Yellow",
       "filename": "wongo-piece-02-yellow.stl",
       "scadFilename": "wongo-piece-02-yellow.scad",
       "unitMm": 15,
@@ -163,7 +165,7 @@
       "id": 3,
       "name": "Twisted hook",
       "color": "yellow",
-      "hex": "#e8b936",
+      "hex": "#f4bf00",
       "cubes": [
         [
           0,
@@ -188,6 +190,7 @@
       ],
       "quantity4": 3,
       "quantity8": 6,
+      "filament": "Mango Yellow",
       "filename": "wongo-piece-03-yellow.stl",
       "scadFilename": "wongo-piece-03-yellow.scad",
       "unitMm": 15,
@@ -230,7 +233,7 @@
       "id": 4,
       "name": "Gate",
       "color": "yellow",
-      "hex": "#e8b936",
+      "hex": "#f4bf00",
       "cubes": [
         [
           0,
@@ -260,6 +263,7 @@
       ],
       "quantity4": 2,
       "quantity8": 4,
+      "filament": "Mango Yellow",
       "filename": "wongo-piece-04-yellow.stl",
       "scadFilename": "wongo-piece-04-yellow.scad",
       "unitMm": 15,
@@ -307,7 +311,7 @@
       "id": 5,
       "name": "Raised hook",
       "color": "blue",
-      "hex": "#4382d1",
+      "hex": "#171c8f",
       "cubes": [
         [
           0,
@@ -337,6 +341,7 @@
       ],
       "quantity4": 2,
       "quantity8": 4,
+      "filament": "Blue (072C)",
       "filename": "wongo-piece-05-blue.stl",
       "scadFilename": "wongo-piece-05-blue.scad",
       "unitMm": 15,
@@ -384,7 +389,7 @@
       "id": 6,
       "name": "Lightning",
       "color": "blue",
-      "hex": "#4382d1",
+      "hex": "#171c8f",
       "cubes": [
         [
           0,
@@ -414,6 +419,7 @@
       ],
       "quantity4": 2,
       "quantity8": 4,
+      "filament": "Blue (072C)",
       "filename": "wongo-piece-06-blue.stl",
       "scadFilename": "wongo-piece-06-blue.scad",
       "unitMm": 15,
@@ -461,7 +467,7 @@
       "id": 7,
       "name": "Step",
       "color": "blue",
-      "hex": "#4382d1",
+      "hex": "#171c8f",
       "cubes": [
         [
           0,
@@ -491,6 +497,7 @@
       ],
       "quantity4": 3,
       "quantity8": 6,
+      "filament": "Blue (072C)",
       "filename": "wongo-piece-07-blue.stl",
       "scadFilename": "wongo-piece-07-blue.scad",
       "unitMm": 15,
@@ -538,7 +545,7 @@
       "id": 8,
       "name": "Corner",
       "color": "blue",
-      "hex": "#4382d1",
+      "hex": "#171c8f",
       "cubes": [
         [
           0,
@@ -558,6 +565,7 @@
       ],
       "quantity4": 4,
       "quantity8": 8,
+      "filament": "Blue (072C)",
       "filename": "wongo-piece-08-blue.stl",
       "scadFilename": "wongo-piece-08-blue.scad",
       "unitMm": 15,
@@ -595,7 +603,7 @@
       "id": 9,
       "name": "Stool",
       "color": "red",
-      "hex": "#e46459",
+      "hex": "#d9432f",
       "cubes": [
         [
           0,
@@ -625,6 +633,7 @@
       ],
       "quantity4": 3,
       "quantity8": 6,
+      "filament": "Red",
       "filename": "wongo-piece-09-red.stl",
       "scadFilename": "wongo-piece-09-red.scad",
       "unitMm": 15,
@@ -672,7 +681,7 @@
       "id": 10,
       "name": "Tripod",
       "color": "red",
-      "hex": "#e46459",
+      "hex": "#d9432f",
       "cubes": [
         [
           0,
@@ -697,6 +706,7 @@
       ],
       "quantity4": 3,
       "quantity8": 6,
+      "filament": "Red",
       "filename": "wongo-piece-10-red.stl",
       "scadFilename": "wongo-piece-10-red.scad",
       "unitMm": 15,
@@ -739,7 +749,7 @@
       "id": 11,
       "name": "End hook",
       "color": "red",
-      "hex": "#e46459",
+      "hex": "#d9432f",
       "cubes": [
         [
           0,
@@ -769,6 +779,7 @@
       ],
       "quantity4": 2,
       "quantity8": 4,
+      "filament": "Red",
       "filename": "wongo-piece-11-red.stl",
       "scadFilename": "wongo-piece-11-red.scad",
       "unitMm": 15,
@@ -816,7 +827,7 @@
       "id": 12,
       "name": "Zigzag",
       "color": "red",
-      "hex": "#e46459",
+      "hex": "#d9432f",
       "cubes": [
         [
           0,
@@ -841,6 +852,7 @@
       ],
       "quantity4": 2,
       "quantity8": 4,
+      "filament": "Red",
       "filename": "wongo-piece-12-red.stl",
       "scadFilename": "wongo-piece-12-red.scad",
       "unitMm": 15,
@@ -883,7 +895,7 @@
       "id": 13,
       "name": "Twisted lightning",
       "color": "green",
-      "hex": "#3d9e7a",
+      "hex": "#93cfc2",
       "cubes": [
         [
           0,
@@ -913,6 +925,7 @@
       ],
       "quantity4": 2,
       "quantity8": 4,
+      "filament": "Mint Green",
       "filename": "wongo-piece-13-green.stl",
       "scadFilename": "wongo-piece-13-green.scad",
       "unitMm": 15,
@@ -960,7 +973,7 @@
       "id": 14,
       "name": "Upright hook",
       "color": "green",
-      "hex": "#3d9e7a",
+      "hex": "#93cfc2",
       "cubes": [
         [
           0,
@@ -990,6 +1003,7 @@
       ],
       "quantity4": 2,
       "quantity8": 4,
+      "filament": "Mint Green",
       "filename": "wongo-piece-14-green.stl",
       "scadFilename": "wongo-piece-14-green.scad",
       "unitMm": 15,
@@ -1037,7 +1051,7 @@
       "id": 15,
       "name": "T",
       "color": "green",
-      "hex": "#3d9e7a",
+      "hex": "#93cfc2",
       "cubes": [
         [
           0,
@@ -1062,6 +1076,7 @@
       ],
       "quantity4": 2,
       "quantity8": 4,
+      "filament": "Mint Green",
       "filename": "wongo-piece-15-green.stl",
       "scadFilename": "wongo-piece-15-green.scad",
       "unitMm": 15,
@@ -1104,7 +1119,7 @@
       "id": 16,
       "name": "L",
       "color": "green",
-      "hex": "#3d9e7a",
+      "hex": "#93cfc2",
       "cubes": [
         [
           0,
@@ -1129,6 +1144,7 @@
       ],
       "quantity4": 4,
       "quantity8": 8,
+      "filament": "Mint Green",
       "filename": "wongo-piece-16-green.stl",
       "scadFilename": "wongo-piece-16-green.scad",
       "unitMm": 15,

@@ -20,6 +20,19 @@ This establishes lattice geometry, not a measurement of commercial manufacturing
 
 No official puzzle cards or artwork are copied into the generated Wongo puzzle collection.
 
+## Purchased filament palette
+
+Use **Flashforge PLA Matte, 1.75 mm** for all four piece groups. Match the same colours in the virtual game, printed piece icons and solution diagrams. Each piece's `filament` and `hex` fields in the canonical catalogue flow into the download manifest.
+
+| Piece IDs | Filament colour | Screen approximation | Copies: 4 players / 5–8 players |
+| --- | --- | --- | --- |
+| 01–04 | Mango Yellow | `#f4bf00` | 9 / 18 |
+| 05–08 | Blue (072C) | `#171c8f` | 11 / 22 |
+| 09–12 | Red | `#d9432f` | 10 / 20 |
+| 13–16 | Mint Green | `#93cfc2` | 10 / 20 |
+
+These screen colours are estimates from the purchased-product screenshots, not measured or manufacturer-certified colour values. STL files store geometry only: assign the specified filament in the slicer. The stable filenames retain `yellow`, `blue`, `red`, and `green`. Piece numbers identify shapes even when colours are hard to distinguish.
+
 ## Shared inventory for four to eight players
 
 These counts describe a shared pool, not a personal full set. Generated rounds must be checked against the selected pool before play. For 4 players use `quantity4`; for **5–8 players use the 80-piece `quantity8` pool**.
