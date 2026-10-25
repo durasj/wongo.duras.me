@@ -160,6 +160,10 @@ try {
   assert.equal((await zip.body()).readUInt32LE(0), 0x04034b50);
 
   await page.getByRole('button', { name: 'Family table', exact: true }).click();
+  await page.getByRole('combobox').first().selectOption('2');
+  assert.equal(await page.locator('.assignment').count(),2);
+  await page.getByRole('combobox').first().selectOption('3');
+  assert.equal(await page.locator('.assignment').count(),3);
   await page.getByRole('combobox').first().selectOption('8');
   await page.getByRole('combobox').nth(1).selectOption('hard');
   assert.equal(await page.locator('.assignment').count(), 8);

@@ -1,18 +1,18 @@
 # Wongo 3D
 ## Family rulebook · English · Version 1.0
 
-**4–8 players · 9 rounds · Ages 10+ suggested · About 25–40 minutes**
+**2–8 players · 9 rounds · Ages 10+ suggested · About 25–40 minutes**
 
 Build a little solid world before time runs out. Everyone solves a different puzzle at the same time, earns gems, and tries to finish with the most points.
 
-Wongo is an original family adaptation inspired by Ubongo 3D Master. It is not an official Ubongo product. These are the rules for our custom four-to-eight-player game.
+Wongo is an original family adaptation inspired by Ubongo 3D Master. It is not an official Ubongo product. These are the rules for our custom two-to-eight-player game.
 
 ## What you need
 
-- The 16 numbered piece shapes, with copies in the quantities shown in the Wongo print manifest: **80 pieces for the full eight-player pool**. The same pool works for four to seven players. This is a shared pool, not 16 pieces per player.
+- Copies of the 16 numbered shapes: **40 pieces for 2–4 players, or 80 for 5–8 players**, using the print-manifest quantities. The 80-piece pool also works for 2–4. This is a shared pool, not 16 pieces per player.
 - One assigned puzzle per player per round, displayed in the app or printed at the matching piece scale.
 - A timer, an opaque gem bag, and paper for recording results.
-- **90 gems:** 18 red, 27 blue, 18 green and 27 amber. This one set works for four through eight players.
+- **90 gems:** 18 red, 27 blue, 18 green and 27 amber. This one set works for two through eight players.
 
 | Gem | Points |
 | --- | ---: |
@@ -23,7 +23,7 @@ Wongo is an original family adaptation inspired by Ubongo 3D Master. It is not a
 
 ## Set up
 
-1. Choose the number of players, from four to eight. Use the round generator so that all assigned puzzles together fit the available piece inventory. Do not independently pick arbitrary puzzles from the shared pool.
+1. Choose the number of players, from two to eight. Use the round generator so that all assigned puzzles together fit the available piece inventory. Do not independently pick arbitrary puzzles from the shared pool.
 2. Agree on difficulty before starting. **Easy uses three pieces in three different colours; hard uses four pieces, one of each colour.** No puzzle uses the same colour twice. These labels describe piece count, not a guarantee of how difficult a person will find a particular puzzle. The initial round planner uses one common level. As a family variant, players may use different levels only if the combined piece allocation has been checked against the shared inventory.
 3. Set the timer to **two minutes per round**. You may agree on a longer time for the whole game. Give beginners a practice round first.
 4. Put **nine blue and nine amber gems** in two visible rows. Each pair marks one round. Put all remaining gems in the bag: initially **18 of each colour**.

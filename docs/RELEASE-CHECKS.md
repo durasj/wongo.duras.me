@@ -1,5 +1,11 @@
 # Release checks
 
+## Version 0.5: two through eight players
+
+Competitive round assignment now supports every integer player count from two to eight. Two through four players use the existing 40-piece pool; five through eight use the 80-piece pool. Both difficulties retain the same strict colour rules and all 1,000 verified puzzles.
+
+All 24 tests pass, including 280 generated rounds across all seven player counts, both difficulties and 20 seeds. Tests check exact assignment counts, distinct puzzle codes, unique colours and inventory limits. The browser suite also explicitly selects two and three players before exercising the eight-player flow. English and Slovak rules, player selectors, printing headers and print-inventory guidance use the new range. The concurrently updated purchased-filament palette is preserved.
+
 ## Version 0.4: expanded library
 
 The active library contains 1,000 verified challenges: 500 easy and 500 hard. Every original W3 record and saved solution remains unchanged. All 1,000 independently solve, pass the placement/coverage validator, obey the distinct-colour rule, and include a valid assembly order. All 24 automated tests pass, including manual reconstruction of every published solution.
@@ -10,7 +16,7 @@ Generation is deterministic and considered 14,599 candidates: 1,000 accepted, 11
 
 Every active easy puzzle has exactly three pieces in three different colour groups. Every active hard puzzle has exactly four pieces, one per colour group. No selectable puzzle repeats a colour. The new W3 catalogue contains 48 puzzles of each difficulty, independently solved and checked for exact coverage and vertical assembly order. All 22 tests pass.
 
-The previous F3 collection is preserved byte-for-byte in a verification archive and retired from lookup and round assignment. Its codes are not reused for different puzzles. Runtime guards and generation tests enforce the new rule, including inventory-checked rounds for four through eight players. Piece shapes and print scale are unchanged.
+The previous F3 collection is preserved byte-for-byte in a verification archive and retired from lookup and round assignment. Its codes are not reused for different puzzles. Runtime guards and generation tests enforce the new rule, including inventory-checked rounds for two through eight players. Piece shapes and print scale are unchanged.
 
 ## Version 0.2: production follow-up
 
@@ -43,7 +49,7 @@ Checked locally on 25 October 2026 against the production Vite build.
 - All 96 puzzles independently solve from an empty board and pass a separate exact coverage validator.
 - Every stored solution has a verified vertical assembly order.
 - Corrupted, unsolvable and search-budget fixtures behave as expected.
-- Inventory allocation passes for 4–8 players and both difficulty categories over multiple seeds.
+- Inventory allocation passes for 2–8 players and both difficulty categories over multiple seeds.
 - 11 automated tests pass. Generated piece exports and puzzle data are reproducible.
 
 ### Browser and print

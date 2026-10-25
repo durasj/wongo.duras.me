@@ -1,6 +1,6 @@
 # Wongo
 
-A family 3D puzzle workshop for **4–8 players**, inspired by Ubongo 3D Master. Solve original generated challenges virtually, inspect their solutions, search a printed card's code, prepare a round that fits your piece inventory, and print the physical game.
+A family 3D puzzle workshop for **2–8 players**, inspired by Ubongo 3D Master. Solve original generated challenges virtually, inspect their solutions, search a printed card's code, prepare a round that fits your piece inventory, and print the physical game.
 
 The library contains **1,000 verified puzzles: 500 easy and 500 hard**, with searchable codes, pagination and direct page jumps.
 
@@ -64,7 +64,7 @@ The piece exporter requires only Node.js; the rulebook exporter uses Python 3's 
 
 Choose a puzzle and select **Try this puzzle** to solve it yourself. Select a piece, rotate around X/Y/Z, choose its bounding-box anchor in either layer grid, and place it. The 3D preview shows your assembly and proposed move; numbered grids remain usable without WebGL. Invalid moves are blocked, and undo, remove and reset are available. Any complete legal arrangement passes, even if it differs from the saved example. Practice is a grid editor rather than a gravity simulation; progress resets when the editor is closed or another puzzle is selected.
 
-Reveal the saved solution only when ready. Inspect it from different angles and by layer, including numbered 2D diagrams. The round planner assigns 4–8 puzzles while accounting for the shared inventory (40 pieces for four players; 80 for five to eight). Keep the physical game's timer, gems and finishing order together at the table; there is no synchronized online multiplayer room.
+Reveal the saved solution only when ready. Inspect it from different angles and by layer, including numbered 2D diagrams. The round planner assigns 2–8 puzzles while accounting for the shared inventory (40 pieces for two to four players; 80 for five to eight). Keep the physical game's timer, gems and finishing order together at the table; there is no synchronized online multiplayer room.
 
 Use the browser's print action for puzzle cards and the download pages for the English and Slovak rulebooks. Print at **100% / actual size**, with browser headers and footers disabled. Check the calibration reference before printing a batch; board cells and printable models must use the same physical unit size.
 

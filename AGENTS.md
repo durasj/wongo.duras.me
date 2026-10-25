@@ -1,6 +1,6 @@
 # Wongo development
 
-Wongo is a family 3D puzzle workshop for 4–8 simultaneous players, inspired by Ubongo 3D Master. It is a static Vite/React/TypeScript application hosted at https://wongo.duras.me on Vercel; it has no accounts, backend, paid services, or networked multiplayer. Manual single-player practice uses legal rotations and two grid layers with a 3D preview.
+Wongo is a family 3D puzzle workshop for 2–8 simultaneous players, inspired by Ubongo 3D Master. It is a static Vite/React/TypeScript application hosted at https://wongo.duras.me on Vercel; it has no accounts, backend, paid services, or networked multiplayer. Manual single-player practice uses legal rotations and two grid layers with a 3D preview.
 
 ## Invariants
 

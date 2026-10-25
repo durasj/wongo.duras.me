@@ -89,19 +89,22 @@ test('code lookup is case-insensitive and round selection is repeatable', () => 
   assert.deepEqual(selectRound(8,'hard',42).map(p=>p.code),selectRound(8,'hard',42).map(p=>p.code));
 });
 
-test('every player count and difficulty fits the real inventory across many rounds', () => {
-  for (let count=4;count<=8;count++) for (const difficulty of ['easy','hard'] as const) for (let seed=0;seed<20;seed++) {
+test('every player count from two to eight and both difficulties fit the real inventory across many rounds', () => {
+  for (let count=2;count<=8;count++) for (const difficulty of ['easy','hard'] as const) for (let seed=0;seed<20;seed++) {
     const round = selectRound(count,difficulty,seed);
     assert.equal(round.length,count);
     assert.equal(new Set(round.map(p=>p.code)).size,count);
     const used = new Map<number,number>();
     for (const puzzle of round) for (const id of puzzle.pieceIds) used.set(id,(used.get(id)??0)+1);
-    assert.ok(round.every(p=>p.code.startsWith('W3-') && isPlayablePuzzle(p)));
+    assert.ok(round.every(p=>p.code.startsWith('W3-') && p.difficulty===difficulty && isPlayablePuzzle(p)));
     for (const piece of pieces) assert.ok((used.get(piece.id)??0) <= (count<=4?piece.quantity4:piece.quantity8));
   }
+  assert.throws(()=>selectRound(2,'easy',1,{}),/Not enough pieces/);
+  assert.throws(()=>selectRound(3,'hard',1,{}),/Not enough pieces/);
   assert.throws(()=>selectRound(8,'hard',1,{}),/Not enough pieces/);
-  assert.throws(()=>selectRound(3,'easy'),/4 and 8/);
-  assert.throws(()=>selectRound(9,'easy'),/4 and 8/);
+  for(const count of [1,9,2.5,Number.NaN,Number.POSITIVE_INFINITY]) {
+    assert.throws(()=>selectRound(count,'easy'),/2 and 8/);
+  }
 });
 
 test('global colour rule rejects repeated colour groups and incorrect difficulty counts', () => {
