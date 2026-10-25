@@ -99,9 +99,11 @@ try {
 
   const isTacustav = await page.locator('.app-shell[data-edition="tacustav-2026"]').count() > 0;
   if (isTacustav) {
-    await page.locator('.workshop-portrait img').evaluate(image => image.decode());
+    await page.locator('.workshop-portrait img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
     assert.equal(await page.locator('.workshop-intro').count(),1,'Edition intro is missing');
-    await page.screenshot({path:'test-results/tacustav-intro-desktop.png'});
+    assert.equal(await page.locator('.workshop-portrait .crew-photo-crop img').count(),5,'The intro must show the original crew and Axel');
+  assert.ok((await page.locator('.workshop-portrait .crew-photo-crop img').evaluateAll(images=>images.map(image=>image.getAttribute('src')))).every(src=>src.startsWith('/art/tacustav/')&&src.endsWith('.jpg')),'Crew portraits must use the original photographs');
+  await page.screenshot({path:'test-results/tacustav-intro-desktop.png'});
     await page.locator('.workshop-actions .primary-button').click();
     assert.equal(await page.locator('.workshop-intro').count(),0,'Start building must take the player to the puzzle');
   }
@@ -233,7 +235,7 @@ try {
   if (isTacustav) {
     await page.setViewportSize({width:390,height:844});
     await page.goto(origin);
-    await page.locator('.workshop-portrait img').evaluate(image => image.decode());
+    await page.locator('.workshop-portrait img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Edition intro overflows mobile width');
     await page.screenshot({path:'test-results/tacustav-intro-mobile.png',fullPage:true});
     await page.locator('.site-rules-link').click();
@@ -249,7 +251,9 @@ try {
   await page.goto(`${origin}/?edition=tacustav-2026`);
   await page.locator('[data-edition="tacustav-2026"] .workshop-intro').waitFor();
   await page.waitForFunction(()=>localStorage.getItem('wongo-edition')==='tacustav-2026');
-  await page.locator('.workshop-portrait img').evaluate(image=>image.decode());
+  await page.locator('.workshop-portrait img').evaluateAll(images=>Promise.all(images.map(image=>image.decode())));
+  assert.equal(await page.locator('.workshop-portrait .crew-photo-crop img').count(),5,'The intro must show the original crew and Axel');
+  assert.ok((await page.locator('.workshop-portrait .crew-photo-crop img').evaluateAll(images=>images.map(image=>image.getAttribute('src')))).every(src=>src.startsWith('/art/tacustav/')&&src.endsWith('.jpg')),'Crew portraits must use the original photographs');
   await page.screenshot({path:'test-results/tacustav-intro-desktop.png'});
   await page.goto(origin);
   await page.locator('.workshop-intro').waitFor();
@@ -258,6 +262,8 @@ try {
   await page.screenshot({path:'test-results/tacustav-intro-mobile.png',fullPage:true});
   await page.locator('.site-rules-link').click();
   assert.ok((await page.locator('.rulebook-card').first().getAttribute('href')).includes('/tacustav/'));
+  assert.ok((await page.locator('.axel-guide').innerText()).includes('Axel, stavby majster'));
+  assert.equal(await page.locator('.axel-guide img').getAttribute('src'),'/art/tacustav/dog-poster.jpg');
   await page.screenshot({path:'test-results/tacustav-rules-mobile.png',fullPage:true});
   await page.goto(`${origin}/?edition=classic`);
   await page.locator('.app-shell[data-edition="classic"]').waitFor();
@@ -295,6 +301,11 @@ try {
     }
     assert.equal(await page.locator('.cover-access').getAttribute('href'),edition.url,'QR cover link points at wrong edition');
     await page.locator('.cover-qr').evaluate(image=>image.decode());
+    if(editionId==='tacustav-2026'){
+      assert.equal(await page.locator('.cover-crew .crew-photo').count(),5);
+      assert.equal(await page.locator('.sheet .axel-guide').count(),3,'Axel explains every rules page');
+      await page.locator('.crew-photo-crop img').evaluateAll(images=>Promise.all(images.map(image=>image.decode())));
+    }
     assert.ok((await page.locator('.cover-specs').innerText()).includes('2–8'));
     const printablePdf=await page.request.get(`${origin}${edition.rulesPath}/rulebook-${lang}.pdf`);
     assert.equal(printablePdf.status(),200);

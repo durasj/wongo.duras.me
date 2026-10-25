@@ -7,6 +7,7 @@ import App from './App';
 import './styles.css';
 import './palette.css';
 import './tacustav.css';
+import './crew.css';
 import { readEdition } from './lib/editions';
 import { filamentPalette } from './lib/pieces';
 

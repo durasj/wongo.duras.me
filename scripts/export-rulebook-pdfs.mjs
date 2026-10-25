@@ -19,11 +19,12 @@ try {
   const editions=JSON.parse(await readFile(new URL('../src/data/editions.json',import.meta.url),'utf8'));
   const canOptimize=spawnSync('gs',['--version'],{stdio:'ignore'}).status===0;
   await mkdir('test-results',{recursive:true});
-  for(const [id,edition] of Object.entries(editions)) for(const lang of ['en','sk']){
+  for(const [id,edition] of Object.entries(editions).filter(([id])=>!process.env.WONGO_RULEBOOK_EDITION||id===process.env.WONGO_RULEBOOK_EDITION)) for(const lang of ['en','sk']){
     await page.goto(`${origin}${edition.rulesPath}/rulebook-${lang}.html`);
     await page.evaluate(()=>document.fonts.ready);
     await page.locator('.cover-art').evaluate(img=>img.decode());
     await page.locator('.cover-qr').evaluate(img=>img.decode());
+    await page.locator('.crew-photo-crop img').evaluateAll(images=>Promise.all(images.map(img=>img.decode())));
     const target=`public${edition.rulesPath}/rulebook-${lang}.pdf`;
     const raw=`test-results/${id}-rulebook-${lang}-raw.pdf`;
     await page.pdf({path:raw,preferCSSPageSize:true,printBackground:true});

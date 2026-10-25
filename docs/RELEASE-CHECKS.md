@@ -1,5 +1,9 @@
 # Release checks
 
+## Version 0.6.1: the actual crew and Axel
+
+Tačustav uses original photographs clipped from the supplied posters in the intro, rulebook cards and printed covers. Faces are not redrawn. More poster slogans are adapted to puzzle play in English and Slovak. Axel, stavby majster, explains the web quick rules and all three printed rules pages. Printed narration preserves the existing instruction and adds humour around it. Classic artwork, the four filament colours, QR destinations and game logic are unchanged.
+
 ## Version 0.6: editions and illustrated rulebooks
 
 Classic and Tačustav 2026 now share the main app, with explicit edition links, a persistent local-storage preference and a visible selector. Both English and Slovak rulebooks have a generated illustrated cover, a vector QR code to the matching production edition, three readable rules pages, and downloadable PDFs. The Tačustav interface includes family-crew artwork and a bilingual workshop intro; Classic keeps a neutral layout and separate artwork. Decorative colours now follow the purchased filament palette throughout the interface.
