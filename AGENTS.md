@@ -20,7 +20,7 @@ Wongo is a family 3D puzzle workshop for 2–8 simultaneous players, inspired by
 - Both Classic and Tačustav ship from main. Use `src/data/editions.json` for names, artwork, rulebook paths and production QR URLs. Do not hardcode the whole app to one edition.
 - Preserve explicit `?edition=classic` / `?edition=tacustav-2026` precedence over the `wongo-edition` local-storage preference. Store no expiry. Keep a visible edition switch and storage-disabled support.
 - Source accent colours from the canonical piece catalogue. Sidebar swatches, logo, avatars and score gems must match the purchased filament palette. Neutral surfaces and readable text may use cream, ink and grey.
-- Tačustav uses the actual user-supplied poster photographs via `src/data/tacustav-photos.json` layout crops. Do not redraw the people. The dog is **Axel, stavby majster**, and explains the Tačustav rules with accurate, light-hearted callouts.
+- Tačustav uses the actual user-supplied poster photographs via `src/data/tacustav-photos.json` layout crops. Keep these source crops unchanged. The cover uses an explicitly requested identity-preserving image montage of these people working on giant game blocks (`/art/tacustav-construction.webp`); keep the supplied people recognizable and the game blocks prominent. The dog is **Axel, stavby majster**, and explains the Tačustav rules with accurate, light-hearted callouts.
 - Keep generated cover art decorative and outside exact puzzle geometry. QR codes must be generated deterministically, never by an image model. Both languages and editions need their own correctly linked covers.
 
 ## Working conventions

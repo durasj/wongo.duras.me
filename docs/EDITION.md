@@ -13,7 +13,7 @@ Both editions ship together on `main` at https://wongo.duras.me. The old edition
 
 ## Art direction
 
-The user supplied Tačustav posters on 25 October 2026. Tačustav now uses **the actual photographs** from those posters: the man in the blue shirt, the man in the grey cap, the woman in the teal sweater, the woman in the pink shirt, and Axel in his hard hat. `src/data/tacustav-photos.json` records exact source regions; `RealCrew` and the rulebook generator clip the original JPEGs in layout. They do not redraw faces or invent new poses. The same five photographic regions appear in the website intro and printed cover.
+The user supplied Tačustav posters on 25 October 2026. Tačustav now uses **the actual photographs** from those posters: the man in the blue shirt, the man in the grey cap, the woman in the teal sweater, the woman in the pink shirt, and Axel in his hard hat. `src/data/tacustav-photos.json` records exact source regions; `RealCrew` and the rulebook generator clip the original JPEGs in layout. They do not redraw faces or invent new poses. The same five photographic regions appear in the website intro. At the user’s request, the printed cover now uses a reference-based photographic montage of this crew working on oversized game blocks, with Axel supervising. Rulebook thumbnails use the same cover scene.
 
 **Axel, stavby majster**, is the rules narrator. His real photo and speech bubble introduce the web rules, the quick rules use his voice, and each printed rules page gives him an explanatory callout. Printed callouts retain the existing instruction verbatim and add a short joke. The classic edition retains its neutral artwork and factual rules presentation.
 
@@ -21,7 +21,7 @@ Humour adapts the supplied slogans: “Robíme bordel, aby ste mali poriadok”,
 
 Classic uses separate neutral artwork: matte voxel pieces and gems on an ivory tabletop. It keeps the standard interface without workshop imagery. Both editions have illustrated A4 rulebook covers in English and Slovak, with precise typeset titles and code-generated QR symbols.
 
-Classic artwork uses the built-in image generator; its prompt is in `docs/artwork/classic-cover-prompt.txt`, and the asset is `public/art/wongo-classic.webp`. The earlier generated Tačustav illustration and prompt are retained as superseded artwork, not displayed in the current edition. Source posters are stored byte-for-byte in `public/art/tacustav/`; the full-image assets preserve original quality while layout shows selected photographic regions. No image model was used to alter these photographs. Typography and QR codes are added precisely in code.
+Classic artwork uses the built-in image generator; its prompt is in `docs/artwork/classic-cover-prompt.txt`, and the asset is `public/art/wongo-classic.webp`. The earlier generated Tačustav illustration and prompt are retained as superseded artwork, not displayed in the current edition. Source posters are stored byte-for-byte in `public/art/tacustav/`; the full-image assets preserve original quality while layout shows selected photographic regions. The source JPEGs stay unchanged. The new decorative cover scene is generated from the Classic block artwork and all three source posters, preserving recognizable people, clothing and Axel while showing them working on the blocks. Its prompt is in `docs/artwork/tacustav-construction-prompt.txt`. Typography and QR codes are added precisely in code.
 
 ## Palette and functional printing
 

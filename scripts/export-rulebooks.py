@@ -73,9 +73,8 @@ def cover(lang,edition,config):
     edition_label='TAČUSTAV EDITION <span class="cover-year">2026</span>' if special else ('Klasická edícia' if sk else 'Classic edition')
     play='Hrať online' if sk else 'Play online'
     qr=f'<a class="cover-access" href="{config["url"]}"><img class="cover-qr" src="/art/qr-{edition}.svg" width="132" height="132" alt="{play}: {config["url"]}"><strong>{play}</strong><span>wongo.duras.me</span></a>'
-    photo_content=(f'<div class="cover-crew">{real_crew(lang)}</div><aside class="cover-axel-intro"><strong>Axel, stavby majster</strong><p>{"Džury nepreberám!" if sk else "No gaps on my watch!"}</p></aside>') if special else ''
-    backdrop='/art/wongo-classic.webp' if special else config['artwork']
-    return f'<section class="rulebook-cover" aria-label="{subtitle}"><img class="cover-art" src="{backdrop}" width="1024" height="1536" alt="{"" if special else alt}"><header class="cover-heading"><span class="cover-kicker">{kicker}</span><h1>WONGO</h1><div class="cover-edition">{edition_label}</div></header>{qr}{photo_content}<div class="cover-caption"><h2>{title}</h2><p>{subtitle}</p><p class="cover-specs">{specs}</p></div></section>'
+    backdrop=config['artwork']
+    return f'<section class="rulebook-cover" aria-label="{subtitle}"><img class="cover-art" src="{backdrop}" width="1024" height="1536" alt="{alt}"><header class="cover-heading"><span class="cover-kicker">{kicker}</span><h1>WONGO</h1><div class="cover-edition">{edition_label}</div></header>{qr}<div class="cover-caption"><h2>{title}</h2><p>{subtitle}</p><p class="cover-specs">{specs}</p></div></section>'
 
 for edition,config in EDITIONS.items():
     destination=ROOT/'public'/config['rulesPath'].lstrip('/')
