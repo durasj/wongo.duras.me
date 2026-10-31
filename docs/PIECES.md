@@ -97,3 +97,9 @@ The second command writes an alternate set without replacing the canonical 20 mm
 For pitch L and chamfer c, each physical voxel volume is L³ − 6Lc² + 16c³/3. Mesh checks require this volume times the occupied cube count, two-manifold edge incidence and outward winding. The independent STL ray test still recovers exactly the canonical occupied cells and handedness. `--chamfer=0` exports sharp comparison models without changing the catalogue.
 
 The 5% gyroid recommendation keeps 3 walls and 0.8 mm top/bottom. It is an engineering starting point, not a universally proven minimum. Research and slicer comparisons are in `docs/PRINTING.md` and `docs/infill-comparison.json`.
+
+## Fit and central-bed revision (2026-10-31)
+
+Only the inner slot of yellow U/Gate #04 changes: remove 0.15 mm per wall to widen its 20.00 mm opening to 20.30 mm. It provides 0.30 mm total clearance around an existing 20.00 mm tab. Exterior dimensions remain unchanged, and the other fifteen published STL models are byte-for-byte identical, so already printed pieces remain compatible. Do not scale whole pieces. Print one Gate #04 trial to confirm real printer fit.
+
+All four P1S plates use compact packing centered at (128,128), at least 6 mm gaps, and a maximum 200 mm group span. Only positions/orientations change on the blue, red and green plates. All published cards and puzzle codes remain valid. Previous filament/time estimates describe the original geometry/layout and are historical; re-slice these projects for current numbers.

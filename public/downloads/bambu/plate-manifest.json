@@ -1,6 +1,11 @@
 {
   "unitMm": 20,
   "chamferMm": 0.5,
+  "slotReliefMm": 0.15,
+  "slotReliefPieceId": 4,
+  "layoutVersion": "compact-center-v2",
+  "gapMm": 6,
+  "maxSpanMm": 200,
   "layerHeightMm": 0.1,
   "nozzleMm": 0.4,
   "infillPercent": 5,
@@ -14,8 +19,8 @@
         {
           "pieceId": 1,
           "copy": 1,
-          "x": 28,
-          "y": 58,
+          "x": 42,
+          "y": 52,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -23,8 +28,8 @@
         {
           "pieceId": 1,
           "copy": 2,
-          "x": 98,
-          "y": 58,
+          "x": 108,
+          "y": 52,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -32,17 +37,17 @@
         {
           "pieceId": 2,
           "copy": 1,
-          "x": 168,
-          "y": 58,
-          "width": 60,
-          "depth": 40,
+          "x": 174,
+          "y": 52,
+          "width": 40,
+          "depth": 60,
           "height": 40
         },
         {
           "pieceId": 2,
           "copy": 2,
-          "x": 28,
-          "y": 108,
+          "x": 42,
+          "y": 98,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -51,7 +56,7 @@
           "pieceId": 3,
           "copy": 1,
           "x": 108,
-          "y": 108,
+          "y": 98,
           "width": 40,
           "depth": 40,
           "height": 40
@@ -59,8 +64,8 @@
         {
           "pieceId": 3,
           "copy": 2,
-          "x": 178,
-          "y": 108,
+          "x": 154,
+          "y": 118,
           "width": 40,
           "depth": 40,
           "height": 40
@@ -68,8 +73,8 @@
         {
           "pieceId": 3,
           "copy": 3,
-          "x": 38,
-          "y": 158,
+          "x": 42,
+          "y": 144,
           "width": 40,
           "depth": 40,
           "height": 40
@@ -77,8 +82,8 @@
         {
           "pieceId": 4,
           "copy": 1,
-          "x": 98,
-          "y": 158,
+          "x": 88,
+          "y": 144,
           "width": 60,
           "depth": 40,
           "height": 20
@@ -86,8 +91,8 @@
         {
           "pieceId": 4,
           "copy": 2,
-          "x": 168,
-          "y": 158,
+          "x": 154,
+          "y": 164,
           "width": 60,
           "depth": 40,
           "height": 20
@@ -102,8 +107,8 @@
         {
           "pieceId": 5,
           "copy": 1,
-          "x": 28,
-          "y": 33,
+          "x": 42,
+          "y": 39,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -111,8 +116,8 @@
         {
           "pieceId": 5,
           "copy": 2,
-          "x": 98,
-          "y": 33,
+          "x": 108,
+          "y": 39,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -120,17 +125,17 @@
         {
           "pieceId": 6,
           "copy": 1,
-          "x": 168,
-          "y": 33,
-          "width": 60,
-          "depth": 40,
+          "x": 174,
+          "y": 39,
+          "width": 40,
+          "depth": 60,
           "height": 40
         },
         {
           "pieceId": 6,
           "copy": 2,
-          "x": 28,
-          "y": 83,
+          "x": 42,
+          "y": 85,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -138,8 +143,8 @@
         {
           "pieceId": 7,
           "copy": 1,
-          "x": 98,
-          "y": 83,
+          "x": 108,
+          "y": 85,
           "width": 60,
           "depth": 40,
           "height": 20
@@ -147,17 +152,17 @@
         {
           "pieceId": 7,
           "copy": 2,
-          "x": 168,
-          "y": 83,
-          "width": 60,
-          "depth": 40,
+          "x": 174,
+          "y": 105,
+          "width": 40,
+          "depth": 60,
           "height": 20
         },
         {
           "pieceId": 7,
           "copy": 3,
-          "x": 28,
-          "y": 133,
+          "x": 42,
+          "y": 131,
           "width": 60,
           "depth": 40,
           "height": 20
@@ -166,7 +171,7 @@
           "pieceId": 8,
           "copy": 1,
           "x": 108,
-          "y": 133,
+          "y": 131,
           "width": 40,
           "depth": 40,
           "height": 20
@@ -174,8 +179,8 @@
         {
           "pieceId": 8,
           "copy": 2,
-          "x": 178,
-          "y": 133,
+          "x": 154,
+          "y": 171,
           "width": 40,
           "depth": 40,
           "height": 20
@@ -183,8 +188,8 @@
         {
           "pieceId": 8,
           "copy": 3,
-          "x": 38,
-          "y": 183,
+          "x": 42,
+          "y": 177,
           "width": 40,
           "depth": 40,
           "height": 20
@@ -192,8 +197,8 @@
         {
           "pieceId": 8,
           "copy": 4,
-          "x": 108,
-          "y": 183,
+          "x": 88,
+          "y": 177,
           "width": 40,
           "depth": 40,
           "height": 20
@@ -208,8 +213,8 @@
         {
           "pieceId": 9,
           "copy": 1,
-          "x": 38,
-          "y": 33,
+          "x": 62,
+          "y": 131,
           "width": 40,
           "depth": 40,
           "height": 40
@@ -218,7 +223,7 @@
           "pieceId": 9,
           "copy": 2,
           "x": 108,
-          "y": 33,
+          "y": 131,
           "width": 40,
           "depth": 40,
           "height": 40
@@ -226,8 +231,8 @@
         {
           "pieceId": 9,
           "copy": 3,
-          "x": 178,
-          "y": 33,
+          "x": 154,
+          "y": 131,
           "width": 40,
           "depth": 40,
           "height": 40
@@ -235,8 +240,8 @@
         {
           "pieceId": 10,
           "copy": 1,
-          "x": 38,
-          "y": 83,
+          "x": 62,
+          "y": 177,
           "width": 40,
           "depth": 40,
           "height": 40
@@ -245,7 +250,7 @@
           "pieceId": 10,
           "copy": 2,
           "x": 108,
-          "y": 83,
+          "y": 177,
           "width": 40,
           "depth": 40,
           "height": 40
@@ -253,8 +258,8 @@
         {
           "pieceId": 10,
           "copy": 3,
-          "x": 178,
-          "y": 83,
+          "x": 154,
+          "y": 177,
           "width": 40,
           "depth": 40,
           "height": 40
@@ -262,8 +267,8 @@
         {
           "pieceId": 11,
           "copy": 1,
-          "x": 28,
-          "y": 133,
+          "x": 62,
+          "y": 39,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -271,8 +276,8 @@
         {
           "pieceId": 11,
           "copy": 2,
-          "x": 98,
-          "y": 133,
+          "x": 128,
+          "y": 39,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -280,8 +285,8 @@
         {
           "pieceId": 12,
           "copy": 1,
-          "x": 168,
-          "y": 133,
+          "x": 62,
+          "y": 85,
           "width": 60,
           "depth": 40,
           "height": 20
@@ -289,8 +294,8 @@
         {
           "pieceId": 12,
           "copy": 2,
-          "x": 28,
-          "y": 183,
+          "x": 128,
+          "y": 85,
           "width": 60,
           "depth": 40,
           "height": 20
@@ -305,8 +310,8 @@
         {
           "pieceId": 13,
           "copy": 1,
-          "x": 28,
-          "y": 33,
+          "x": 42,
+          "y": 39,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -314,8 +319,8 @@
         {
           "pieceId": 13,
           "copy": 2,
-          "x": 98,
-          "y": 33,
+          "x": 108,
+          "y": 39,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -323,17 +328,17 @@
         {
           "pieceId": 14,
           "copy": 1,
-          "x": 168,
-          "y": 33,
-          "width": 60,
-          "depth": 40,
+          "x": 174,
+          "y": 39,
+          "width": 40,
+          "depth": 60,
           "height": 40
         },
         {
           "pieceId": 14,
           "copy": 2,
-          "x": 28,
-          "y": 83,
+          "x": 42,
+          "y": 85,
           "width": 60,
           "depth": 40,
           "height": 40
@@ -341,8 +346,8 @@
         {
           "pieceId": 15,
           "copy": 1,
-          "x": 98,
-          "y": 83,
+          "x": 108,
+          "y": 85,
           "width": 60,
           "depth": 40,
           "height": 20
@@ -350,17 +355,17 @@
         {
           "pieceId": 15,
           "copy": 2,
-          "x": 168,
-          "y": 83,
-          "width": 60,
-          "depth": 40,
+          "x": 174,
+          "y": 105,
+          "width": 40,
+          "depth": 60,
           "height": 20
         },
         {
           "pieceId": 16,
           "copy": 1,
-          "x": 28,
-          "y": 133,
+          "x": 42,
+          "y": 131,
           "width": 60,
           "depth": 40,
           "height": 20
@@ -368,8 +373,8 @@
         {
           "pieceId": 16,
           "copy": 2,
-          "x": 98,
-          "y": 133,
+          "x": 108,
+          "y": 131,
           "width": 60,
           "depth": 40,
           "height": 20
@@ -377,8 +382,8 @@
         {
           "pieceId": 16,
           "copy": 3,
-          "x": 168,
-          "y": 133,
+          "x": 42,
+          "y": 177,
           "width": 60,
           "depth": 40,
           "height": 20
@@ -386,8 +391,8 @@
         {
           "pieceId": 16,
           "copy": 4,
-          "x": 28,
-          "y": 183,
+          "x": 108,
+          "y": 177,
           "width": 60,
           "depth": 40,
           "height": 20

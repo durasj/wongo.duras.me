@@ -14,6 +14,8 @@ Use a single common difficulty and one shared D6 roll. For 2–4 players, select
 
 Open the four colour projects in `public/downloads/bambu/` as projects, not geometry only. Use a standard 0.4 mm nozzle, 0.10 mm layers including the first layer, 3 walls, **5% gyroid**, 8 top/bottom layers with 0.8 mm minimum thickness, no supports/brim/prime tower and by-layer printing. Verify your actual plate and filament. The starting Textured PEI/PLA profile uses 220 °C nozzle, 55 °C bed and an 8 mm³/s volumetric limit. It derives from Generic PLA and is not manufacturer-certified or physically calibrated for Flashforge.
 
+**Historical v1 figures below — re-slice the revised v2 models for current estimates.**
+
 | Plate | Pieces | Filament | Estimated time |
 | --- | ---: | ---: | ---: |
 | Mango Yellow | 9 | 117.8 g | 6 h 53 min |
@@ -37,3 +39,9 @@ Run `npm test`, `npm run build`, `npm run test:browser`, `npm run test:print` an
 The expanded deck adds 547 verified `WD6` puzzles; the online library now contains 1,547 puzzles including the unchanged original 1,000 `W3` entries. Sets 01–12 and every existing code retain their meanings. New sets 13–36 add different six-choice card faces, with usage balancing to reduce repeated individual puzzles. The 3,456 printed assignments use 902 unique puzzles: individual puzzles still recur. Keep used packs aside for four nine-round games without reusing a card.
 
 Already printed sets 01–12? Print only `/downloads/puzzles/wongo-d6-expansion-13-36.pdf`: 192 pages on 96 A4 duplex sheets. The full deck uses 144 sheets. Sort by the prominent SADA / SET number, then block and card slot.
+
+## Fit and central-bed revision (2026-10-31)
+
+Only the inner slot of yellow U/Gate #04 changes: remove 0.15 mm per wall to widen its 20.00 mm opening to 20.30 mm. It provides 0.30 mm total clearance around an existing 20.00 mm tab. Exterior dimensions remain unchanged, and the other fifteen published STL models are byte-for-byte identical, so already printed pieces remain compatible. Do not scale whole pieces. Print one Gate #04 trial to confirm real printer fit.
+
+All four P1S plates use compact packing centered at (128,128), at least 6 mm gaps, and a maximum 200 mm group span. Only positions/orientations change on the blue, red and green plates. All published cards and puzzle codes remain valid. Previous filament/time estimates describe the original geometry/layout and are historical; re-slice these projects for current numbers.

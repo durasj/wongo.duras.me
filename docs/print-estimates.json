@@ -47,5 +47,8 @@
     "grams": 987.7,
     "hours": 57.59
   },
-  "chamferMm": 0.5
+  "chamferMm": 0.5,
+  "currentGeometry": false,
+  "geometryVersion": "chamfered-voxels-v1",
+  "status": "Historical estimates; current clearance-v2 centered plates must be re-sliced."
 }

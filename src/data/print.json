@@ -5,5 +5,9 @@
   "wallLoops": 3,
   "infillPercent": 5,
   "chamferMm": 0.5,
-  "infillPattern": "gyroid"
+  "infillPattern": "gyroid",
+  "plateGapMm": 6,
+  "plateMaxSpanMm": 200,
+  "slotReliefMm": 0.15,
+  "slotReliefPieceId": 4
 }

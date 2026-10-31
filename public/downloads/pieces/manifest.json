@@ -1,8 +1,10 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "unitMm": 20,
   "chamferMm": 0.5,
-  "geometryVersion": "chamfered-voxels-v1",
+  "slotReliefMm": 0.15,
+  "slotReliefPieceId": 4,
+  "geometryVersion": "yellow-gate-slot-v2",
   "shapeCount": 16,
   "inventory4": 40,
   "inventory8": 80,
@@ -46,6 +48,7 @@
       "scadFilename": "wongo-piece-01-yellow.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -125,6 +128,7 @@
       "scadFilename": "wongo-piece-02-yellow.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -199,6 +203,7 @@
       "scadFilename": "wongo-piece-03-yellow.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -273,6 +278,7 @@
       "scadFilename": "wongo-piece-04-yellow.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0.15,
       "printCubes": [
         [
           0,
@@ -310,7 +316,7 @@
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 204,
-        "volumeMm3": 39853.333333333336
+        "volumeMm3": 39734.46208333336
       }
     },
     {
@@ -352,6 +358,7 @@
       "scadFilename": "wongo-piece-05-blue.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -431,6 +438,7 @@
       "scadFilename": "wongo-piece-06-blue.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -510,6 +518,7 @@
       "scadFilename": "wongo-piece-07-blue.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -579,6 +588,7 @@
       "scadFilename": "wongo-piece-08-blue.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -648,6 +658,7 @@
       "scadFilename": "wongo-piece-09-red.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -722,6 +733,7 @@
       "scadFilename": "wongo-piece-10-red.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -796,6 +808,7 @@
       "scadFilename": "wongo-piece-11-red.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -870,6 +883,7 @@
       "scadFilename": "wongo-piece-12-red.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -944,6 +958,7 @@
       "scadFilename": "wongo-piece-13-green.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -1023,6 +1038,7 @@
       "scadFilename": "wongo-piece-14-green.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -1097,6 +1113,7 @@
       "scadFilename": "wongo-piece-15-green.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
@@ -1166,6 +1183,7 @@
       "scadFilename": "wongo-piece-16-green.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "slotReliefMm": 0,
       "printCubes": [
         [
           0,
