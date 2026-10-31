@@ -14,6 +14,8 @@ Use a single common difficulty and one shared D6 roll. For 2–4 players, select
 
 Open the four colour projects in `public/downloads/bambu/` as projects, not geometry only. Use a standard 0.4 mm nozzle, 0.10 mm layers including the first layer, 3 walls, **5% gyroid**, 8 top/bottom layers with 0.8 mm minimum thickness, no supports/brim/prime tower and by-layer printing. Verify your actual plate and filament. The starting Textured PEI/PLA profile uses 220 °C nozzle, 55 °C bed and an 8 mm³/s volumetric limit. It derives from Generic PLA and is not manufacturer-certified or physically calibrated for Flashforge.
 
+**Historical v1 figures below — re-slice the revised v2 models for current estimates.**
+
 | Plate | Pieces | Filament | Estimated time |
 | --- | ---: | ---: | ---: |
 | Mango Yellow | 9 | 117.8 g | 6 h 53 min |
