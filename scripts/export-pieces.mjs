@@ -5,7 +5,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chamferedMesh, chamferedVoxel } from './lib/chamfered-voxel.mjs';
-import { insetMesh } from './lib/fit-clearance.mjs';
+import { openGateSlot } from './lib/fit-clearance.mjs';
 import { piecePreviewSVG } from './lib/piece-preview.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -15,7 +15,7 @@ const unit = Number(args.unit ?? defaults.unitMm);
 if (!Number.isFinite(unit) || unit <= 0 || unit > 100) throw new Error('--unit must be >0 and <=100 mm');
 const chamfer = Number(args.chamfer ?? defaults.chamferMm ?? 0);
 if (!Number.isFinite(chamfer) || chamfer < 0 || chamfer >= unit/4) throw Error('Invalid chamfer');
-const inset=Number(args.inset ?? defaults.surfaceInsetMm ?? 0);
+const slotRelief=Number(args['slot-relief'] ?? defaults.slotReliefMm ?? 0);
 const voxelVolume = unit**3 - 6*unit*chamfer**2 + 16/3*chamfer**3;
 const output = args.out ? path.resolve(args.out) : path.join(root, 'public/downloads/pieces');
 const pieces = JSON.parse(await readFile(path.join(root, 'src/data/pieces.json'), 'utf8'));
@@ -69,7 +69,7 @@ function mesh(cubes) {
   }
   return triangles;
 }
-function validateMesh(triangles, cubeCount) {
+function validateMesh(triangles, cubeCount, relieved=false) {
   const edges = new Map(); let signedVolume = 0;
   for (const {n,v:[a,b,c]} of triangles) {
     if (dot(cross(sub(b,a),sub(c,a)),n) <= 0) throw new Error('Triangle has wrong winding');
@@ -81,8 +81,8 @@ function validateMesh(triangles, cubeCount) {
     }
   }
   if ([...edges.values()].some((e) => e.count !== 2 || e.direction !== 0)) throw new Error('STL is not a closed consistently oriented two-manifold');
-  if (!inset && Math.abs(signedVolume-cubeCount*voxelVolume) > 1e-5) throw new Error('STL volume does not match the specified chamfered voxel union');
-  if(inset && !(signedVolume>cubeCount*voxelVolume*.9 && signedVolume<cubeCount*voxelVolume))throw Error('Invalid inset volume');
+  if (!relieved && Math.abs(signedVolume-cubeCount*voxelVolume) > 1e-5) throw new Error('STL volume does not match the specified chamfered voxel union');
+  if(relieved&&!(signedVolume>cubeCount*voxelVolume*.95&&signedVolume<cubeCount*voxelVolume))throw Error('Invalid relieved Gate volume');
   return {watertight:true,consistentlyOriented:true,triangles:triangles.length,volumeMm3:signedVolume};
 }
 function stl(name, triangles) {
@@ -135,22 +135,25 @@ for (const piece of pieces) {
   const signature=orientations(piece.cubes).map((o) => JSON.stringify(o)).sort()[0];
   if (signatures.has(signature)) throw new Error(`Duplicate shape under rotations: ${piece.id}`);
   signatures.add(signature);
-  const cubes=printOrientation(piece.cubes), triangles=insetMesh(chamfer ? chamferedMesh(cubes,unit,chamfer) : mesh(cubes),inset), validation=validateMesh(triangles,cubes.length);
+  const cubes=printOrientation(piece.cubes), relieved=piece.id===defaults.slotReliefPieceId&&slotRelief>0;
+  const original=chamfer ? chamferedMesh(cubes,unit,chamfer) : mesh(cubes);
+  const triangles=relieved?openGateSlot(original,cubes,unit,chamfer,slotRelief):original,validation=validateMesh(triangles,cubes.length,relieved);
   const basename=`wongo-piece-${String(piece.id).padStart(2,'0')}-${piece.color}`;
   const data=stl(basename,triangles);
-  const points=[],pointIds=new Map();
-  const faces=triangles.map(t=>t.v.map(v=>{const k=key(v);if(!pointIds.has(k)){pointIds.set(k,points.length);points.push(v);}return pointIds.get(k);}).reverse());
-  const scad=`// Wongo piece ${piece.id}: ${piece.name}. GPL-3.0.\n// 20 mm lattice; ${inset} mm inward surface clearance; ${chamfer} mm chamfer.\n// Mesh is identical to the STL; changing unit scales the complete finished mesh.\nunit=${unit};\nscale([unit/${unit},unit/${unit},unit/${unit}]) polyhedron(points=${JSON.stringify(points)},faces=${JSON.stringify(faces)},convexity=10);\n`;
+  const voxel = chamfer ? chamferedVoxel(unit,chamfer) : null;
+  const geometry = voxel ? `scale([unit,unit,unit]) polyhedron(points=${JSON.stringify(voxel.vertices.map(v=>v.map(x=>x/unit)))}, faces=${JSON.stringify(voxel.faces.map(f=>[...f.indices].reverse()))}, convexity=10);` : 'cube([unit,unit,unit]);';
+  let scad=`// Wongo piece ${piece.id}: ${piece.name}. GPL-3.0; see README.txt.\n// ${chamfer} mm chamfer at the default ${unit} mm pitch; unit scales everything.\nunit = ${unit};\npositions = ${JSON.stringify(cubes)};\nunion() { for (p = positions) translate(p * unit) { ${geometry} } }\n`;
+  if(relieved){const points=[],ids=new Map();const faces=triangles.map(t=>t.v.map(v=>{const k=key(v);if(!ids.has(k)){ids.set(k,points.length);points.push(v);}return ids.get(k);}).reverse());scad=`// Yellow Gate #04: ${slotRelief} mm per inner slot wall; exterior unchanged.\nunit=${unit};\nscale([unit/${unit},unit/${unit},unit/${unit}]) polyhedron(points=${JSON.stringify(points)},faces=${JSON.stringify(faces)},convexity=10);\n`;}
 
 
   await writeFile(path.join(output,`${basename}.stl`),data); await writeFile(path.join(output,`${basename}.scad`),scad);
   entries.push([`${basename}.stl`,data],[`${basename}.scad`,scad]);
-  exports.push({...piece,filename:`${basename}.stl`,scadFilename:`${basename}.scad`,unitMm:unit,chamferMm:chamfer,surfaceInsetMm:inset,printCubes:cubes,supportsRequired:false,dimensionsMm:[0,1,2].map((axis) => Number(Math.max(...triangles.flatMap(t=>t.v.map(v=>v[axis]))).toFixed(8))),validation});
+  exports.push({...piece,filename:`${basename}.stl`,scadFilename:`${basename}.scad`,unitMm:unit,chamferMm:chamfer,slotReliefMm:relieved?slotRelief:0,printCubes:cubes,supportsRequired:false,dimensionsMm:[0,1,2].map((axis) => (Math.max(...cubes.map((v) => v[axis]))+1)*unit),validation});
 }
 if(chamfer){const preview=piecePreviewSVG(exports.find(p=>p.id===7),unit,chamfer,chamferedVoxel);await writeFile(path.join(output,'chamfer-preview.svg'),preview);entries.push(['chamfer-preview.svg',preview]);}
-const manifest={schemaVersion:3,unitMm:unit,chamferMm:chamfer,surfaceInsetMm:inset,geometryVersion:inset?'chamfered-clearance-v2':chamfer?'chamfered-voxels-v1':'sharp-voxels-v1',shapeCount:pieces.length,inventory4:pieces.reduce((n,p) => n+p.quantity4,0),inventory8:pieces.reduce((n,p) => n+p.quantity8,0),pieces:exports};
+const manifest={schemaVersion:3,unitMm:unit,chamferMm:chamfer,slotReliefMm:slotRelief,slotReliefPieceId:defaults.slotReliefPieceId,geometryVersion:slotRelief?'yellow-gate-slot-v2':chamfer?'chamfered-voxels-v1':'sharp-voxels-v1',shapeCount:pieces.length,inventory4:pieces.reduce((n,p) => n+p.quantity4,0),inventory8:pieces.reduce((n,p) => n+p.quantity8,0),pieces:exports};
 const manifestText=JSON.stringify(manifest,null,2)+'\n';
-const readme=`WONGO PRINTABLE PIECES\n\n16 distinct shapes. All STL files use millimetres; unit cube side ${unit} mm.\nEach STL is an outer union surface: no internal coincident faces.\nAll are oriented with flat supported layers; supports are not required for ideal geometry.\nPrint quantities are in manifest.json: quantity4 (40 total) or quantity8 (80 total).\nUse the 40-piece pool for 2-4 players or the 80-piece pool for 5-8 players.\nThese are a shared inventory, not 16 pieces per player.\n\nFILAMENT: Flashforge PLA Matte, 1.75 mm\nIDs 01-04: Mango Yellow (9 / 18 copies for 4 / 8 players)\nIDs 05-08: Blue (072C) (11 / 22 copies)\nIDs 09-12: Red (10 / 20 copies)\nIDs 13-16: Mint Green (10 / 20 copies)\nScreen hex colours in manifest.json are visual approximations, not calibrated filament values.\nSTL files contain geometry only; select the matching filament in your slicer.\n\nStart with PLA, 0.1 mm layers, 3 walls, 5% gyroid infill; use your calibrated filament profile.\nPrint a small fit sample before committing to the full set. Inspect first-layer flare.\nLattice pitch and occupied cells are unchanged. External surfaces are inset ${inset} mm, including concave slot walls. A nominal 20 mm stud is ${unit-2*inset} mm wide; a 20 mm slot is ${unit+2*inset} mm wide. Fit revision v2; print a yellow Gate #04 trial first. Each voxel has a ${chamfer} mm 45-degree edge chamfer; joining faces are fused, leaving visible shallow seam grooves. The physical solid is intentionally smaller at edges than the exact solver volume.\nSCAD files expose the unit size. Scale all pieces AND future puzzle cards together.\n\nGeometry data adapted from ps78/Ubongo blockfactory/blockfactory.go,\nblob 63c1a892046543f1973b375d3dfba89f90c8114e, GPL-3.0.\nSource: https://github.com/ps78/Ubongo\nWongo source and provenance: https://github.com/durasj/wongo.duras.me\nGame concept: Grzegorz Rejchtman / KOSMOS. Independent family project.\nSee repository LICENSE and docs/PIECES.md.\n`;
+const readme=`WONGO PRINTABLE PIECES\n\n16 distinct shapes. All STL files use millimetres; unit cube side ${unit} mm.\nEach STL is an outer union surface: no internal coincident faces.\nAll are oriented with flat supported layers; supports are not required for ideal geometry.\nPrint quantities are in manifest.json: quantity4 (40 total) or quantity8 (80 total).\nUse the 40-piece pool for 2-4 players or the 80-piece pool for 5-8 players.\nThese are a shared inventory, not 16 pieces per player.\n\nFILAMENT: Flashforge PLA Matte, 1.75 mm\nIDs 01-04: Mango Yellow (9 / 18 copies for 4 / 8 players)\nIDs 05-08: Blue (072C) (11 / 22 copies)\nIDs 09-12: Red (10 / 20 copies)\nIDs 13-16: Mint Green (10 / 20 copies)\nScreen hex colours in manifest.json are visual approximations, not calibrated filament values.\nSTL files contain geometry only; select the matching filament in your slicer.\n\nStart with PLA, 0.1 mm layers, 3 walls, 5% gyroid infill; use your calibrated filament profile.\nPrint a small fit sample before committing to the full set. Inspect first-layer flare.\nLattice pitch and occupied cells are unchanged. Only yellow Gate #04 has ${slotRelief} mm relief per inner slot wall, widening its nominal 20 mm opening to ${unit+2*slotRelief} mm. Its exterior dimensions and every other model are unchanged. Compatible with previously printed unscaled 20 mm pieces. Each voxel has a ${chamfer} mm 45-degree edge chamfer; joining faces are fused, leaving visible shallow seam grooves. The physical solid is intentionally smaller at edges than the exact solver volume.\nSCAD files expose the unit size. Scale all pieces AND future puzzle cards together.\n\nGeometry data adapted from ps78/Ubongo blockfactory/blockfactory.go,\nblob 63c1a892046543f1973b375d3dfba89f90c8114e, GPL-3.0.\nSource: https://github.com/ps78/Ubongo\nWongo source and provenance: https://github.com/durasj/wongo.duras.me\nGame concept: Grzegorz Rejchtman / KOSMOS. Independent family project.\nSee repository LICENSE and docs/PIECES.md.\n`;
 await writeFile(path.join(output,'manifest.json'),manifestText); await writeFile(path.join(output,'README.txt'),readme);
 entries.push(['manifest.json',manifestText],['README.txt',readme]);
 const license=await readFile(path.join(root,'LICENSE'),'utf8');

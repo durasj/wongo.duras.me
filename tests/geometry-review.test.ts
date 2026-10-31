@@ -89,6 +89,6 @@ test('all exported STLs reconstruct the canonical shape using physical rotations
     let volume=0;
     for (const [a,b,c] of mesh) volume += (a[0]*(b[1]*c[2]-b[2]*c[1]) + a[1]*(b[2]*c[0]-b[0]*c[2]) + a[2]*(b[0]*c[1]-b[1]*c[0]))/6;
     const nominalVolume=source.cubes.length*(unit**3-6*unit*(entry.chamferMm??0)**2+16/3*(entry.chamferMm??0)**3);
-    if(entry.surfaceInsetMm){assert.ok(volume<nominalVolume&&volume>nominalVolume*.9);assert.equal(entry.surfaceInsetMm,.15);}else assert.ok(Math.abs(volume-nominalVolume)<1e-5);
+    if(entry.slotReliefMm){assert.equal(entry.id,4);assert.ok(volume<nominalVolume&&volume>nominalVolume*.95);assert.equal(entry.slotReliefMm,.15);}else assert.ok(Math.abs(volume-nominalVolume)<1e-5);
   }
 });

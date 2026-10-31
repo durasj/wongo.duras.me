@@ -6,7 +6,8 @@
   "infillPercent": 5,
   "chamferMm": 0.5,
   "infillPattern": "gyroid",
-  "surfaceInsetMm": 0.15,
   "plateGapMm": 6,
-  "plateMaxSpanMm": 200
+  "plateMaxSpanMm": 200,
+  "slotReliefMm": 0.15,
+  "slotReliefPieceId": 4
 }

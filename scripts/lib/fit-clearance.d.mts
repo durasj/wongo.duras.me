@@ -1,2 +1,2 @@
 import type { MeshTriangle } from './chamfered-voxel.mjs';
-export function insetMesh(triangles: MeshTriangle[], inset: number): MeshTriangle[];
+export function openGateSlot(triangles: MeshTriangle[], cubes: number[][], unit: number, chamfer: number, relief: number): MeshTriangle[];

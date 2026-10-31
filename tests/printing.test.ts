@@ -11,7 +11,7 @@ test('20 mm meshes and full colour plates agree with the shared physical invento
  const plates=json('public/downloads/bambu/plate-manifest.json');
  assert.equal(meshes.unitMm,20);assert.equal(plates.unitMm,20);assert.equal(plates.plates.length,4);
  assert.deepEqual(plates.plates.map((p:{count:number})=>p.count),[9,11,10,10]);
- assert.equal(plates.surfaceInsetMm,.15);assert.equal(plates.layoutVersion,'compact-center-v2');
+ assert.equal(plates.slotReliefMm,.15);assert.equal(plates.slotReliefPieceId,4);assert.equal(plates.layoutVersion,'compact-center-v2');
  for(const plate of plates.plates){
   const os=plate.objects,loX=Math.min(...os.map((o:any)=>o.x)),hiX=Math.max(...os.map((o:any)=>o.x+o.width)),loY=Math.min(...os.map((o:any)=>o.y)),hiY=Math.max(...os.map((o:any)=>o.y+o.depth));
   assert.ok(Math.abs((loX+hiX)/2-128)<1e-5&&Math.abs((loY+hiY)/2-128)<1e-5,'Center the complete group on the bed');
