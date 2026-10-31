@@ -1,7 +1,8 @@
 {
   "unitMm": 20,
   "chamferMm": 0.5,
-  "surfaceInsetMm": 0.15,
+  "slotReliefMm": 0.15,
+  "slotReliefPieceId": 4,
   "layoutVersion": "compact-center-v2",
   "gapMm": 6,
   "maxSpanMm": 200,
@@ -18,83 +19,83 @@
         {
           "pieceId": 1,
           "copy": 1,
-          "x": 42.45,
-          "y": 52.45,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 42,
+          "y": 52,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 1,
           "copy": 2,
-          "x": 108.15,
-          "y": 52.45,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 108,
+          "y": 52,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 2,
           "copy": 1,
-          "x": 173.85,
-          "y": 52.45,
-          "width": 39.7,
-          "depth": 59.7,
-          "height": 39.7
+          "x": 174,
+          "y": 52,
+          "width": 40,
+          "depth": 60,
+          "height": 40
         },
         {
           "pieceId": 2,
           "copy": 2,
-          "x": 42.45,
-          "y": 98.15,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 42,
+          "y": 98,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 3,
           "copy": 1,
-          "x": 108.15,
-          "y": 98.15,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 108,
+          "y": 98,
+          "width": 40,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 3,
           "copy": 2,
-          "x": 153.85,
-          "y": 118.15,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 154,
+          "y": 118,
+          "width": 40,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 3,
           "copy": 3,
-          "x": 42.45,
-          "y": 143.85,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 42,
+          "y": 144,
+          "width": 40,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 4,
           "copy": 1,
-          "x": 88.15,
-          "y": 143.85,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "x": 88,
+          "y": 144,
+          "width": 60,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 4,
           "copy": 2,
-          "x": 153.85,
-          "y": 163.85,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "x": 154,
+          "y": 164,
+          "width": 60,
+          "depth": 40,
+          "height": 20
         }
       ]
     },
@@ -106,101 +107,101 @@
         {
           "pieceId": 5,
           "copy": 1,
-          "x": 42.45,
-          "y": 39.6,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 42,
+          "y": 39,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 5,
           "copy": 2,
-          "x": 108.15,
-          "y": 39.6,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 108,
+          "y": 39,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 6,
           "copy": 1,
-          "x": 173.85,
-          "y": 39.6,
-          "width": 39.7,
-          "depth": 59.7,
-          "height": 39.7
+          "x": 174,
+          "y": 39,
+          "width": 40,
+          "depth": 60,
+          "height": 40
         },
         {
           "pieceId": 6,
           "copy": 2,
-          "x": 42.45,
-          "y": 85.3,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 42,
+          "y": 85,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 7,
           "copy": 1,
-          "x": 108.15,
-          "y": 85.3,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "x": 108,
+          "y": 85,
+          "width": 60,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 7,
           "copy": 2,
-          "x": 173.85,
-          "y": 105.3,
-          "width": 39.7,
-          "depth": 59.7,
-          "height": 19.7
+          "x": 174,
+          "y": 105,
+          "width": 40,
+          "depth": 60,
+          "height": 20
         },
         {
           "pieceId": 7,
           "copy": 3,
-          "x": 42.45,
+          "x": 42,
           "y": 131,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "width": 60,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 8,
           "copy": 1,
-          "x": 108.15,
+          "x": 108,
           "y": 131,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 19.7
+          "width": 40,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 8,
           "copy": 2,
-          "x": 153.85,
+          "x": 154,
           "y": 171,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 19.7
+          "width": 40,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 8,
           "copy": 3,
-          "x": 42.45,
-          "y": 176.7,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 19.7
+          "x": 42,
+          "y": 177,
+          "width": 40,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 8,
           "copy": 4,
-          "x": 88.15,
-          "y": 176.7,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 19.7
+          "x": 88,
+          "y": 177,
+          "width": 40,
+          "depth": 40,
+          "height": 20
         }
       ]
     },
@@ -212,92 +213,92 @@
         {
           "pieceId": 9,
           "copy": 1,
-          "x": 62.45,
+          "x": 62,
           "y": 131,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 39.7
+          "width": 40,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 9,
           "copy": 2,
-          "x": 108.15,
+          "x": 108,
           "y": 131,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 39.7
+          "width": 40,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 9,
           "copy": 3,
-          "x": 153.85,
+          "x": 154,
           "y": 131,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 39.7
+          "width": 40,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 10,
           "copy": 1,
-          "x": 62.45,
-          "y": 176.7,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 62,
+          "y": 177,
+          "width": 40,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 10,
           "copy": 2,
-          "x": 108.15,
-          "y": 176.7,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 108,
+          "y": 177,
+          "width": 40,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 10,
           "copy": 3,
-          "x": 153.85,
-          "y": 176.7,
-          "width": 39.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 154,
+          "y": 177,
+          "width": 40,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 11,
           "copy": 1,
-          "x": 62.45,
-          "y": 39.6,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 62,
+          "y": 39,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 11,
           "copy": 2,
-          "x": 128.15,
-          "y": 39.6,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 128,
+          "y": 39,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 12,
           "copy": 1,
-          "x": 62.45,
-          "y": 85.3,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "x": 62,
+          "y": 85,
+          "width": 60,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 12,
           "copy": 2,
-          "x": 128.15,
-          "y": 85.3,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "x": 128,
+          "y": 85,
+          "width": 60,
+          "depth": 40,
+          "height": 20
         }
       ]
     },
@@ -309,92 +310,92 @@
         {
           "pieceId": 13,
           "copy": 1,
-          "x": 42.45,
-          "y": 39.6,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 42,
+          "y": 39,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 13,
           "copy": 2,
-          "x": 108.15,
-          "y": 39.6,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 108,
+          "y": 39,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 14,
           "copy": 1,
-          "x": 173.85,
-          "y": 39.6,
-          "width": 39.7,
-          "depth": 59.7,
-          "height": 39.7
+          "x": 174,
+          "y": 39,
+          "width": 40,
+          "depth": 60,
+          "height": 40
         },
         {
           "pieceId": 14,
           "copy": 2,
-          "x": 42.45,
-          "y": 85.3,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 39.7
+          "x": 42,
+          "y": 85,
+          "width": 60,
+          "depth": 40,
+          "height": 40
         },
         {
           "pieceId": 15,
           "copy": 1,
-          "x": 108.15,
-          "y": 85.3,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "x": 108,
+          "y": 85,
+          "width": 60,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 15,
           "copy": 2,
-          "x": 173.85,
-          "y": 105.3,
-          "width": 39.7,
-          "depth": 59.7,
-          "height": 19.7
+          "x": 174,
+          "y": 105,
+          "width": 40,
+          "depth": 60,
+          "height": 20
         },
         {
           "pieceId": 16,
           "copy": 1,
-          "x": 42.45,
+          "x": 42,
           "y": 131,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "width": 60,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 16,
           "copy": 2,
-          "x": 108.15,
+          "x": 108,
           "y": 131,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "width": 60,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 16,
           "copy": 3,
-          "x": 42.45,
-          "y": 176.7,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "x": 42,
+          "y": 177,
+          "width": 60,
+          "depth": 40,
+          "height": 20
         },
         {
           "pieceId": 16,
           "copy": 4,
-          "x": 108.15,
-          "y": 176.7,
-          "width": 59.7,
-          "depth": 39.7,
-          "height": 19.7
+          "x": 108,
+          "y": 177,
+          "width": 60,
+          "depth": 40,
+          "height": 20
         }
       ]
     }

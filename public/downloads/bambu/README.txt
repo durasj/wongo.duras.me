@@ -10,7 +10,7 @@ No supports, brim or prime tower; by-layer printing; at least 6 mm object gaps. 
 Textured PEI starting profile: nozzle 220 C, bed 55 C, volumetric cap 8 mm3/s.
 The filament settings derive from Generic PLA and are not physically calibrated.
 Use your calibrated filament profile if available. Print a small sample first.
-Each 20 mm voxel has a 0.5 mm 45-degree chamfer, with shallow visible seam grooves. Lattice pitch and shape IDs are unchanged. Surface inset 0.15 mm also opens concave slots; do not uniformly scale these models. Print a yellow Gate #04 fit sample before a full run. No embossed IDs. Previous slicer estimates describe the v1 geometry; re-slice these v2 plates for current time and filament.
+Each 20 mm voxel has a 0.5 mm 45-degree chamfer, with shallow visible seam grooves. Lattice pitch and shape IDs are unchanged. Only yellow Gate #04 has 0.15 mm relief per inner slot wall (20.30 mm opening). All exterior dimensions and all other models are unchanged; compatible with previously printed pieces. Do not uniformly scale these models. Print a yellow Gate #04 fit sample before a full run. No embossed IDs. Previous slicer estimates describe the v1 geometry; re-slice these v2 plates for current time and filament.
 
 Use ONLY matching 20 mm puzzle grids at 100% / actual size.
 Cards: downloads/puzzles/wongo-d6-20mm.pdf or the companion HTML.
