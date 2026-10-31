@@ -5,5 +5,8 @@
   "wallLoops": 3,
   "infillPercent": 5,
   "chamferMm": 0.5,
-  "infillPattern": "gyroid"
+  "infillPattern": "gyroid",
+  "surfaceInsetMm": 0.15,
+  "plateGapMm": 6,
+  "plateMaxSpanMm": 200
 }

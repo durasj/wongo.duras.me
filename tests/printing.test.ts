@@ -11,11 +11,17 @@ test('20 mm meshes and full colour plates agree with the shared physical invento
  const plates=json('public/downloads/bambu/plate-manifest.json');
  assert.equal(meshes.unitMm,20);assert.equal(plates.unitMm,20);assert.equal(plates.plates.length,4);
  assert.deepEqual(plates.plates.map((p:{count:number})=>p.count),[9,11,10,10]);
+ assert.equal(plates.surfaceInsetMm,.15);assert.equal(plates.layoutVersion,'compact-center-v2');
  for(const plate of plates.plates){
+  const os=plate.objects,loX=Math.min(...os.map((o:any)=>o.x)),hiX=Math.max(...os.map((o:any)=>o.x+o.width)),loY=Math.min(...os.map((o:any)=>o.y)),hiY=Math.max(...os.map((o:any)=>o.y+o.depth));
+  assert.ok(Math.abs((loX+hiX)/2-128)<1e-5&&Math.abs((loY+hiY)/2-128)<1e-5,'Center the complete group on the bed');
+  assert.ok(Math.max(hiX-loX,hiY-loY)<=180,'Compact grouping must avoid the outer bed');
+  for(let i=0;i<os.length;i++)for(let j=i+1;j<os.length;j++){const a=os[i],b=os[j];assert.ok(Math.max(a.x-b.x-b.width,b.x-a.x-a.width,a.y-b.y-b.depth,b.y-a.y-a.depth)>=6-1e-5,'Keep a safe gap');}
+
   for(const o of plate.objects){
    const piece=meshes.pieces.find((p:{id:number})=>p.id===o.pieceId);
    assert.ok(piece);assert.equal(plate.objects.filter((p:{pieceId:number})=>p.pieceId===piece.id).length,piece.quantity4);
-   assert.equal(o.height,piece.dimensionsMm[2]);assert.ok(o.x>=20&&o.y>=30&&o.x+o.width<=246&&o.y+o.depth<=246);
+   assert.equal(o.height,piece.dimensionsMm[2]);assert.ok(o.x>=28&&o.y>=28&&o.x+o.width<=228&&o.y+o.depth<=228);
   }
  }
 });

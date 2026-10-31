@@ -97,3 +97,9 @@ The second command writes an alternate set without replacing the canonical 20 mm
 For pitch L and chamfer c, each physical voxel volume is L³ − 6Lc² + 16c³/3. Mesh checks require this volume times the occupied cube count, two-manifold edge incidence and outward winding. The independent STL ray test still recovers exactly the canonical occupied cells and handedness. `--chamfer=0` exports sharp comparison models without changing the catalogue.
 
 The 5% gyroid recommendation keeps 3 walls and 0.8 mm top/bottom. It is an engineering starting point, not a universally proven minimum. Research and slicer comparisons are in `docs/PRINTING.md` and `docs/infill-comparison.json`.
+
+## Fit and central-bed revision (2026-10-31)
+
+The logical pitch stays 20 mm. Physical surfaces now use a 0.15 mm inward mitered offset, including walls inside the yellow Gate (#04). A nominal 20 mm tab is 19.70 mm, and its matching slot is 20.30 mm: 0.60 mm total clearance between two revised parts. This is a starting fit allowance, not a physically verified calibration. Do not scale complete pieces, which also shrinks their slots. Reprint mating pieces as needed; test Gate #04 before a full run.
+
+All four P1S plates now use compact bounding-box packing centered at (128,128), with at least 6 mm gaps and all objects within the central 200×200 mm region (at least 28 mm from the bed edge). Published puzzle codes and printed cards are unchanged. Previous filament/time estimates in this repository describe the earlier v1 geometry and layout and are historical; re-slice the revised projects for current numbers.
