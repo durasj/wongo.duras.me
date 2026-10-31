@@ -45,3 +45,18 @@ Already printed sets 01–12? Print only `/downloads/puzzles/wongo-d6-expansion-
 Only the inner slot of yellow U/Gate #04 changes: remove 0.15 mm per wall to widen its 20.00 mm opening to 20.30 mm. It provides 0.30 mm total clearance around an existing 20.00 mm tab. Exterior dimensions remain unchanged, and the other fifteen published STL models are byte-for-byte identical, so already printed pieces remain compatible. Do not scale whole pieces. Print one Gate #04 trial to confirm real printer fit.
 
 All four P1S plates use compact packing centered at (128,128), at least 6 mm gaps, and a maximum 200 mm group span. Only positions/orientations change on the blue, red and green plates. All published cards and puzzle codes remain valid. Previous filament/time estimates describe the original geometry/layout and are historical; re-slice these projects for current numbers.
+
+## Shape nesting revision v3 (2026-10-31)
+
+The updated ZIP and all four 3MF files use full projected voxel footprints, including upper layers, rather than rectangular bounding boxes. Four proper XY rotations allow empty footprint regions to interleave. The group stays centered at (128,128), with at least 6 mm conservative projected clearance and no change to the bed-facing orientation.
+
+| Colour | Previous span | Nested span | Bounding area reduction |
+| --- | --- | --- | --- |
+| Yellow | 172 × 152 mm | 152 × 138 mm | 19.8% |
+| Blue | 172 × 178 mm | 164 × 170 mm | 8.9% |
+| Red | 132 × 178 mm | 158 × 138 mm | 7.2% |
+| Green | 172 × 178 mm | 152 × 158 mm | 21.6% |
+
+These are deterministic heuristic layouts, not a proof of global optimality. Clearance checks independently reconstruct all rotated projections from the print voxel data. Exported 3MF triangle coordinates were also checked against the original STLs under the recorded proper rotations and translations. No STL, puzzle, print profile or inventory changes are included. Re-slice for current estimates. Preview: `nested-plates.png`.
+
+Run `python3 scripts/verify-plate-meshes.py` to check the 40 exported 3MF mesh instances against the original STL triangles, allowing only each recorded proper XY rotation and translation.

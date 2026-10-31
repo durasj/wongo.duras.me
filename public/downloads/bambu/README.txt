@@ -6,7 +6,7 @@ Slice and preview before printing. Projects are editable and contain no G-code.
 Print each colour once for 40 pieces (2-4 players); twice for 80 (5-8 players).
 
 0.10 mm layers including first layer; 3 walls; 5% gyroid; 0.8 mm top/bottom.
-No supports, brim or prime tower; by-layer printing; at least 6 mm object gaps. All objects form one compact centered group, inside the central 200 x 200 mm region.
+No supports, brim or prime tower; by-layer printing; at least 6 mm between actual projected shapes, including upper layers. Four XY rotations let pieces nest into unused footprint space. All objects form one compact centered group, inside the central 200 x 200 mm region.
 Textured PEI starting profile: nozzle 220 C, bed 55 C, volumetric cap 8 mm3/s.
 The filament settings derive from Generic PLA and are not physically calibrated.
 Use your calibrated filament profile if available. Print a small sample first.

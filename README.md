@@ -117,3 +117,7 @@ Already printed sets 01–12? Print only `/downloads/puzzles/wongo-d6-expansion-
 Only the inner slot of yellow U/Gate #04 changes: remove 0.15 mm per wall to widen its 20.00 mm opening to 20.30 mm. It provides 0.30 mm total clearance around an existing 20.00 mm tab. Exterior dimensions remain unchanged, and the other fifteen published STL models are byte-for-byte identical, so already printed pieces remain compatible. Do not scale whole pieces. Print one Gate #04 trial to confirm real printer fit.
 
 All four P1S plates use compact packing centered at (128,128), at least 6 mm gaps, and a maximum 200 mm group span. Only positions/orientations change on the blue, red and green plates. All published cards and puzzle codes remain valid. Previous filament/time estimates describe the original geometry/layout and are historical; re-slice these projects for current numbers.
+
+## Nested central plates (2026-10-31)
+
+The v3 print kit nests the complete XY voxel projections using all four proper XY rotations, retaining at least 6 mm clearance at every height and the existing print orientation. Yellow occupies 152 × 138 mm, blue 164 × 170 mm, red 158 × 138 mm and green 152 × 158 mm, centered on (128,128). Bounding boxes may overlap; the actual conservative piece projections do not. STL geometry, Gate #04 clearance, quantities and slicing settings remain unchanged. Open the updated projects as projects rather than auto-arranging their objects again. See `docs/nested-plates.png`.
