@@ -1,8 +1,9 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "unitMm": 20,
   "chamferMm": 0.5,
-  "geometryVersion": "chamfered-voxels-v1",
+  "surfaceInsetMm": 0.15,
+  "geometryVersion": "chamfered-clearance-v2",
   "shapeCount": 16,
   "inventory4": 40,
   "inventory8": 80,
@@ -46,6 +47,7 @@
       "scadFilename": "wongo-piece-01-yellow.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -75,15 +77,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        60,
-        40
+        39.7,
+        59.7,
+        39.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 204,
-        "volumeMm3": 39853.33333333332
+        "volumeMm3": 38548.98709902961
       }
     },
     {
@@ -125,6 +127,7 @@
       "scadFilename": "wongo-piece-02-yellow.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -154,15 +157,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        60,
-        40,
-        40
+        59.7,
+        39.7,
+        39.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 204,
-        "volumeMm3": 39853.333333333336
+        "volumeMm3": 38548.99328101006
       }
     },
     {
@@ -199,6 +202,7 @@
       "scadFilename": "wongo-piece-03-yellow.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -223,15 +227,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        40,
-        40
+        39.7,
+        39.7,
+        39.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 164,
-        "volumeMm3": 31882.66666666667
+        "volumeMm3": 30818.159304938596
       }
     },
     {
@@ -273,6 +277,7 @@
       "scadFilename": "wongo-piece-04-yellow.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -302,15 +307,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        60,
-        20
+        39.7,
+        59.7,
+        19.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 204,
-        "volumeMm3": 39853.333333333336
+        "volumeMm3": 38548.99328101004
       }
     },
     {
@@ -352,6 +357,7 @@
       "scadFilename": "wongo-piece-05-blue.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -381,15 +387,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        60,
-        40
+        39.7,
+        59.7,
+        39.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 204,
-        "volumeMm3": 39853.33333333335
+        "volumeMm3": 38548.993281010065
       }
     },
     {
@@ -431,6 +437,7 @@
       "scadFilename": "wongo-piece-06-blue.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -460,15 +467,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        60,
-        40,
-        40
+        59.7,
+        39.7,
+        39.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 204,
-        "volumeMm3": 39853.33333333334
+        "volumeMm3": 38548.987099029626
       }
     },
     {
@@ -510,6 +517,7 @@
       "scadFilename": "wongo-piece-07-blue.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -539,15 +547,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        60,
-        20
+        39.7,
+        59.7,
+        19.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 200,
-        "volumeMm3": 39853.33333333332
+        "volumeMm3": 38654.13897045507
       }
     },
     {
@@ -579,6 +587,7 @@
       "scadFilename": "wongo-piece-08-blue.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -598,15 +607,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        40,
-        20
+        39.7,
+        39.7,
+        19.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 124,
-        "volumeMm3": 23911.999999999993
+        "volumeMm3": 23087.33151084757
       }
     },
     {
@@ -648,6 +657,7 @@
       "scadFilename": "wongo-piece-09-red.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -677,15 +687,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        40,
-        40
+        39.7,
+        39.7,
+        39.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 200,
-        "volumeMm3": 39853.33333333332
+        "volumeMm3": 38654.130538474616
       }
     },
     {
@@ -722,6 +732,7 @@
       "scadFilename": "wongo-piece-10-red.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -746,15 +757,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        40,
-        40
+        39.7,
+        39.7,
+        39.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 164,
-        "volumeMm3": 31882.66666666667
+        "volumeMm3": 30818.159304938585
       }
     },
     {
@@ -796,6 +807,7 @@
       "scadFilename": "wongo-piece-11-red.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -825,15 +837,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        60,
-        40
+        39.7,
+        59.7,
+        39.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 204,
-        "volumeMm3": 39853.333333333336
+        "volumeMm3": 38548.99328101006
       }
     },
     {
@@ -870,6 +882,7 @@
       "scadFilename": "wongo-piece-12-red.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -894,15 +907,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        60,
-        20
+        39.7,
+        59.7,
+        19.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 164,
-        "volumeMm3": 31882.66666666667
+        "volumeMm3": 30818.1593049386
       }
     },
     {
@@ -944,6 +957,7 @@
       "scadFilename": "wongo-piece-13-green.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -973,15 +987,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        60,
-        40
+        39.7,
+        59.7,
+        39.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 204,
-        "volumeMm3": 39853.33333333335
+        "volumeMm3": 38548.98709902961
       }
     },
     {
@@ -1023,6 +1037,7 @@
       "scadFilename": "wongo-piece-14-green.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -1052,15 +1067,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        60,
-        40,
-        40
+        59.7,
+        39.7,
+        39.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 204,
-        "volumeMm3": 39853.33333333334
+        "volumeMm3": 38548.993281010065
       }
     },
     {
@@ -1097,6 +1112,7 @@
       "scadFilename": "wongo-piece-15-green.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -1121,15 +1137,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        60,
-        20
+        39.7,
+        59.7,
+        19.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 164,
-        "volumeMm3": 31882.666666666675
+        "volumeMm3": 30818.159304938592
       }
     },
     {
@@ -1166,6 +1182,7 @@
       "scadFilename": "wongo-piece-16-green.scad",
       "unitMm": 20,
       "chamferMm": 0.5,
+      "surfaceInsetMm": 0.15,
       "printCubes": [
         [
           0,
@@ -1190,15 +1207,15 @@
       ],
       "supportsRequired": false,
       "dimensionsMm": [
-        40,
-        60,
-        20
+        39.7,
+        59.7,
+        19.7
       ],
       "validation": {
         "watertight": true,
         "consistentlyOriented": true,
         "triangles": 164,
-        "volumeMm3": 31882.66666666666
+        "volumeMm3": 30818.165486919024
       }
     }
   ]

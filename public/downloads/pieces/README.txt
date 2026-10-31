@@ -17,7 +17,7 @@ STL files contain geometry only; select the matching filament in your slicer.
 
 Start with PLA, 0.1 mm layers, 3 walls, 5% gyroid infill; use your calibrated filament profile.
 Print a small fit sample before committing to the full set. Inspect first-layer flare.
-Lattice pitch and occupied cells are unchanged. Each voxel has a 0.5 mm 45-degree edge chamfer; joining faces are fused, leaving visible shallow seam grooves. The physical solid is intentionally smaller at edges than the exact solver volume.
+Lattice pitch and occupied cells are unchanged. External surfaces are inset 0.15 mm, including concave slot walls. A nominal 20 mm stud is 19.7 mm wide; a 20 mm slot is 20.3 mm wide. Fit revision v2; print a yellow Gate #04 trial first. Each voxel has a 0.5 mm 45-degree edge chamfer; joining faces are fused, leaving visible shallow seam grooves. The physical solid is intentionally smaller at edges than the exact solver volume.
 SCAD files expose the unit size. Scale all pieces AND future puzzle cards together.
 
 Geometry data adapted from ps78/Ubongo blockfactory/blockfactory.go,
