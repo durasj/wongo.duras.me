@@ -1,6 +1,7 @@
 // Deterministic print assets: 20 mm Bambu plates and A4 duplex puzzle cards.
 // Geometry data derives from ps78/Ubongo; see LICENSE and docs/PIECES.md.
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { cardPolygons } from './lib/card-view.mjs';
 import path from 'node:path';
 import { centeredLayout, projectionGap } from './lib/plate-layout.mjs';
 import { fileURLToPath } from 'node:url';
@@ -63,7 +64,7 @@ await write('public/downloads/bambu/plate-manifest.json',JSON.stringify({unitMm:
 await write('public/downloads/bambu/slicer-estimates.json',JSON.stringify(estimates,null,2)+'\n');
 kitEntries.push(['START-HERE.txt',readme],['slicer-estimates.json',JSON.stringify(estimates,null,2)],['plate-manifest.json',JSON.stringify(plateList,null,2)]);
 for(const p of manifest.pieces)kitEntries.push(['STL-20mm/'+p.filename,await readFile(path.join(root,'public/downloads/pieces',p.filename),'utf8')]);
-kitEntries.push(['LICENSE.txt',await readFile(path.join(root,'LICENSE'),'utf8')],['Source/pieces.json',JSON.stringify(pieces,null,2)],['Source/print.json',JSON.stringify(printConfig)],['Source/export-pieces.mjs',await readFile(path.join(root,'scripts/export-pieces.mjs'),'utf8')],['Source/export-print-kit.mjs',await readFile(path.join(root,'scripts/export-print-kit.mjs'),'utf8')],['Source/lib/chamfered-voxel.mjs',await readFile(path.join(root,'scripts/lib/chamfered-voxel.mjs'),'utf8')],['Source/lib/fit-clearance.mjs',await readFile(path.join(root,'scripts/lib/fit-clearance.mjs'),'utf8')],['Source/lib/plate-layout.mjs',await readFile(path.join(root,'scripts/lib/plate-layout.mjs'),'utf8')],['Source/lib/piece-preview.mjs',await readFile(path.join(root,'scripts/lib/piece-preview.mjs'),'utf8')]);
+kitEntries.push(['LICENSE.txt',await readFile(path.join(root,'LICENSE'),'utf8')],['Source/pieces.json',JSON.stringify(pieces,null,2)],['Source/print.json',JSON.stringify(printConfig)],['Source/export-pieces.mjs',await readFile(path.join(root,'scripts/export-pieces.mjs'),'utf8')],['Source/export-print-kit.mjs',await readFile(path.join(root,'scripts/export-print-kit.mjs'),'utf8')],['Source/lib/chamfered-voxel.mjs',await readFile(path.join(root,'scripts/lib/chamfered-voxel.mjs'),'utf8')],['Source/lib/fit-clearance.mjs',await readFile(path.join(root,'scripts/lib/fit-clearance.mjs'),'utf8')],['Source/lib/plate-layout.mjs',await readFile(path.join(root,'scripts/lib/plate-layout.mjs'),'utf8')],['Source/lib/card-view.mjs',await readFile(path.join(root,'scripts/lib/card-view.mjs'),'utf8')],['Source/lib/piece-preview.mjs',await readFile(path.join(root,'scripts/lib/piece-preview.mjs'),'utf8')]);
 const profiles=JSON.parse(await readFile(path.join(root,'scripts/bambu-profiles/index.json'),'utf8'));
 for(const [kind,name] of profiles)kitEntries.push(['Source/bambu-profiles/'+kind+'/'+name+'.json',await readFile(path.join(profilesRoot,kind,name+'.json'),'utf8')]);
 kitEntries.push(['Source/bambu-profiles/index.json',JSON.stringify(profiles)],['Source/bambu-profiles/LICENSE-AGPL-3.0.txt',await readFile(path.join(profilesRoot,'LICENSE-AGPL-3.0.txt'),'utf8')]);
@@ -77,9 +78,8 @@ const pages=[];
 for(let i=0;i<easy.length;i+=2){pages.push([easy[i],easy[i+1]]);pages.push([hard[i+1],hard[i]]);}
 const bounds=p=>({w:Math.max(...p.footprint.map(v=>v[0]))+1,h:Math.max(...p.footprint.map(v=>v[1]))+1});
 for(const p of puzzles){const {w,h}=bounds(p);if(w>5||h>5)throw Error('Puzzle exceeds A5 board layout: '+p.code);}
-function polygons(piece){const points=piece.cubes.map(([x,y,z])=>[28*(x-y),14*(x+y)-30*z]);const minX=Math.min(...points.map(p=>p[0]))-31,minY=Math.min(...points.map(p=>p[1]))-32,w=Math.max(...points.map(p=>p[0]))-minX+31,h=Math.max(...points.map(p=>p[1]))-minY+31;
- const shapes=[];for(const [x,y,z] of [...piece.cubes].sort((a,b)=>(a[0]+a[1]+a[2]*4)-(b[0]+b[1]+b[2]*4))){const px=28*(x-y),py=14*(x+y)-30*z;for(const [coords,shade] of [[[[0,-2],[28,-16],[28,14],[0,28]],1],[[[0,-2],[-28,-16],[-28,14],[0,28]],.78],[[[0,-30],[28,-16],[0,-2],[-28,-16]],1.15]])shapes.push({points:coords.map(([a,b])=>[a+px,b+py]),shade});}
- return {minX,minY,w,h,shapes};}
+const illustrations = new Map(manifest.pieces.map(p => [p.id, cardPolygons(p.printCubes)]));
+const polygons = piece => illustrations.get(piece.id);
 const rgb=(hex,shade=1)=>[1,3,5].map(i=>Math.min(255,parseInt(hex.slice(i,i+2),16)*shade)/255);
 const iconSymbols='<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>'+pieces.map(piece=>{const s=polygons(piece);return '<symbol id="piece-'+piece.id+'" viewBox="'+[s.minX,s.minY,s.w,s.h].join(' ')+'">'+s.shapes.map(a=>'<polygon points="'+a.points.map(p=>p.join(',')).join(' ')+'" fill="rgb('+rgb(piece.hex,a.shade).map(n=>Math.round(n*255)).join(',')+')" stroke="'+(['blue','red'].includes(piece.color)?'#ffffff':'#25332c')+'" stroke-width="'+(['blue','red'].includes(piece.color)?'1.4':'1')+'"/>').join('')+'</symbol>';}).join('')+'</defs></svg>';
 const icon=piece=>'<svg aria-hidden="true"><use href="#piece-'+piece.id+'" width="100%" height="100%"/></svg>';
@@ -137,9 +137,9 @@ function dicePdfCard(card,ox){const {w,h}=bounds(card);let s='0.15 0.2 0.17 rg 0
  const left=ox+(148.5-w*unit)/2,top=30+(100-h*unit)/2;s+='0.25 0.25 0.25 RG 0.35 w\n';for(const [x,y] of card.footprint)s+=fmt((left+x*unit)*MM)+' '+fmt(H-(top+(h-y)*unit)*MM)+' '+fmt(unit*MM)+' '+fmt(unit*MM)+' re S\n';
  for(let i=0;i<6;i++){const p=lookup.get(card.codes[i]),col=i%2,row=Math.floor(i/2),x=ox+10+col*65.75,y=134+row*21;s+='0.15 0.2 0.17 rg\n'+pdfDie(i+1,x,y)+text(p.code,x+6,y+3.1,8,true);for(let j=0;j<p.pieceIds.length;j++){const id=p.pieceIds[j],cx=x+(62.25/p.pieceIds.length)*(j+.5);s+='q 0.5 0 0 0.5 '+fmt((cx-5.75)*MM)+' '+fmt(H-(y+18)*MM)+' cm /P'+id+' Do Q\n0.15 0.2 0.17 rg\n'+text('#'+String(id).padStart(2,'0'),cx-2,y+20,7.2);}}
  s+='0.15 0.2 0.17 rg 0.4 w\n'+line(ox+10,204,ox+50,204)+line(ox+10,202,ox+10,204)+line(ox+50,202,ox+50,204)+text('40 mm / 20 mm grid / print 100% / wongo.duras.me',ox+53,204,6);return s;}
-function makeDicePdf(pageList){
+function makeDicePdf(pageList, drawPage = page => page.map((p,j)=>dicePdfCard(p,j*148.5)).join('')){
 const diceObjects=[null,'','',objects[3],objects[4],...objects.slice(5,21)],diceKids=[];
-for(const page of pageList){const stream='0.65 G 0.3 w [2 3] 0 d\n'+line(148.5,6,148.5,204)+'[] 0 d\n'+page.map((p,j)=>dicePdfCard(p,j*148.5)).join(''),pid=diceObjects.length,cid=pid+1;diceObjects.push('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+fmt(W)+' '+fmt(H)+'] /Resources << /Font << /F 3 0 R /B 4 0 R >> /XObject << '+xobjRefs+' >> >> /Contents '+cid+' 0 R >>');diceObjects.push('<< /Length '+utf8(stream).length+' >>\nstream\n'+stream+'endstream');diceKids.push(pid+' 0 R');}
+for(const page of pageList){const stream='0.65 G 0.3 w [2 3] 0 d\n'+(page ? line(148.5,6,148.5,204) : '')+'[] 0 d\n'+drawPage(page),pid=diceObjects.length,cid=pid+1;diceObjects.push('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+fmt(W)+' '+fmt(H)+'] /Resources << /Font << /F 3 0 R /B 4 0 R >> /XObject << '+xobjRefs+' >> >> /Contents '+cid+' 0 R >>');diceObjects.push('<< /Length '+utf8(stream).length+' >>\nstream\n'+stream+'endstream');diceKids.push(pid+' 0 R');}
 diceObjects[1]='<< /Type /Catalog /Pages 2 0 R >>';diceObjects[2]='<< /Type /Pages /Count '+pageList.length+' /Kids ['+diceKids.join(' ')+'] >>';let dicePdf='%PDF-1.4\n',diceLength=utf8(dicePdf).length;const diceOffsets=[0];for(let i=1;i<diceObjects.length;i++){diceOffsets.push(diceLength);const str=i+' 0 obj\n'+diceObjects[i]+'\nendobj\n';dicePdf+=str;diceLength+=utf8(str).length;}const diceXref=diceLength;dicePdf+='xref\n0 '+diceObjects.length+'\n0000000000 65535 f \n'+diceOffsets.slice(1).map(n=>String(n).padStart(10,'0')+' 00000 n \n').join('')+'trailer\n<< /Size '+diceObjects.length+' /Root 1 0 R >>\nstartxref\n'+diceXref+'\n%%EOF\n';
 return utf8(dicePdf);
 }
@@ -147,3 +147,15 @@ await write('public/downloads/puzzles/wongo-d6-20mm.pdf',makeDicePdf(dicePages))
 await write('public/downloads/puzzles/wongo-d6-expansion-13-36.pdf',makeDicePdf(dicePages.slice(96)));
 await write('public/downloads/puzzles/d6-manifest.json',JSON.stringify({...dice,pages:dicePages.length,duplex:'short-edge',paper:'A4 landscape',backSlotsReversed:true,pageLayout:dicePages.map((p,i)=>({page:i+1,ids:p.map(c=>c.id)}))},null,2)+'\n');
 console.log('Generated D6 physical edition: '+dice.doubleSidedCards+' double-sided cards, '+dice.a4Sheets+' A4 sheets, '+dice.uniquePuzzles+' distinct verified challenges.');
+
+function pieceKey() {
+  let stream = text('WONGO / DIELIKY',12,16,20,true);
+  stream += text('01-16   /   Match the number on your card.',12,23,10);
+  for (const [i,piece] of pieces.entries()) {
+    const x = 17+(i%4)*70, y = 29+Math.floor(i/4)*44;
+    stream += 'q 1.5 0 0 1.5 '+fmt(x*MM)+' '+fmt(H-(y+34.5)*MM)+' cm /P'+piece.id+' Do Q\n';
+    stream += text('#'+String(piece.id).padStart(2,'0'),x+37,y+21,17,true);
+  }
+  return stream;
+}
+await write('public/downloads/puzzles/wongo-piece-key.pdf',makeDicePdf([null],pieceKey));

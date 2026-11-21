@@ -1,7 +1,7 @@
 // Exact isometric view of the same chamfer planes used in the physical STL.
 export function piecePreviewSVG(piece,unit,chamfer,voxelFactory){
  const voxel=voxelFactory(unit,chamfer),set=new Set(piece.printCubes.map(c=>c.join(','))),faces=[];
- const project=([x,y,z])=>[(x-y)*.8660254,(x+y)*.5-z];
+ const project=([x,y,z])=>[(y-x)*.8660254,(x+y)*.5-z];
  for(const cube of piece.printCubes)for(const face of voxel.faces){
   if(face.neighbour&&set.has(cube.map((v,i)=>v+face.neighbour[i]).join(',')))continue;
   if(face.n[0]+face.n[1]+face.n[2]<=0)continue;
